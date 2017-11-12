@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextColor="#000"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabSelectedTextColor="@color/colorAccent">
+        </android.support.design.widget.TabLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"/>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/rg_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/comic"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_home_selector"
+            android:checked="true"
+            android:text="漫画" />
+
+        <RadioButton
+            android:id="@+id/news"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_news_selector"
+            android:text="新闻" />
+
+        <RadioButton
+            android:id="@+id/light_novel"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_smart_selector"
+            android:text="轻小说" />
+
+        <RadioButton
+            android:id="@+id/mine"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_gov_selector"
+            android:text="我的" />
+
+    </RadioGroup>
+
+</LinearLayout>
