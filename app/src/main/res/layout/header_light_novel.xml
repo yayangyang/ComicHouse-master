@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/common_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="轻小说"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.youth.banner.Banner>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/bt_chasing_novels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="追小说"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:id="@+id/bt_looking_for_novel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="找小说"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:id="@+id/bt_ranking_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:text="排行榜"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+</LinearLayout>

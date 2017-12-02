@@ -1,39 +1,33 @@
 package com.yayangyang.comichouse_master.Bean.user;
 
-/**
- * @author yuyh.
- * @date 16/9/5.
- */
 public class TencentLoginResult {
 
 
     /**
-     * ret : 0
-     * pay_token : 28DE80BCA3104F9609B394F1EEB60F7x
-     *             91F9E4AE709D635225C2C6E439C4F23A
-     * pf : desktop_m_qq-10000144-android-2002-
-     * query_authority_cost : 342
-     * authority_cost : 0
-     * openid : 98AACEE0C75501E20A5C7A8C353041Ax
-     *          91F9E4AE709D635225C2C6E439C4F23A
-     * expires_in : 7776000
-     * pfkey : a74c189dfd8867ec1e57e76ac2d2c9c6
-     * msg :
-     * access_token : 28B367EBBE91393A2F1C3AE70A1FCB0F
-     * login_cost : 567
+     * "access_token": "848FB789519321B979005DBF16CB8AEA",
+     * "authority_cost": 0,
+     * "expires_in": 7776000,
+     * "login_cost": 278,
+     * "msg": "",
+     * "openid": "92F002E3592300331FE922C0DC2930A1",
+     * "pay_token": "F2AA970C5ACE6B17E0407090ECBDB9CF",
+     * "pf": "desktop_m_qq-10000144-android-2002-",
+     * "pfkey": "a1a6acb47c88b42e915889a925701e1c",
+     * "query_authority_cost": 259,
+     * "ret": 0
      */
 
-    public int ret;
+    public String access_token;
+    public String authority_cost;
+    public String expires_in;
+    public String login_cost;
+    public String msg;
+    public String openid;
     public String pay_token;
     public String pf;
-    public int query_authority_cost;
-    public int authority_cost;
-    public String openid;
-    public int expires_in;
     public String pfkey;
-    public String msg;
-    public String access_token;
-    public int login_cost;
+    public String query_authority_cost;
+    public String ret;
 
     @Override
     public String toString() {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@color/common_h3">
+
+    <Button
+        android:id="@+id/bt_all_comic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:text="全部漫画"/>
+
+    <Button
+        android:id="@+id/bt_original_comic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:text="原创漫画"
+        android:layout_marginStart="10dp"/>
+
+    <Button
+        android:id="@+id/bt_dubbing_comic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/common_bg"
+        android:text="译制漫画"
+        android:layout_marginStart="10dp"/>
+
+</LinearLayout>

@@ -18,18 +18,15 @@ import com.yayangyang.comichouse_master.view.LoginPopupWindow;
 import org.json.JSONObject;
 
 public abstract class BaseLoginActivity extends BaseActivity
-        implements BaseLoginContract.View,LoginPopupWindow.LoginTypeListener{
-    protected LoginPopupWindow popupWindow;
-    protected Tencent mTencent=Tencent.createInstance("222222", AppUtils.getAppContext());//mBase为空,使用this会报错
-    protected BaseUIListener loginListener;
-
-    protected boolean isLogin=false;
+        implements BaseLoginContract.View{
+    protected BaseUIListener loginListener=new BaseUIListener();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_LOGIN ||
                 requestCode == Constants.REQUEST_APPBAR||
                 requestCode == Constants.REQUEST_QQ_SHARE) {
+            LogUtils.e("eeeeeeeeeeeeeeeeeee");
             Tencent.onActivityResultData(requestCode, resultCode, data, loginListener);
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -42,10 +39,11 @@ public abstract class BaseLoginActivity extends BaseActivity
             LogUtils.e("onComplete");
             JSONObject jsonObject = (JSONObject) o;
             String json = jsonObject.toString();
+            LogUtils.e(json);
             Gson gson = new Gson();
             TencentLoginResult result = gson.fromJson(json, TencentLoginResult.class);
             LogUtils.e(result.toString());
-            loginZhuiShu(result);
+            loginComicHouse(result);
         }
 
         @Override
@@ -64,7 +62,7 @@ public abstract class BaseLoginActivity extends BaseActivity
      * qq操作取得数据后的回调(例:qq登录,qq分享)
      * @param result
      */
-    protected abstract void loginZhuiShu(TencentLoginResult result);
+    protected abstract void loginComicHouse(TencentLoginResult result);
 
     /**
      * qq取消回调
@@ -76,12 +74,5 @@ public abstract class BaseLoginActivity extends BaseActivity
      * @param login
      */
     public abstract void loginSuccess(Login login);
-
-    /**
-     * 登录弹出框的回调(有登录功能需要重写)
-     * @param view
-     * @param type
-     */
-    public abstract void onLogin(ImageView view, String type);
 
 }

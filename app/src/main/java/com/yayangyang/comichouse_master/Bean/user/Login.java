@@ -6,48 +6,28 @@ import java.io.Serializable;
 
 public class Login extends Base {
 
-    private static final long serialVersionUID = 1L;
-
     /**
-     * _id : 57cbf0278b37eb5f05496f8b
-     * nickname : ✘。
-     * avatar : /avatar/eb/a0/eba095c72cc992bdea6539ce1cfd0aff
-     * exp : 0
-     * lv : 1
-     * gender : female
-     * type : normal
+     * "result": 1,
+     * "msg": "OK",
+     * "data": {
+     * "uid": "105290861",
+     * "nickname": "qzuser10673657",
+     * "pic": "89694a3a838a917649111452de27ee3f",
+     * "photo": "http:\/\/images.dmzj.com\/user\/89\/69\/89694a3a838a917649111452de27ee3f.png",
+     * "dmzj_token": "1f751c3f8c325126d5f017128c4195b9"
+     * }
      */
 
-    public UserBean user;
-    /**
-     * user : {"_id":"57cbf0278b37eb5f05496f8b","nickname":"✘。","avatar":"/avatar/eb/a0/eba095c72cc992bdea6539ce1cfd0aff","exp":0,"lv":1,"gender":"female","type":"normal"}
-     * token : gmPcsbwQ41UfTQEc7yMnBiRY
-     */
+    public String result;
+    public String msg;
+    public DataBean data;
 
-    public String token;
-
-    public static class UserBean implements Serializable {
-        public String _id;
+    public static class DataBean{
+        public String uid;
         public String nickname;
-        public String avatar;
-        public int exp;
-        public int lv;
-        public String gender;
-        public String type;
-
-        @Override
-        public String toString() {
-            return "UserBean{" +
-                    "_id='" + _id + '\'' +
-                    ", nickname='" + nickname + '\'' +
-                    ", avatar='" + avatar + '\'' +
-                    ", exp=" + exp +
-                    ", lv=" + lv +
-                    ", gender='" + gender + '\'' +
-                    ", type='" + type + '\'' +
-                    '}';
-        }
+        public String pic;
+        public String photo;
+        public String dmzj_token;
     }
-
 
 }

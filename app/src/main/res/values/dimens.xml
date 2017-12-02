@@ -19,4 +19,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="book_read_bottom_text">12dp</dimen>
     <dimen name="book_read_top_text">16sp</dimen>
+
+    <!--my-->
+    <dimen name="common_radius">6dp</dimen>
 </resources>

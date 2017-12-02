@@ -1,29 +1,17 @@
 package com.yayangyang.comichouse_master.Bean.support;
 
-
-import com.yayangyang.comichouse_master.base.Constant;
-
-/**
- * @author yuyh.
- * @date 16/9/2.
- */
 public class SelectionEvent {
 
-    public String distillate;
+    public int index;
+    public int currentComicType;
+    public int currentDate;
+    public int currentRankType;
 
-    public String type;
-
-    public String sort;
-
-    public SelectionEvent(@Constant.Distillate String distillate,
-                          @Constant.BookType String type,
-                          @Constant.SortType String sort) {
-        this.distillate = distillate;
-        this.type = type;
-        this.sort = sort;
+    public SelectionEvent(int index,int currentComicType,int currentDate,int currentRankType) {
+        this.index=index;
+        this.currentComicType = currentComicType;
+        this.currentDate = currentDate;
+        this.currentRankType = currentRankType;
     }
 
-    public SelectionEvent(@Constant.SortType String sort) {
-        this.sort = sort;
-    }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,8 +39,10 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2,K
     protected View inflate,network,footView;
     protected BaseQuickAdapter<T2,K> mAdapter;
 
-    protected int start = 0;
-    protected int limit = 20;
+//    protected int start = 0;
+//    protected int limit = 20;
+
+    protected int page=0;
 
     /**
      * [此方法不可再重写]
@@ -113,7 +116,7 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2,K
     @Override
     public void onRefresh() {
         Log.e("onRefresh","onRefresh");
-        start=0;
+        page=0;
     }
 
     @Override
@@ -122,12 +125,15 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2,K
     }
 
     protected void loaddingError() {
+        LogUtils.e("wwwwwwwwwww");
         if(mAdapter.getData().size()==0){
             LogUtils.e("getItemCount:"+mAdapter.getItemCount());
             mAdapter.setEmptyView(network);
         }
-        if(NetworkUtils.isAvailable(mContext)){
+        if(!NetworkUtils.isAvailable(mContext)){//之前模拟器没网络也返回true,应该是当时模拟器有点问题
             ToastUtils.showToast("网络异常");
+            mSwipeRefreshLayout.setRefreshing(false);
+            mAdapter.loadMoreFail();
         }
     }
 

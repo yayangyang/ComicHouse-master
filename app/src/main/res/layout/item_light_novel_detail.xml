@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/touch_bg_selector">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="115dp"
+        android:layout_height="150dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/iv_touch_bg_selector">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        tools:text="女朋友、借我一下"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/tv_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        tools:text="宫岛礼吏"
+        android:ellipsize="end"/>
+
+</LinearLayout>

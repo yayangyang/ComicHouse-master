@@ -1,5 +1,7 @@
 package com.yayangyang.comichouse_master.utils;
 
+import java.util.ArrayList;
+
 public class StringUtils {
 
     public static String creatAcacheKey(Object... param) {
@@ -36,6 +38,41 @@ public class StringUtils {
      */
     public static String getTwoSpaces() {
         return "\u3000\u3000";
+    }
+
+
+    public static ArrayList<Integer> getAllIndex(String str,String key) {
+        ArrayList<Integer> integers = new ArrayList<>();
+        int a = str.indexOf(key);//*第一个出现的索引位置
+        integers.add(a);
+        while (a != -1) {
+            a = str.indexOf(key, a + 1);//*从这个索引往后开始第一个出现的位置
+            if(a!=-1){
+                integers.add(a);
+            }
+        }
+        return integers;
+    }
+
+    /**
+     * 已知对应字符串之后有数字才可使用该方法
+     * @param str
+     * @param index
+     * @return
+     */
+    public static String getNumberByIndex(String str,int index) {
+        String number="";
+        str=str.substring(++index,str.length());
+        LogUtils.e("str:"+str);
+        for(int i=0;i<str.length();i++){
+            LogUtils.e("char"+str.charAt(i));
+            if(Character.isDigit(str.charAt(i))){//判断字符是否是数字
+                number+=str.charAt(i);
+            }else{
+                break;
+            }
+        }
+        return number;
     }
 
 }

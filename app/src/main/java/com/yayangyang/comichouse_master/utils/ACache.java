@@ -143,6 +143,8 @@ public class ACache {
 
 
     private ACache(File cacheDir, long max_size, int max_count) {
+        LogUtils.e("cacheDir.exists():"+cacheDir.exists());
+        LogUtils.e("cacheDir.mkdirs():"+cacheDir.mkdirs());
         if (!cacheDir.exists() && !cacheDir.mkdirs()) {
             throw new RuntimeException("can't make dirs in " + cacheDir.getAbsolutePath());
         }
@@ -164,6 +166,7 @@ public class ACache {
         File file = mCache.newFile(key);
         BufferedWriter out = null;
         try {
+            //多线程不同Writer写入同一个文件可能出现串行(同一Writer可能是线程安全的)
             out = new BufferedWriter(new FileWriter(file), 1024);
             out.write(value);
         } catch (IOException e) {

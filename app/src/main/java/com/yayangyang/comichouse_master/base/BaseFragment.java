@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.component.AppComponent;
+import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.view.lodding.CustomDialog;
 
 import butterknife.ButterKnife;
@@ -33,11 +34,15 @@ public abstract class BaseFragment extends Fragment {
 
     private CustomDialog dialog;
 
-    public abstract
-    @LayoutRes
-    int getLayoutResId();
+    public abstract int getLayoutResId();
 
     protected abstract void setupActivityComponent(AppComponent appComponent);
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        LogUtils.e("onCreate+++++++++++++++++");
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {

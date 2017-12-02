@@ -11,7 +11,7 @@ import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerAppComponent;
 import com.yayangyang.comichouse_master.manager.SettingManager;
 import com.yayangyang.comichouse_master.module.AppModule;
-import com.yayangyang.comichouse_master.module.BookApiModule;
+import com.yayangyang.comichouse_master.module.ComicApiModule;
 import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
@@ -51,7 +51,7 @@ public class ReaderApplication extends Application {
     private void initCompoent() {
         LogUtils.e("wwwwwwwww");
         appComponent = DaggerAppComponent.builder()
-                .bookApiModule(new BookApiModule())
+                .comicApiModule(new ComicApiModule())
                 .appModule(new AppModule(this))
                 .build();
     }

@@ -84,4 +84,12 @@
     <color name="gender_select_female_normal">#EEA9B8</color>
     <color name="gender_select_female_pressed">#EEA2AD</color>
 
+    <!--my-->
+    <color name="bg_transparent">#55000000</color>
+
+    <!--IamgeView背景色-->
+    <color name="iv_bg">#00ffffff</color>
+    <!--IamgeView触摸背景色-->
+    <color name="iv_touch_bg">@color/bg_transparent</color>
+
 </resources>

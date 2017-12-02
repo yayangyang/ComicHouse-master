@@ -7,14 +7,15 @@
 
     <include layout="@layout/common_toolbar" />
 
-    <com.imooc.brvaheasyrecycleview.view.SelectionLayout
+    <com.yayangyang.comichouse_master.view.SelectionLayout
         android:id="@+id/slOverall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <fragment
-        android:id="@+id/fragmentCO"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<fragment-->
+        <!--android:id="@+id/fragmentCO"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="com.yayangyang.comichouse_master.ui.fragment.MineFragment"/>-->
 
 </LinearLayout>

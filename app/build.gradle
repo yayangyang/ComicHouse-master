@@ -67,4 +67,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //cardView
     compile 'com.android.support:cardview-v7:26.1.0'
+
+    //Banner(轮播库)
+    compile 'com.youth.banner:banner:1.4.10'
+    //popupwindow封装库
+    compile 'com.github.pinguo-zhouwei:CustomPopwindow:2.1.1'
 }

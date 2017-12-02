@@ -2,6 +2,7 @@ package com.yayangyang.comichouse_master.api.support;
 
 import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.DeviceUtils;
+import com.yayangyang.comichouse_master.utils.LogUtils;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public final class HeaderInterceptor implements Interceptor {
                 url.contains("toc/") ||
                 url.contains("post/") ||
                 url.contains("user/")) {
+            LogUtils.e("请求头11111111111"+chain.request().toString());
             Request request = original.newBuilder()
                     .addHeader("User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]") // 不能转UTF-8
                     .addHeader("X-User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
@@ -34,6 +36,8 @@ public final class HeaderInterceptor implements Interceptor {
                     .addHeader("If-Modified-Since", "Tue, 02 Aug 2016 03:20:06 UTC")
                     .build();
             return chain.proceed(request);
+        }else{
+            LogUtils.e("请求头22222222222222"+chain.request().toString());
         }
         return chain.proceed(original);
     }
