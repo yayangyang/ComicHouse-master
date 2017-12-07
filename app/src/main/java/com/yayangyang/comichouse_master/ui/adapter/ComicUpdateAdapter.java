@@ -16,6 +16,8 @@ import com.yayangyang.comichouse_master.base.MyBaseMultiItemQuickAdapter;
 import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,7 +60,9 @@ public class ComicUpdateAdapter extends MyBaseMultiItemQuickAdapter<ComicUpdate,
             helper.setText(R.id.tv_title,item.title);
             helper.setText(R.id.tv_author,item.authors);
             helper.setText(R.id.tv_type,item.types);
-            helper.setText(R.id.tv_date,item.last_updatetime);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String dateString=format.format(new Date(Long.parseLong(item.last_updatetime)*1000L));
+            helper.setText(R.id.tv_date,dateString);
             helper.setText(R.id.bt_last_update_chapter_name,item.last_update_chapter_name);
         }
     }

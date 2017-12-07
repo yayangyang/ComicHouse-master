@@ -9,6 +9,7 @@ import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerNewsComponent;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
@@ -26,6 +27,8 @@ import java.util.List;
 
 public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter,NewsCommonBody,BaseViewHolder>
         implements NewsRecommendContract.View,BaseQuickAdapter.OnItemChildClickListener{
+
+    private int newsType= Constant.NewsType.RECOMMEND;
 
     private Banner banner;
     private ArrayList mArrayList=new ArrayList();
@@ -56,13 +59,13 @@ public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter
     @Override
     public void onRefresh() {
         super.onRefresh();
-        mPresenter.getNewsCommonBody(page);
+        mPresenter.getNewsCommonBody(newsType,page);
         mPresenter.getNewsRecommendHeader();
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getNewsCommonBody(page);
+        mPresenter.getNewsCommonBody(newsType,page);
     }
 
     @Override
@@ -130,7 +133,7 @@ public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter
 
     private void initBaner(ArrayList images,ArrayList<String> titles) {
         ViewGroup.LayoutParams params=new ViewGroup.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dpToPxInt(250));
+                (ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dpToPxInt(200));
         banner.setLayoutParams(params);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);

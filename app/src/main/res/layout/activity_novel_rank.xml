@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.ToolBar.Menu">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小说排行榜"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <com.yayangyang.comichouse_master.view.SelectionLayout
+            android:id="@+id/slOverall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.yayangyang.comichouse_master.view.SelectionLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <RadioButton
+                android:id="@+id/rb_popular_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="人气排行"
+                android:button="@null"
+                android:textColor="@color/tv_common_selector"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_suscribe_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订阅排行"
+                android:button="@null"
+                android:textColor="@color/tv_common_selector"
+                android:layout_marginStart="10dp"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</LinearLayout>

@@ -28,13 +28,13 @@ public class NewsCommonPresenter<T extends NewsCommonContract.View> extends RxPr
 
     @Inject
     public NewsCommonPresenter(ComicApi comicApi) {
-        LogUtils.e("wwwwwww");
         this.comicApi = comicApi;
     }
 
     @Override
-    public void getNewsCommonBody(final int page) {
-        Disposable rxDisposable = comicApi.getNewsCommonBody(page+"",Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
+    public void getNewsCommonBody(int newsType,final int page) {
+        Disposable rxDisposable = comicApi.getNewsCommonBody(newsType+"",page+"",
+                Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Consumer<List<NewsCommonBody>>() {

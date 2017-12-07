@@ -21,8 +21,8 @@
         android:padding="10dp">
 
         <FrameLayout
-            android:layout_width="130dp"
-            android:layout_height="153dp"
+            android:layout_width="110dp"
+            android:layout_height="120dp"
             android:foreground="@drawable/iv_touch_bg_selector">
 
             <ImageView

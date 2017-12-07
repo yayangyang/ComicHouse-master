@@ -1,5 +1,6 @@
 package com.yayangyang.comichouse_master.ui.fragment;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,15 +9,26 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
+import com.yayangyang.comichouse_master.manager.SettingManager;
+import com.yayangyang.comichouse_master.transform.GlideCircleTransform;
+import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.ui.activity.LoginActivity;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.LoginUtil;
+import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -31,6 +43,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     private String[] mTitles={"漫画","小说","更新"};
     private ArrayList<View> mViewArrayList=new ArrayList<>();
 
+    @BindView(R.id.iv_cover)
+    ImageView iv_cover;
+    @BindView(R.id.tv_user_name)
+    TextView tv_user_name;
+    @BindView(R.id.tv_login_description)
+    TextView tv_login_description;
     @BindView(R.id.tablayout)
     TabLayout mTabLayout;
     @BindView(R.id.viewPager)
@@ -85,8 +103,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(ReaderApplication.sLogin!=null
-                &&!TextUtils.isEmpty(ReaderApplication.sLogin.data.dmzj_token)){
+        if(ReaderApplication.sLogin!=null){
 
         }else{
             LoginActivity.startActivity(getActivity());
@@ -126,4 +143,23 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.e("onActivityResult-resultCode:"+resultCode);
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode== Constant.RETURN_DATA){
+            if(LoginUtil.isLogin()){
+                GlideUrl cookie = new GlideUrl(ReaderApplication.sLogin.data.photo, new LazyHeaders.Builder()
+                        .addHeader("Referer", Constant.IMG_BASE_URL)
+                        .addHeader("Accept-Encoding","gzip").build());
+                Glide.with(mContext).load(cookie)
+                        .placeholder(R.drawable.avatar_default) .transform(new GlideCircleTransform
+                        (mContext)).into(iv_cover);
+                tv_user_name.setText(ReaderApplication.sLogin.data.nickname);
+                tv_login_description.setText("");
+            }else{
+                ToastUtils.showToast("请重新登录");
+            }
+        }
+    }
 }

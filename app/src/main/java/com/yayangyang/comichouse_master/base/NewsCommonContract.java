@@ -16,7 +16,7 @@ public interface NewsCommonContract {
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
-        void getNewsCommonBody(int page);
+        void getNewsCommonBody(int newsType,int page);
     }
 
 }

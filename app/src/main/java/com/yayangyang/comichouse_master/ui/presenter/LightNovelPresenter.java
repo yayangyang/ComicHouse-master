@@ -38,7 +38,7 @@ public class LightNovelPresenter extends RxPresenter<LightNovelContract.View>
                             public void accept(List<LightNovel> list) throws Exception {
                                 LogUtils.e("getRecommend-accept");
                                 if (list != null) {
-                                    if (!list.isEmpty() && mView != null) {
+                                    if (mView != null) {
                                         LogUtils.e("eeeeeeeeeeeee");
                                         mView.showNovelList(list);
                                     }

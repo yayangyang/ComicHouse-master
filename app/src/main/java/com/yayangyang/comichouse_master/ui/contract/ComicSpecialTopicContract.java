@@ -1,6 +1,5 @@
 package com.yayangyang.comichouse_master.ui.contract;
 
-import com.yayangyang.comichouse_master.Bean.ComicRank;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.base.BaseContract;
 

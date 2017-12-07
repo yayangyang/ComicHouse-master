@@ -132,9 +132,10 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2,K
         }
         if(!NetworkUtils.isAvailable(mContext)){//之前模拟器没网络也返回true,应该是当时模拟器有点问题
             ToastUtils.showToast("网络异常");
-            mSwipeRefreshLayout.setRefreshing(false);
             mAdapter.loadMoreFail();
         }
+        mSwipeRefreshLayout.setRefreshing(false);
+        dismissDialog();
     }
 
     @Override

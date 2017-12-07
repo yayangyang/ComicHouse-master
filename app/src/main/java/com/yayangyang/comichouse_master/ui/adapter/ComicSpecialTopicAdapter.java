@@ -7,12 +7,10 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.yayangyang.comichouse_master.Bean.ComicRank;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
-import com.yayangyang.comichouse_master.utils.LogUtils;
 
 import java.util.List;
 

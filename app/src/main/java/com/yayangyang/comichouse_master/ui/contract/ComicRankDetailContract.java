@@ -1,7 +1,6 @@
 package com.yayangyang.comichouse_master.ui.contract;
 
-import com.yayangyang.comichouse_master.Bean.ComicRank;
-import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.base.BaseContract;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 public interface ComicRankDetailContract {
 
     interface View extends BaseContract.BaseView {
-        void showComicRankList(List<ComicRank> list, int page);
+        void showComicRankList(List<ComicInfo> list, int page);
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {

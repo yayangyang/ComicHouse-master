@@ -38,15 +38,11 @@ public class LoginActivityPresenter extends RxPresenter<BaseLoginContract.View>
                         new Consumer<Login>() {
                             @Override
                             public void accept(Login data) throws Exception {
-//                                if(data.user!=null){
-//                                    LogUtils.e("收到了"+data.toString());
-//                                }else{
-//                                    LogUtils.e("user为空"+data.ok);
-//                                }
-//                                if (data != null && mView != null) {
-//                                    mView.loginSuccess(data);
+                                LogUtils.e("login-accept"+data);
+                                if (data != null && mView != null) {
+                                    mView.loginSuccess(data);
 //                                    LogUtils.e(data.user.toString());
-//                                }
+                                }
                             }
                         },
                         new Consumer<Throwable>() {

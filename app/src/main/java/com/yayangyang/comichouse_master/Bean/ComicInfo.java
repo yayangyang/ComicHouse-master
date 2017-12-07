@@ -6,7 +6,7 @@ import com.yayangyang.comichouse_master.Bean.base.Base;
  * Created by Administrator on 2017/11/30.
  */
 
-public class ComicRank extends Base {
+public class ComicInfo extends Base {
 
     /**
      * [{

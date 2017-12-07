@@ -5,8 +5,8 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.yayangyang.comichouse_master.Bean.ComicRank;
-import com.yayangyang.comichouse_master.Bean.support.SelectionEvent;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
+import com.yayangyang.comichouse_master.Bean.RefreshRankEvent;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.base.Constant;
@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPresenter,ComicRank,BaseViewHolder>
+public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPresenter,ComicInfo,BaseViewHolder>
         implements ComicRankDetailContract.View,BaseQuickAdapter.OnItemChildClickListener {
 
     private ArrayList mArrayList=new ArrayList();
@@ -73,7 +73,7 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void selection(SelectionEvent event) {
+    public void selection(RefreshRankEvent event) {
         //getUserVisibleHint方法用在判断ViewPager,在这里不行
         if (event.index==index) {
             LogUtils.e("event.index==index");
@@ -115,7 +115,7 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
     }
 
     @Override
-    public void showComicRankList(List<ComicRank> list,int page) {
+    public void showComicRankList(List<ComicInfo> list, int page) {
         LogUtils.e("showComicRankList");
         boolean isRefresh = page == 0;
         if(isRefresh){

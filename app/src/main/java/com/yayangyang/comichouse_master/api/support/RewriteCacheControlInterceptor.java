@@ -25,7 +25,8 @@ public class RewriteCacheControlInterceptor implements Interceptor{
 //                .header("Cache-Control", "public, max-age=" + maxAge)
 //                .build();
 
-        LogUtils.e(originalResponse.header("Cache-Control"));
+        //若没有缓存头默认返回null,动漫之家一般会返回max-age==1800,即半小时的缓存
+        LogUtils.e("ee"+originalResponse.header("Cache-Control"));
         int maxAge = 0; // 有网络时 设置缓存超时时间0个小时
         LogUtils.e("has network maxAge="+maxAge);
         return originalResponse.newBuilder()

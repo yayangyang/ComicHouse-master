@@ -1,13 +1,20 @@
 package com.yayangyang.comichouse_master.api;
 
 
+import com.yayangyang.comichouse_master.Bean.AuthorIntroduce;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
-import com.yayangyang.comichouse_master.Bean.ComicRank;
+import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
+import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
+import com.yayangyang.comichouse_master.Bean.NewestNovel;
 import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
+import com.yayangyang.comichouse_master.Bean.NovelCategory;
+import com.yayangyang.comichouse_master.Bean.NovelCategoryDetail;
+import com.yayangyang.comichouse_master.Bean.NovelRank;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
 import com.yayangyang.comichouse_master.Bean.user.Login;
@@ -70,8 +77,8 @@ public class ComicApi {
         return service.getNewsRecommendHeader(channel,version);
     }
 
-    public Observable<List<NewsCommonBody>> getNewsCommonBody(String page, String channel, String version){
-        return service.getNewsCommonBody(page,channel,version);
+    public Observable<List<NewsCommonBody>> getNewsCommonBody(String newsType,String page, String channel, String version){
+        return service.getNewsCommonBody(newsType,page,channel,version);
     }
 
     public Observable<List<ComicUpdate>> getComicUpdate(String type,String page,String channel, String version) {
@@ -82,12 +89,40 @@ public class ComicApi {
         return service.getComicCategory(channel,version);
     }
 
-    public Observable<List<ComicRank>> getComicRank(String comicType,String date,String rankType, String page,String channel, String version) {
+    public Observable<List<ComicInfo>> getComicRank(String comicType, String date, String rankType, String page, String channel, String version) {
         return service.getComicRank(comicType,date,rankType,page,channel,version);
     }
 
     public Observable<List<ComicSpecialTopic>> getComicSpecialTopic(String page, String channel, String version) {
         return service.getComicSpecialTopic(page,channel,version);
+    }
+
+    public Observable<List<ComicCategoryDetail>> getComicCategoryDetail(String tagId,String type, String page, String channel, String version){
+        return service.getComicCategoryDetail(tagId,type,page,channel,version);
+    }
+
+    public Observable<List<NewestNovel>> getNewestLightNovel(String page,String channel, String version){
+        return service.getNewestLightNovel(page,channel,version);
+    }
+
+    public Observable<List<NovelCategory>> getNovelCategory(String channel, String version) {
+        return service.getNovelCategory(channel,version);
+    }
+
+    public Observable<List<NovelRank>> getNovelRank(String type, String tagId, String page, String channel, String version){
+        return service.getNovelRank(type,tagId,page,channel,version);
+    }
+
+    public Observable<List<NovelCategoryDetail>> getNovelCategoryDetail(String tagId, String scheduleType,String type, String page, String channel, String version){
+        return service.getNovelCategoryDetail(tagId,scheduleType,type,page,channel,version);
+    }
+
+    public Observable<NewComicWeekly> getNewComicWeekly(String object_id, String channel, String version){
+        return service.getNewComicWeekly(object_id,channel,version);
+    }
+
+    public Observable<AuthorIntroduce> getAuthorIntroduce(String object_id, String channel, String version){
+        return service.getAuthorIntroduce(object_id,channel,version);
     }
 
 }

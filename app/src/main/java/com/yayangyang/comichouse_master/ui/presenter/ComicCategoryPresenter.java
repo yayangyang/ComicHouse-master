@@ -1,6 +1,7 @@
 package com.yayangyang.comichouse_master.ui.presenter;
 
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
+import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
 import com.yayangyang.comichouse_master.api.ComicApi;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.RxPresenter;
@@ -35,7 +36,7 @@ public class ComicCategoryPresenter extends RxPresenter<ComicCategoryContract.Vi
                             @Override
                             public void accept(List<ComicCategory> list) throws Exception {
                                 LogUtils.e("getComicCategory-accept");
-                                if (!list.isEmpty() && mView != null) {
+                                if (mView != null) {
                                     LogUtils.e("eeeeeeeeeeeee");
                                     mView.showComicCategoryList(list);
                                 }

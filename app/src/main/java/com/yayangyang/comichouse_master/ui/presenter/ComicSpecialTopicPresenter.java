@@ -1,11 +1,9 @@
 package com.yayangyang.comichouse_master.ui.presenter;
 
-import com.yayangyang.comichouse_master.Bean.ComicRank;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.api.ComicApi;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.RxPresenter;
-import com.yayangyang.comichouse_master.ui.contract.ComicRankDetailContract;
 import com.yayangyang.comichouse_master.ui.contract.ComicSpecialTopicContract;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -37,7 +35,7 @@ public class ComicSpecialTopicPresenter extends RxPresenter<ComicSpecialTopicCon
                         new Consumer<List<ComicSpecialTopic>>() {
                             @Override
                             public void accept(List<ComicSpecialTopic> list) throws Exception {
-                                if (!list.isEmpty() && mView != null) {
+                                if (mView != null) {
                                     mView.showComicSpecialTopicList(list,page);
                                 }
                             }

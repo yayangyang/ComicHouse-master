@@ -12,6 +12,7 @@ import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
+import com.yayangyang.comichouse_master.ui.activity.ComicCategoryActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicCategoryAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicCategoryContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicCategoryPresenter;
@@ -31,7 +32,8 @@ public class ComicCategoryFragment extends BaseRVFragment<ComicCategoryPresenter
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicCategory comicCategory = (ComicCategory) adapter.getData().get(position);
+        ComicCategoryActivity.startActivity(getActivity(),comicCategory.tag_id);
     }
 
     @Override
@@ -68,6 +70,7 @@ public class ComicCategoryFragment extends BaseRVFragment<ComicCategoryPresenter
         initAdapter(ComicCategoryAdapter.class,
                 R.layout.item_comic_category,mArrayList,true,false);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener(this);
         onRefresh();
     }

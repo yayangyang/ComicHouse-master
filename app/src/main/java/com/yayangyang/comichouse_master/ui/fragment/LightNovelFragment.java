@@ -14,10 +14,14 @@ import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerLightNovelComponent;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
+import com.yayangyang.comichouse_master.ui.activity.NewestNovelActivity;
+import com.yayangyang.comichouse_master.ui.activity.NovelCategoryActivity;
+import com.yayangyang.comichouse_master.ui.activity.NovelRankActivity;
 import com.yayangyang.comichouse_master.ui.adapter.LightNovelAdapter;
 import com.yayangyang.comichouse_master.ui.contract.LightNovelContract;
 import com.yayangyang.comichouse_master.ui.presenter.LightNovelPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -51,11 +55,11 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
         if(v.getId()==R.id.iv_search){
 
         }else if(v.getId()==R.id.bt_chasing_novels){
-
+            NewestNovelActivity.startActivity(getActivity());
         }else if(v.getId()==R.id.bt_looking_for_novel){
-
+            NovelCategoryActivity.startActivity(getActivity());
         }else if(v.getId()==R.id.bt_ranking_list){
-
+            NovelRankActivity.startActivity(getActivity());
         }
     }
 
@@ -100,7 +104,6 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
     @Override
     public void showError() {
         loaddingError();
-        mAdapter.loadMoreFail();
     }
 
     @Override
@@ -137,7 +140,7 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
 
     private void initBaner(ArrayList images,ArrayList<String> titles) {
         LinearLayout.LayoutParams params=new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT,700);
+                (ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dpToPxInt(200));
         banner.setLayoutParams(params);
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);

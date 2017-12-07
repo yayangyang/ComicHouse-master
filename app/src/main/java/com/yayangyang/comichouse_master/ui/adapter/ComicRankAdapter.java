@@ -7,11 +7,9 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.yayangyang.comichouse_master.Bean.ComicRank;
-import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.Constant;
-import com.yayangyang.comichouse_master.base.MyBaseMultiItemQuickAdapter;
 import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -21,14 +19,14 @@ import java.util.List;
  * Created by Administrator on 2017/11/28.
  */
 
-public class ComicRankAdapter extends BaseQuickAdapter<ComicRank,BaseViewHolder> {
+public class ComicRankAdapter extends BaseQuickAdapter<ComicInfo,BaseViewHolder> {
 
-    public ComicRankAdapter(int id, List<ComicRank> data) {
+    public ComicRankAdapter(int id, List<ComicInfo> data) {
         super(id,data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ComicRank item) {
+    protected void convert(BaseViewHolder helper, ComicInfo item) {
         LogUtils.e("LinearLayout");
         ImageView view =helper.getView(R.id.iv_cover);
         GlideUrl cookie = new GlideUrl(item.cover, new LazyHeaders.Builder()

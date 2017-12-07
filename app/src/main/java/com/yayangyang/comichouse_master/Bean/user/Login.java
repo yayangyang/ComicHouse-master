@@ -22,7 +22,7 @@ public class Login extends Base {
     public String msg;
     public DataBean data;
 
-    public static class DataBean{
+    public static class DataBean implements Serializable{
         public String uid;
         public String nickname;
         public String pic;

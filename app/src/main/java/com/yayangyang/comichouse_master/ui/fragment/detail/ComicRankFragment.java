@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,14 +17,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zhouwei.library.CustomPopWindow;
 import com.yayangyang.comichouse_master.Bean.ComicRankComicTypeBean;
 import com.yayangyang.comichouse_master.Bean.ComicRankDateTypeBean;
-import com.yayangyang.comichouse_master.Bean.ComicRankItemBean;
-import com.yayangyang.comichouse_master.Bean.support.SelectionEvent;
+import com.yayangyang.comichouse_master.Bean.base.ComicRankPopupWindowBean;
+import com.yayangyang.comichouse_master.Bean.RefreshRankEvent;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.ui.adapter.ComicRankPopupWindowAdapter;
-import com.yayangyang.comichouse_master.ui.fragment.MineFragment;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
@@ -46,8 +44,8 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
     private CustomPopWindow popWindow;
 
     private Fragment[] mFragments=new Fragment[3];
-    private ArrayList<ComicRankItemBean> categoryArrayList=new ArrayList<ComicRankItemBean>();
-    private ArrayList<ComicRankItemBean> dateArrayList=new ArrayList<ComicRankItemBean>();
+    private ArrayList<ComicRankPopupWindowBean> categoryArrayList=new ArrayList<ComicRankPopupWindowBean>();
+    private ArrayList<ComicRankPopupWindowBean> dateArrayList=new ArrayList<ComicRankPopupWindowBean>();
 
     private int index=0;
 
@@ -68,7 +66,7 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        ComicRankItemBean bean = ((ComicRankPopupWindowAdapter) adapter).getData().get(position);
+        ComicRankPopupWindowBean bean = ((ComicRankPopupWindowAdapter) adapter).getData().get(position);
         if(!bean.isDate){
             LogUtils.e("currentComicType",bean.type);
             currentComicType[index]=bean.type;
@@ -78,7 +76,7 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
             currentDate[index]=bean.type;
         }
         tv_date.setText(Constant.dateTypeMap.get(currentDate[index]));
-        EventBus.getDefault().post(new SelectionEvent(index,currentComicType[index],currentDate[index],currentRankType[index]));
+        EventBus.getDefault().post(new RefreshRankEvent(index,currentComicType[index],currentDate[index],currentRankType[index]));
         popWindow.dissmiss();
         LogUtils.e("onItemClick");
     }

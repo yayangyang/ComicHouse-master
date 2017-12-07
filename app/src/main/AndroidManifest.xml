@@ -27,6 +27,13 @@
         </activity>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.ComicCategoryActivity"/>
+        <activity android:name=".ui.activity.NewestNovelActivity"/>
+        <activity android:name=".ui.activity.NovelCategoryActivity"/>
+        <activity android:name=".ui.activity.NovelRankActivity"/>
+        <activity android:name=".ui.activity.NovelCategoryDetailActivity"/>
+        <activity android:name=".ui.activity.NewComicWeeklyActivity"/>
+        <activity android:name=".ui.activity.AuthorIntroduceActivity"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.NewsCommonContract;
 import com.yayangyang.comichouse_master.base.NewsCommonPresenter;
 import com.yayangyang.comichouse_master.component.AppComponent;
@@ -19,6 +20,8 @@ import java.util.List;
 
 public class NewsAnimatedInformationFragment extends BaseRVFragment<NewsCommonPresenter<NewsCommonContract.View>,NewsCommonBody,BaseViewHolder>
         implements NewsCommonContract.View,BaseQuickAdapter.OnItemChildClickListener{
+
+    private int newsType= Constant.NewsType.ANIMATED_INFORMATION;
 
     private ArrayList mArrayList=new ArrayList();
 
@@ -48,12 +51,12 @@ public class NewsAnimatedInformationFragment extends BaseRVFragment<NewsCommonPr
     @Override
     public void onRefresh() {
         super.onRefresh();
-        mPresenter.getNewsCommonBody(page);
+        mPresenter.getNewsCommonBody(newsType,page);
     }
 
     @Override
     public void onLoadMoreRequested() {
-        mPresenter.getNewsCommonBody(page);
+        mPresenter.getNewsCommonBody(newsType,page);
     }
 
     @Override

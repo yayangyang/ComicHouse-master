@@ -16,11 +16,14 @@ import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.base.BaseActivity;
 import com.yayangyang.comichouse_master.base.BaseLoginActivity;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.component.DaggerMineComponent;
+import com.yayangyang.comichouse_master.manager.SettingManager;
 import com.yayangyang.comichouse_master.ui.presenter.LoginActivityPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +66,7 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     public void initDatas() {
-
+        mPresenter.attachView(this);
     }
 
     @Override
@@ -83,9 +86,13 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     protected void loginComicHouse(TencentLoginResult result) {
-//        Map<String,String> params=new HashMap<>();
-//
-//        mPresenter.login(params);
+        Map<String,String> params=new HashMap<>();
+        params.put("uid",result.openid);
+        params.put("os","android_MX4 Pro");
+        params.put("channel","qq");
+        params.put("token",result.pay_token);
+
+        mPresenter.login(params);
     }
 
     @Override
@@ -95,7 +102,11 @@ public class LoginActivity extends BaseLoginActivity {
 
     @Override
     public void loginSuccess(Login login) {
-
+        ToastUtils.showToast("动漫之家登录成功:");
+        ReaderApplication.sLogin=login;
+        SettingManager.getInstance().saveLoginInfo(login);
+        setResult(Constant.RETURN_DATA);
+        finish();
     }
 
     @OnClick({R.id.login,R.id.sina,R.id.qq,R.id.wetchat})

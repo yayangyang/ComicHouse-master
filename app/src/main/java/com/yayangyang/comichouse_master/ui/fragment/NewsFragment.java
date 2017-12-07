@@ -11,7 +11,16 @@ import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.component.AppComponent;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsAkiraInformationFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.NewsAnimatedInformationFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsAppreciatePictureFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsComicDisplayFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsComicInformationFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsComicPeripheryFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsGameInformationFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsHodgepodgeFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsLightNovelInformationFragment;
+import com.yayangyang.comichouse_master.ui.fragment.detail.NewsMusicInformationFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.NewsRecommendFragment;
 
 import java.util.ArrayList;
@@ -51,9 +60,16 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void initDatas() {
         mFragments.add(new NewsRecommendFragment());
-        for(int i=1;i<mTitles.length;i++){
-            mFragments.add(new NewsAnimatedInformationFragment());
-        }
+        mFragments.add(new NewsAnimatedInformationFragment());
+        mFragments.add(new NewsComicInformationFragment());
+        mFragments.add(new NewsLightNovelInformationFragment());
+        mFragments.add(new NewsAppreciatePictureFragment());
+        mFragments.add(new NewsGameInformationFragment());
+        mFragments.add(new NewsComicPeripheryFragment());
+        mFragments.add(new NewsAkiraInformationFragment());
+        mFragments.add(new NewsComicDisplayFragment());
+        mFragments.add(new NewsMusicInformationFragment());
+        mFragments.add(new NewsHodgepodgeFragment());
     }
 
     @Override

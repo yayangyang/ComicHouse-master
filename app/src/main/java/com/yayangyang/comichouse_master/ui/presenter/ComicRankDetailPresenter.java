@@ -1,6 +1,6 @@
 package com.yayangyang.comichouse_master.ui.presenter;
 
-import com.yayangyang.comichouse_master.Bean.ComicRank;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.api.ComicApi;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.RxPresenter;
@@ -32,10 +32,10 @@ public class ComicRankDetailPresenter extends RxPresenter<ComicRankDetailContrac
                 page+"",Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        new Consumer<List<ComicRank>>() {
+                        new Consumer<List<ComicInfo>>() {
                             @Override
-                            public void accept(List<ComicRank> list) throws Exception {
-                                if (!list.isEmpty() && mView != null) {
+                            public void accept(List<ComicInfo> list) throws Exception {
+                                if (mView != null) {
                                     mView.showComicRankList(list,page);
                                 }
                             }

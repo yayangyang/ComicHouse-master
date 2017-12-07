@@ -1,8 +1,9 @@
 package com.yayangyang.comichouse_master.view;
 
-
 import android.content.Context;
-import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,20 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.zhouwei.library.CustomPopWindow;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.decoration.GridItemDecoration;
+import com.yayangyang.comichouse_master.decoration.SpaceItemDecoration;
+import com.yayangyang.comichouse_master.ui.adapter.ComicRankPopupWindowAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.SelAdapter;
+import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +35,8 @@ public class SelectionLayout extends LinearLayout {
     private LinearLayout parent;
 
     private OnSelectListener listener;
+
+    private List<String> mTitleList;
 
     public SelectionLayout(Context context) {
         this(context, null);
@@ -43,21 +52,22 @@ public class SelectionLayout extends LinearLayout {
         this.mContext = context;
     }
 
-    public void setData(List<String>... data) {
+    public void setData(List<String> titleList,List<String>... data) {
+        LogUtils.e("SelectionLayout-setData");
+        mTitleList=titleList;
         if (data != null && data.length > 0) {
             for (int i = 0; i < data.length; i++) {
                 List<String> list = data[i];
                 ChildView childView = new ChildView(mContext);
-                LayoutParams params = new LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+                LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 params.weight = 1;
                 childView.setLayoutParams(params);
-                childView.setData(list);
+                childView.setData(list,i);
                 childView.setTag(i);
                 addView(childView);
             }
         }
     }
-
 
     private void closeAll() {
         int childCount = getChildCount();
@@ -67,7 +77,7 @@ public class SelectionLayout extends LinearLayout {
         }
     }
 
-    class ChildView extends LinearLayout implements OnClickListener, AdapterView.OnItemClickListener {
+    class ChildView extends LinearLayout implements OnClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
         private LinearLayout layout;
 
@@ -75,9 +85,10 @@ public class SelectionLayout extends LinearLayout {
         private TextView tvTitle;
 
         private boolean isOpen = false;
+        private int initialSelection=0;
 
         private List<String> data = new ArrayList<>();
-        private ListPopupWindow mListPopupWindow;
+        private CustomPopWindow popWindow;
         private SelAdapter mAdapter;
 
         Animation operatingAnim1 = AnimationUtils.loadAnimation(mContext, R.anim.roate_0_180);
@@ -112,42 +123,59 @@ public class SelectionLayout extends LinearLayout {
             operatingAnim2.setFillAfter(true);
         }
 
-        private void setData(List<String> list) {
+        private void setData(List<String> list,int i) {
             if (list != null && !list.isEmpty()) {
                 data.addAll(list);
-                tvTitle.setText(list.get(0));
+                if(mTitleList==null||mTitleList.size()<getChildCount()){
+                    tvTitle.setText(list.get(0));
+                }else{
+                    tvTitle.setText(mTitleList.get(i));
+                    if(list.contains(mTitleList.get(i))){
+                        initialSelection=list.indexOf(mTitleList.get(i));
+                    }else{
+                        initialSelection=-1;
+                    }
+                }
             }
         }
 
         public void openPopupWindow() {
-            if (mListPopupWindow == null) {
+            tvTitle.setTextColor(getResources().getColor(R.color.colorAccent));
+            if (popWindow == null) {
                 createPopupWindow();
             }
-            mListPopupWindow.show();
+            mAdapter.notifyDataSetChanged();
+            popWindow.showAsDropDown(parent.getChildAt(0));
         }
 
         private void createPopupWindow() {
-            mListPopupWindow = new ListPopupWindow(mContext);
-            mAdapter = new SelAdapter(data);
-            mListPopupWindow.setAdapter(mAdapter);
-            mListPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            mListPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-            mListPopupWindow.setAnchorView(parent.getChildAt(0));
-            mListPopupWindow.setForceIgnoreOutsideTouch(false);
-            mListPopupWindow.setOnItemClickListener(this);
-            mListPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    ivArrow.startAnimation(operatingAnim2);
-                    isOpen = false;
-                }
-            });
-            mListPopupWindow.setModal(true);
+            View contentView = View.inflate(mContext, R.layout.view_comic_category_popupwindow, null);
+            RecyclerView recyclerView = contentView.findViewById(R.id.recyclerview);
+            recyclerView.setLayoutManager(new GridLayoutManager(mContext,4));
+            mAdapter=new SelAdapter(R.layout.item_selection_popupwindow,data);
+            mAdapter.setSelPosition(initialSelection);//初始选中项
+            mAdapter.setOnItemChildClickListener(this);
+            recyclerView.setAdapter(mAdapter);
+
+            popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
+                    .setView(contentView)//显示的布局，还可以通过设置一个View
+                    .size(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT) //设置显示的大小，不设置就默认包裹内容
+                    .setFocusable(true)//是否获取焦点，默认为ture
+                    .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
+                    .setOnDissmissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            tvTitle.setTextColor(getResources().getColor(R.color.black));
+                            ivArrow.startAnimation(operatingAnim2);
+                            isOpen = false;
+                        }
+                    })
+                    .create();//创建PopupWindow
         }
 
         public void closePopWindow() {
-            if (mListPopupWindow != null && mListPopupWindow.isShowing()) {
-                mListPopupWindow.dismiss();
+            if (popWindow != null) {
+                popWindow.dissmiss();
             }
         }
 
@@ -165,16 +193,14 @@ public class SelectionLayout extends LinearLayout {
         }
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
             mAdapter.setSelPosition(position);
             tvTitle.setText(data.get(position));
             if (listener != null) {
                 listener.onSelect((Integer) this.getTag(), position, data.get(position));
             }
-            mListPopupWindow.dismiss();
+            popWindow.dissmiss();
         }
-
-
     }
 
     public interface OnSelectListener {

@@ -1,68 +1,34 @@
 package com.yayangyang.comichouse_master.ui.adapter;
 
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.yayangyang.comichouse_master.Bean.base.ComicRankPopupWindowBean;
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.utils.AppUtils;
+import com.yayangyang.comichouse_master.utils.LogUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
+public class SelAdapter extends BaseQuickAdapter<String,BaseViewHolder> {
 
-/**
- * Created by Administrator on 2017/10/19.
- */
+    private int selectedPosition=0;
 
-public class SelAdapter extends BaseAdapter{
-    int selPosition = 0;
-    private List<String> mList;
-
-    public SelAdapter(List<String> data) {
-        mList=data;
-    }
-
-    public void setSelPosition(int position) {
-        selPosition = position;
-        notifyDataSetChanged();
+    public SelAdapter(int id, List<String> data) {
+        super(id,data);
     }
 
     @Override
-    public int getCount() {
-        return mList.size();
-    }
-
-    @Override
-    public String getItem(int position) {
-        return mList.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder=null;
-        if(convertView==null){
-            convertView = View.inflate(AppUtils.getAppContext(), R.layout.item_selection_view, null);
-            holder=new ViewHolder();
-            holder.tvSelTitleItem= (TextView) convertView.findViewById(R.id.tvSelTitleItem);
-
-            convertView.setTag(holder);
+    protected void convert(BaseViewHolder helper, String item) {
+        LogUtils.e("SelAdapter-convert"+item);
+        helper.setText(R.id.bt_type,item);
+        if(selectedPosition==helper.getLayoutPosition()){
+            helper.setBackgroundColor(R.id.bt_type,mContext.getResources().getColor(R.color.colorAccent));
         }else{
-            holder= (ViewHolder) convertView.getTag();
+            helper.setBackgroundColor(R.id.bt_type,mContext.getResources().getColor(R.color.common_bg));
         }
-        holder.tvSelTitleItem.setText(getItem(position));
-        return convertView;
+        helper.addOnClickListener(R.id.bt_type);
     }
 
-    static class ViewHolder{
-        public TextView tvSelTitleItem;
+    public void setSelPosition(int selectedPosition){
+        this.selectedPosition=selectedPosition;
     }
 }

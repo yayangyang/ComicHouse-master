@@ -51,7 +51,7 @@ public class ComicRecommendPresenter extends RxPresenter<ComicRecommendContract.
                             public void accept(List<ComicRecommend> list) throws Exception {
                                 LogUtils.e("getRecommend-accept");
                                 if (list != null) {
-                                    if (!list.isEmpty() && mView != null) {
+                                    if (mView != null) {
                                         LogUtils.e("eeeeeeeeeeeee");
                                         mView.showComicRecommendList(list);
                                     }

@@ -32,7 +32,7 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 //        LogUtils.e("size:"+size);
 //        LogUtils.e("qqqqqqq000"+parent.getChildLayoutPosition(view));
 //        LogUtils.e("qqqqqqq111"+parent.getChildLayoutPosition(view) % size);
-        if (parent.getChildLayoutPosition(view) % size == 0) {
+        if (parent.getChildLayoutPosition(view) % size != 0) {
 //            LogUtils.e("qqqqqqq222"+parent.getChildLayoutPosition(view) % size);
             outRect.left = 0;
         }

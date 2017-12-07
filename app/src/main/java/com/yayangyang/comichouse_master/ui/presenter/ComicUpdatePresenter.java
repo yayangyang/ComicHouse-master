@@ -44,7 +44,7 @@ public class ComicUpdatePresenter extends RxPresenter<ComicUpdateContract.View>
                         new Consumer<List<ComicUpdate>>() {
                             @Override
                             public void accept(List<ComicUpdate> list) throws Exception {
-                                if (!list.isEmpty() && mView != null) {
+                                if (mView != null) {
                                     mView.showComicUpdateList(list,page);
                                 }
                             }

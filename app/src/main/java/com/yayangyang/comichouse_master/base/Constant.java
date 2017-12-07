@@ -141,6 +141,9 @@ public class Constant {
     public static String CURRENT_COMIC_TYPE="currentComicType";;
     public static String CURRENT_DATE="currentdate";;
     public static String CURRENT_RANK_TYPE="currentRankType";;
+    public static String TAG_ID="tag_id";;
+    public static String OBJECT_ID="object_id";;
+
 
     @IntDef({
             //定义限定值
@@ -247,4 +250,341 @@ public class Constant {
         put(DateType.MONTH, "月");
         put(DateType.TOTAL, "总");
     }};
+
+    public @interface NewsType {
+        int RECOMMEND=0;
+        int ANIMATED_INFORMATION=1;
+        int COMIC_INFORMATION=2;
+        int LIGHT_NOVEL_INFORMATION=3;
+        int APPRECIATE_PICTURE=8;
+        int GAMNE_INFORMATION=7;
+        int COMIC_PERIPHERY=4;
+        int AKIRA_INFORMATION=5;
+        int COMIC_DISPLAY=9;
+        int MUSIC_INFORMATION=6;
+        int HODGEPODGE=10;
+    }
+
+    @StringDef({
+            ThemeType.ALL,
+            ThemeType.ADVENTURE,
+            ThemeType.LILY,
+            ThemeType.LIFE,
+            ThemeType.FOUR_LATTICE,
+            ThemeType.DRAG_QUEEN,
+            ThemeType.SUSPENSE,
+            ThemeType.HISTORY,
+            ThemeType.HAREM,
+            ThemeType.WARM_BLOOD,
+            ThemeType.TANBI,
+            ThemeType.OTHER,
+            ThemeType.TERROR,
+            ThemeType.SCIENCE_FICTION,
+            ThemeType.COMBAT,
+            ThemeType.JOYFUL,
+            ThemeType.LOVE,
+            ThemeType.DETECTIVE,
+            ThemeType.SCHOOL,
+            ThemeType.SUPERNATURAL,
+            ThemeType.MAGIC,
+            ThemeType.ATHLETICS,
+            ThemeType.WARFARE,
+            ThemeType.ADORABLE,
+            ThemeType.FANTASY,
+            ThemeType.MAGIC_HALLUCINATION,
+            ThemeType.TO_HELP_HER,
+            ThemeType.PRINCIPLES,
+            ThemeType.LIGHT_NOVEL,
+            ThemeType.KANTAI_COLLECTION,
+            ThemeType.XIAN_XIA,
+            ThemeType.AMUSE,
+            ThemeType.YAN_YI,
+            ThemeType.EAST,
+            ThemeType.SEX_CONVERSION,
+            ThemeType.WU_XIA,
+            ThemeType.ENCOURAGEMENT,
+            ThemeType.CURE,
+            ThemeType.HOME_DEPARTMENT,
+            ThemeType.SUPER_ROBOT_WARS,
+            ThemeType.MUSIC_AND_DANCE,
+            ThemeType.HIGH_DEFINITION_SINGLE_LINE,
+            ThemeType.WESTERN_MAGIC,
+            ThemeType.JOB_MARKET,
+            ThemeType.DELICIOUS_FOOD
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ThemeType {
+        String ALL="0";
+        String ADVENTURE="4";
+        String LILY="3243";
+        String LIFE="3242";
+        String FOUR_LATTICE="17";
+        String DRAG_QUEEN="3244";
+        String SUSPENSE="3245";
+        String HISTORY="3250";
+        String HAREM="3249";
+        String WARM_BLOOD="3248";
+        String TANBI="3246";
+        String OTHER="16";
+        String TERROR="14";
+        String SCIENCE_FICTION="7";
+        String COMBAT="6";
+        String JOYFUL="5";
+        String LOVE="8";
+        String DETECTIVE="9";
+        String SCHOOL="13";
+        String SUPERNATURAL="12";
+        String MAGIC="11";
+        String ATHLETICS="1";
+        String WARFARE="3251";
+        String ADORABLE="3252";
+        String FANTASY="5848";
+        String MAGIC_HALLUCINATION="5806";
+        String TO_HELP_HER="5345";
+        String PRINCIPLES="6219";
+        String LIGHT_NOVEL="6316";
+        String KANTAI_COLLECTION="13627";
+        String XIAN_XIA="7900";
+        String AMUSE="7568";
+        String YAN_YI="5077";
+        String EAST="5077";
+        String SEX_CONVERSION="4518";
+        String WU_XIA="3324";
+        String ENCOURAGEMENT="3255";
+        String CURE="3254";
+        String HOME_DEPARTMENT="3253";
+        String SUPER_ROBOT_WARS="3325";
+        String MUSIC_AND_DANCE="3326";
+        String HIGH_DEFINITION_SINGLE_LINE="4459";
+        String WESTERN_MAGIC="3365";
+        String JOB_MARKET="3328";
+        String DELICIOUS_FOOD="3327";
+
+    }
+
+    public static List<String> themeTypeList = new ArrayList<String>() {{
+        add(ThemeType.ALL);
+        add(ThemeType.ADVENTURE);
+        add(ThemeType.LILY);
+        add(ThemeType.LIFE);
+        add(ThemeType.FOUR_LATTICE);
+        add(ThemeType.DRAG_QUEEN);
+        add(ThemeType.SUSPENSE);
+        add(ThemeType.HISTORY);
+        add(ThemeType.HAREM);
+        add(ThemeType.WARM_BLOOD);
+        add(ThemeType.TANBI);
+        add(ThemeType.OTHER);
+        add(ThemeType.TERROR);
+        add(ThemeType.SCIENCE_FICTION);
+        add(ThemeType.COMBAT);
+        add(ThemeType.JOYFUL);
+        add(ThemeType.LOVE);
+        add(ThemeType.DETECTIVE);
+        add(ThemeType.SCHOOL);
+        add(ThemeType.SUPERNATURAL);
+        add(ThemeType.MAGIC);
+        add(ThemeType.ATHLETICS);
+        add(ThemeType.WARFARE);
+        add(ThemeType.ADORABLE);
+        add(ThemeType.FANTASY);
+        add(ThemeType.MAGIC_HALLUCINATION);
+        add(ThemeType.TO_HELP_HER);
+        add(ThemeType.PRINCIPLES);
+        add(ThemeType.LIGHT_NOVEL);
+        add(ThemeType.KANTAI_COLLECTION);
+        add(ThemeType.XIAN_XIA);
+        add(ThemeType.AMUSE);
+        add(ThemeType.YAN_YI);
+        add(ThemeType.EAST);
+        add(ThemeType.SEX_CONVERSION);
+        add(ThemeType.WU_XIA);
+        add(ThemeType.ENCOURAGEMENT);
+        add(ThemeType.CURE);
+        add(ThemeType.HOME_DEPARTMENT);
+        add(ThemeType.SUPER_ROBOT_WARS);
+        add(ThemeType.MUSIC_AND_DANCE);
+        add(ThemeType.HIGH_DEFINITION_SINGLE_LINE);
+        add(ThemeType.WESTERN_MAGIC);
+        add(ThemeType.JOB_MARKET);
+        add(ThemeType.DELICIOUS_FOOD);
+    }};
+
+    @StringDef({
+            AgeType.ALL,
+            AgeType.JUVENILE_COMIC,
+            AgeType.GRIL_COMIC,
+            AgeType.YOUTH_COMIC,
+            AgeType.FEMALE_YOUTH_COMIC
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AgeType {
+        String ALL="0";
+        String JUVENILE_COMIC="3262";
+        String GRIL_COMIC="3263";
+        String YOUTH_COMIC="3264";
+        String FEMALE_YOUTH_COMIC="13626";
+    }
+
+    public static List<String> ageTypeList = new ArrayList<String>() {{
+        add(AgeType.ALL);
+        add(AgeType.JUVENILE_COMIC);
+        add(AgeType.GRIL_COMIC);
+        add(AgeType.YOUTH_COMIC);
+        add(AgeType.FEMALE_YOUTH_COMIC);
+    }};
+
+    @StringDef({
+            ScheduleType.ALL,
+            ScheduleType.SERIALIZING,
+            ScheduleType.THE_END
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ScheduleType {
+        String ALL="0";
+        String SERIALIZING ="2309";
+        String THE_END="2310";
+    }
+
+    public static List<String> scheduleTypeList = new ArrayList<String>() {{
+        add(ScheduleType.ALL);
+        add(ScheduleType.SERIALIZING);
+        add(ScheduleType.THE_END);
+    }};
+
+    @StringDef({
+            RegionType.ALL,
+            RegionType.JAPAN,
+            RegionType.KOREA,
+            RegionType.EUROPE_AND_AMERICA,
+            RegionType.HONGKONG_AND_TAIWAN,
+            RegionType.OTHER,
+            RegionType.INLAND
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface RegionType {
+        String ALL="0";
+        String JAPAN ="2304";
+        String KOREA="2305";
+        String EUROPE_AND_AMERICA="2306";
+        String HONGKONG_AND_TAIWAN="2307";
+        String OTHER="8435";
+        String INLAND="2308";
+    }
+
+    public static List<String> regionTypeList = new ArrayList<String>() {{
+        add(RegionType.ALL);
+        add(RegionType.JAPAN);
+        add(RegionType.KOREA);
+        add(RegionType.EUROPE_AND_AMERICA);
+        add(RegionType.HONGKONG_AND_TAIWAN);
+        add(RegionType.OTHER);
+        add(RegionType.INLAND);
+    }};
+
+
+
+    @StringDef({
+            NovelCommonType.ALL,
+            NovelCommonType.TERROR,
+            NovelCommonType.SCIENCE_FICTION,
+            NovelCommonType.DETECTIVE,
+            NovelCommonType.LOVE,
+            NovelCommonType.SCHOOL,
+            NovelCommonType.SUPERNATURAL,
+            NovelCommonType.MAGIC,
+            NovelCommonType.ADVENTURE,
+            NovelCommonType.OTHER,
+            NovelCommonType.JOYFUL,
+            NovelCommonType.COMBAT,
+            NovelCommonType.SUPER_ROBOT_WARS,
+            NovelCommonType.XIAN_XIA,
+            NovelCommonType.CITY,
+            NovelCommonType.HISTORY,
+            NovelCommonType.WARFARE,
+            NovelCommonType.ENCOURAGEMENT,
+            NovelCommonType.HAREM,
+            NovelCommonType.LILY,
+            NovelCommonType.TANBI,
+            NovelCommonType.ANOTHER_WORLD,
+            NovelCommonType.ABILITY,
+            NovelCommonType.TIME_TRAVEL,
+            NovelCommonType.FANTASY
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface NovelCommonType {
+        String ALL="0";
+        String TERROR ="2";
+        String SCIENCE_FICTION="4";
+        String DETECTIVE="6";
+        String LOVE="8";
+        String SCHOOL="12";
+        String SUPERNATURAL="14";
+        String MAGIC="16";
+        String ADVENTURE="20";
+        String OTHER="25";
+        String JOYFUL="40";
+        String COMBAT="47";
+        String SUPER_ROBOT_WARS="1264";
+        String XIAN_XIA="1265";
+        String CITY="1266";
+        String HISTORY="1267";
+        String WARFARE="1268";
+        String ENCOURAGEMENT="1269";
+        String HAREM="1271";
+        String LILY="1272";
+        String TANBI="1273";
+        String ANOTHER_WORLD="1274";
+        String ABILITY="1275";
+        String TIME_TRAVEL="1276";
+        String FANTASY="1321";
+    }
+
+    public static List<String> novelCommonTypeList = new ArrayList<String>() {{
+        add(NovelCommonType.ALL);
+        add(NovelCommonType.TERROR);
+        add(NovelCommonType.SCIENCE_FICTION);
+        add(NovelCommonType.DETECTIVE);
+        add(NovelCommonType.LOVE);
+        add(NovelCommonType.SCHOOL);
+        add(NovelCommonType.SUPERNATURAL);
+        add(NovelCommonType.MAGIC);
+        add(NovelCommonType.ADVENTURE);
+        add(NovelCommonType.OTHER);
+        add(NovelCommonType.JOYFUL);
+        add(NovelCommonType.COMBAT);
+        add(NovelCommonType.SUPER_ROBOT_WARS);
+        add(NovelCommonType.XIAN_XIA);
+        add(NovelCommonType.CITY);
+        add(NovelCommonType.HISTORY);
+        add(NovelCommonType.WARFARE);
+        add(NovelCommonType.ENCOURAGEMENT);
+        add(NovelCommonType.HAREM);
+        add(NovelCommonType.LILY);
+        add(NovelCommonType.HAREM);
+        add(NovelCommonType.TANBI);
+        add(NovelCommonType.ANOTHER_WORLD);
+        add(NovelCommonType.ABILITY);
+        add(NovelCommonType.TIME_TRAVEL);
+        add(NovelCommonType.FANTASY);
+    }};
+
+    @StringDef({
+            novelScheduleType.ALL,
+            novelScheduleType.SERIALIZING,
+            novelScheduleType.THE_END
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface novelScheduleType {
+        String ALL="0";
+        String SERIALIZING ="1";
+        String THE_END="2";
+    }
+
+    public static List<String> novelScheduleTypeList = new ArrayList<String>() {{
+        add(ScheduleType.ALL);
+        add(ScheduleType.SERIALIZING);
+        add(ScheduleType.THE_END);
+    }};
+
 }

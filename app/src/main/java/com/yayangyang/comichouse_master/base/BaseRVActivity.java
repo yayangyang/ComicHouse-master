@@ -31,6 +31,8 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
 
     protected int start = 0;
     protected int limit = 20;
+
+    protected int page=0;
     protected boolean isConnected=false;//网络是否连接
 
     protected float y=0;
