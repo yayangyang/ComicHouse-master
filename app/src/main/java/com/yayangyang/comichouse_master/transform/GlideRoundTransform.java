@@ -10,13 +10,18 @@ import android.graphics.RectF;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.LoginUtil;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
 public class GlideRoundTransform extends BitmapTransformation {
+    //定义一个static变量共用以优化性能(由于Glide加载的无序性,若同时加载的值不同可能互相影响)
     private static float radius = 0f;
 
     public GlideRoundTransform(Context context, int dp) {
         super(context);
         radius = Resources.getSystem().getDisplayMetrics().density * dp;
+        LogUtils.e("radius:"+radius);
     }
 
     @Override

@@ -9,8 +9,8 @@
 
     <FrameLayout
         android:id="@+id/fr_normal"
-        android:layout_width="115dp"
-        android:layout_height="150dp"
+        android:layout_width="125dp"
+        android:layout_height="160dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="@drawable/iv_touch_bg_selector">
@@ -20,14 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@mipmap/ic_launcher"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"/>
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/fr_big"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="105dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="@drawable/iv_touch_bg_selector"
@@ -37,7 +38,8 @@
             android:id="@+id/iv_cover_big"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
 
     </FrameLayout>
 

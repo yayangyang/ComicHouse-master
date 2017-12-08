@@ -18,6 +18,7 @@ import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
+import com.yayangyang.comichouse_master.decoration.CommonSpaceItemDecoration;
 import com.yayangyang.comichouse_master.decoration.SpaceItemDecoration;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
 import com.yayangyang.comichouse_master.ui.activity.AuthorIntroduceActivity;
@@ -53,7 +54,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     private Map<String, String> subscriptionParams;
     private Map<String, String> elatedParams;
 
-    private List<HeaderViewHolder> mHeaderViewHolderArrayList=new ArrayList<>();
+    private List<HeaderViewHolder> mHeaderViewHolderArrayList;
 
     @BindView(R.id.sw)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -67,7 +68,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             R.id.rv_newest_shelves})
     RecyclerView rvz[];
 
-    private List<ComicRecommendDetailAdapter> mAdapterList=new ArrayList();
+    private List<ComicRecommendDetailAdapter> mAdapterList;
 
     @Inject
     ComicRecommendPresenter mPresenter;
@@ -128,6 +129,8 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void initDatas() {
+        LogUtils.e("initDatas-rvz.length"+rvz.length);
+        mHeaderViewHolderArrayList=new ArrayList<>();
         for(int i=0;i<rvz.length;i++){
             View view = View.inflate(getActivity(), R.layout.header_comic_recommend_detail, null);
             HeaderViewHolder holder = new HeaderViewHolder(view);
@@ -141,12 +144,14 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             holder.tv_title.setText(strz[i]);
             mHeaderViewHolderArrayList.add(holder);
         }
+        LogUtils.e("mHeaderViewHolderArrayList.size"+mHeaderViewHolderArrayList.size());
     }
 
     @Override
     public void configViews() {
         LogUtils.e("configViews");
 
+        mAdapterList=new ArrayList();
         for(int i=0;i<rvz.length;i++){
             ComicRecommendDetailAdapter adapter = new ComicRecommendDetailAdapter
                     (R.layout.item_comic_recommend_detail, null);
@@ -156,14 +161,15 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             rvz[i].setNestedScrollingEnabled(false);
             if(i==2||i==6||i==8){
                 rvz[i].setLayoutManager(new GridLayoutManager(getActivity(),2));
-                rvz[i].removeItemDecoration(rvz[i].getItemDecorationAt(0));
-                rvz[i].addItemDecoration(new SpaceItemDecoration(ScreenUtils.dpToPxInt(10),2));
+//                rvz[i].removeItemDecoration(rvz[i].getItemDecorationAt(0));
             }else{
                 rvz[i].setLayoutManager(new GridLayoutManager(getActivity(),3));
             }
+            rvz[i].addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(5)));
             //使用了brvah框架bindToRecyclerView方法里面执行了setAdapter,所以应该在setLayoutManager之后才能绑定spancount
             adapter.bindToRecyclerView(rvz[i]);
         }
+        LogUtils.e("mAdapterList.size"+mAdapterList.size());
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
         onRefresh();
@@ -229,13 +235,13 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             bean.cover=data.data.get(i).cover;
             bean.title=data.data.get(i).title;
             bean.sub_title=data.data.get(i).authors;
-            bean.type="";
+            bean.type="1";
             bean.status=data.data.get(i).status;
 
             bean.id=data.data.get(i).id;
         }
 //        comicRecommend.data=beans;
-        if(mAdapterList.get(0).getHeaderLayout()==null){
+        if(mAdapterList.get(0).getHeaderLayout()==null&&data.data!=null&&!data.data.isEmpty()){
             mAdapterList.get(0).setHeaderView(mHeaderViewHolderArrayList.get(0).view);
         }
         mAdapterList.get(0).setNewData(beans);
@@ -244,17 +250,18 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void showElatedComic(ElatedComic.DataBean data) {
-        LogUtils.e("showElatedComic");
+        LogUtils.e("showElatedComic"+data.data.size());
         ArrayList<ComicRecommend.DataBean> beans = new ArrayList<>();
         for(int i=0;i<data.data.size();i++){
             ComicRecommend.DataBean bean = new ComicRecommend.DataBean();
             bean.cover=data.data.get(i).cover;
             bean.title=data.data.get(i).title;
             bean.sub_title=data.data.get(i).authors;
-            bean.type="";
+            bean.type="1";
             bean.status=data.data.get(i).status;
             bean.num=data.data.get(i).num;
             bean.id=data.data.get(i).id;
+            beans.add(bean);
         }
 
         if(mAdapterList.get(3).getHeaderLayout()==null){
@@ -312,6 +319,8 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onDestroyView() {
         mPresenter.detachView();
+        //下面代码放在onDestroyView方法之前,
+        //BaseFragment的onDestroyView方法里unbind.unbind方法应该是将这些它赋值的变量置为空了
         banner.stopAutoPlay();
         super.onDestroyView();
     }

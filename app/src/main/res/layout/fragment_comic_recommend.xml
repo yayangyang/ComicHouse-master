@@ -22,68 +22,88 @@
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="200dp">
                 </com.youth.banner.Banner>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_my_subscribe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/common_bg"
                     android:visibility="gone">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_recent_must_look"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_host_special"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_guess_you_like"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_master"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_good_china_comic"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_american_comic"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_hot_serial"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_webtoon"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_newest_shelves"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_bg"
+                    android:layout_marginTop="10dp">
                 </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>

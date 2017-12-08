@@ -27,6 +27,7 @@ import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.component.DaggerLightNovelComponent;
+import com.yayangyang.comichouse_master.decoration.CommonSpaceItemDecoration;
 import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.ui.adapter.AuthorIntroduceAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.NewComicWeeklyAdapter;
@@ -37,6 +38,7 @@ import com.yayangyang.comichouse_master.ui.contract.NewestNovelContract;
 import com.yayangyang.comichouse_master.ui.presenter.AuthorIntroduceActivityPresenter;
 import com.yayangyang.comichouse_master.ui.presenter.NewComicWeeklyActivityPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,7 @@ public class AuthorIntroduceActivity extends BaseActivity
         LogUtils.e("configViews");
         mAdapter = new AuthorIntroduceAdapter(R.layout.item_author_introduce, mArrayList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        mRecyclerView.addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(10)));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setNestedScrollingEnabled(false);
         mAdapter.setOnItemChildClickListener(this);

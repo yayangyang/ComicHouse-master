@@ -61,6 +61,9 @@ public class ComicRecommendDetailAdapter extends BaseQuickAdapter<ComicRecommend
         helper.setText(R.id.tv_title,item.title);
         if(!item.title.equals(item.sub_title)){
             helper.setText(R.id.tv_author,item.sub_title);
+            helper.setVisible(R.id.tv_author,true);
+        }else{
+            helper.setGone(R.id.tv_author,false);
         }
     }
 }
