@@ -1,13 +1,16 @@
 package com.yayangyang.comichouse_master.api;
 
 
+import com.yayangyang.comichouse_master.Bean.Announcement;
 import com.yayangyang.comichouse_master.Bean.AuthorIntroduce;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
+import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
+import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
 import com.yayangyang.comichouse_master.Bean.NewestNovel;
@@ -15,7 +18,9 @@ import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NovelCategory;
 import com.yayangyang.comichouse_master.Bean.NovelCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.NovelRank;
+import com.yayangyang.comichouse_master.Bean.ComicReview;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
+import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
@@ -26,6 +31,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -123,6 +129,30 @@ public class ComicApi {
 
     public Observable<AuthorIntroduce> getAuthorIntroduce(String object_id, String channel, String version){
         return service.getAuthorIntroduce(object_id,channel,version);
+    }
+
+    public Observable<ComicDetailHeader> getComicDetailHeader(String comicId, String channel, String version) {
+        return service.getComicDetailHeader(comicId,channel,version);
+    }
+
+    public Observable<List<Object>> getComicDetailBody(String comicId, String page, String channel, String version) {
+        return service.getComicDetailBody(comicId,page,channel,version);
+    }
+
+    public Observable<Announcement> getAnnouncement(String comicId, String channel, String version) {
+        return service.getAnnouncement(comicId,channel,version);
+    }
+
+    public Observable<IsHelpful> getIsHelpful(String obj_id,String comment_id,String type, String channel, String version) {
+        return service.getIsHelpful(obj_id,comment_id,type,channel,version);
+    }
+
+    public Observable<ComicReview> publishReview(Map<String, String> params){
+        return service.publishReview(params);
+    }
+
+    public Observable<UploadImageResult> uploadImage(Map<String, RequestBody> params){
+        return service.uploadImage(params);
     }
 
 }

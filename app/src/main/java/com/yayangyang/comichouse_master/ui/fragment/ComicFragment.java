@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseFragment;
@@ -14,11 +15,13 @@ import com.yayangyang.comichouse_master.ui.fragment.detail.ComicRankFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicRecommendFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicSpecialTopicFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicUpdateFragment;
+import com.yayangyang.comichouse_master.utils.DeviceUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/11/12.
@@ -83,6 +86,11 @@ public class ComicFragment extends BaseFragment{
         LogUtils.e("测试");
         mTabLayout.setupWithViewPager(mViewPager);
         LogUtils.e("测试");
+    }
+
+    @OnClick(R.id.showInfo)
+    public void show(){
+        DeviceUtils.printDisplayInfo(getActivity());
     }
 
 }

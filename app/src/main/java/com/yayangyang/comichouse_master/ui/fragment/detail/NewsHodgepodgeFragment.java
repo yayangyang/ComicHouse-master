@@ -107,4 +107,10 @@ public class NewsHodgepodgeFragment extends BaseRVFragment<NewsCommonPresenter<N
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsHodgepodgeFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

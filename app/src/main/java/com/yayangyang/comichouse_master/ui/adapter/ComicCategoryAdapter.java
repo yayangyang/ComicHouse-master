@@ -6,15 +6,21 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
-import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.GlideUtil;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ComicCategoryAdapter extends BaseQuickAdapter<ComicCategory,BaseViewHolder> {
 
@@ -29,9 +35,10 @@ public class ComicCategoryAdapter extends BaseQuickAdapter<ComicCategory,BaseVie
         GlideUrl cookie = new GlideUrl(item.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        Glide.with(mContext).load(cookie)
-                .placeholder(R.drawable.avatar_default) .transform(new GlideRoundTransform
-                (mContext,6)).into(iv_cover);
+        GlideApp.with(mContext).load(cookie)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .apply(GlideUtil.getRoundCornerRequestOptions())
+                .into(iv_cover);
 
         helper.addOnClickListener(R.id.frameLayout);
 

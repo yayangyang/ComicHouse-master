@@ -33,7 +33,6 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
     protected int limit = 20;
 
     protected int page=0;
-    protected boolean isConnected=false;//网络是否连接
 
     protected float y=0;
     protected int screenHeight = 0;
@@ -97,13 +96,7 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
 
     @Override
     public void onLoadMoreRequested() {
-        if (!NetworkUtils.isConnected(getApplicationContext())) {
-            ToastUtils.showToast("网络异常");
-            isConnected=false;
-        }else{
-            isConnected=true;
-            mSwipeRefreshLayout.setEnabled(false);
-        }
+
     }
 
     @Override
@@ -118,7 +111,9 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
             ViewUtils.setEmptyViewLayoutParams(RecyclerView.LayoutParams.MATCH_PARENT,
                     RecyclerView.LayoutParams.MATCH_PARENT,mAdapter.getEmptyView());
         }
-        ToastUtils.showToast("网络异常");
+        if(!NetworkUtils.isAvailable(this)){
+            ToastUtils.showToast("网络异常");
+        }
     }
 
 }

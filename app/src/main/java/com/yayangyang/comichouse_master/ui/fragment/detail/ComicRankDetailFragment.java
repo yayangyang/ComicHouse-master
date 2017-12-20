@@ -12,6 +12,7 @@ import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
+import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicRankAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicRankDetailContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicRankDetailPresenter;
@@ -27,8 +28,6 @@ import java.util.List;
 public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPresenter,ComicInfo,BaseViewHolder>
         implements ComicRankDetailContract.View,BaseQuickAdapter.OnItemChildClickListener {
 
-    private ArrayList mArrayList=new ArrayList();
-
     private int index= 0;
     private int currentComicType= Constant.ComicType.ALL;
     private int currentDate= Constant.DateType.DAY;
@@ -36,7 +35,8 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicInfo comicInfo = (ComicInfo) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
     public void configViews() {
         LogUtils.e("configViews");
         initAdapter(ComicRankAdapter.class,
-                R.layout.item_comic_rank,mArrayList,true,true);
+                R.layout.item_comic_rank,null,true,true);
         mAdapter.setOnItemChildClickListener(this);
         onRefresh();
     }

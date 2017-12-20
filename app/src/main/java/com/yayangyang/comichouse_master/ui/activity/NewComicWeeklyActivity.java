@@ -2,45 +2,39 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
-import com.yayangyang.comichouse_master.Bean.NewestNovel;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.BaseActivity;
-import com.yayangyang.comichouse_master.base.BaseRVActivity;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
-import com.yayangyang.comichouse_master.component.DaggerLightNovelComponent;
-import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.ui.adapter.NewComicWeeklyAdapter;
-import com.yayangyang.comichouse_master.ui.adapter.NovelCategoryAdapter;
 import com.yayangyang.comichouse_master.ui.contract.NewComicWeeklyContract;
-import com.yayangyang.comichouse_master.ui.contract.NewestNovelContract;
 import com.yayangyang.comichouse_master.ui.presenter.NewComicWeeklyActivityPresenter;
+import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/12/5.
@@ -96,7 +90,7 @@ public class NewComicWeeklyActivity extends BaseActivity
     @Override
     public void initToolBar() {
         mCommonToolbar.setTitle("");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        mCommonToolbar.setNavigationIcon(R.drawable.img_back);
     }
 
     @Override
@@ -137,9 +131,9 @@ public class NewComicWeeklyActivity extends BaseActivity
         GlideUrl cookie = new GlideUrl(newComicWeekly.mobile_header_pic, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        Glide.with(mContext).load(cookie)
-                .placeholder(R.drawable.avatar_default) .transform(new GlideRoundTransform
-                (mContext,6)).into(holder.iv_cover);
+        GlideApp.with(mContext).load(cookie)
+                .apply(GlideUtil.getRoundCornerRequestOptions())
+                .into(holder.iv_cover);
 
         tv_toolbar_title.setText(newComicWeekly.title.substring(0,newComicWeekly.title.indexOf(" ")));
         holder.tv_title.setText(newComicWeekly.title);

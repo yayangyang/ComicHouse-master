@@ -107,4 +107,9 @@ public class NewsComicPeripheryFragment extends BaseRVFragment<NewsCommonPresent
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsComicPeripheryFragment-onDestroyView");
+        super.onDestroyView();
+    }
 }

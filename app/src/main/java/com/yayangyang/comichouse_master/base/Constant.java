@@ -1,6 +1,7 @@
 package com.yayangyang.comichouse_master.base;
 
 import android.graphics.Color;
+import android.os.Environment;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringDef;
 
@@ -23,7 +24,11 @@ public class Constant {
 
     public static String PATH_DATA = FileUtils.createRootPath(AppUtils.getAppContext()) + "/cache";
 
-    public static String PATH_RESPONSES = FileUtils.createRootPath(AppUtils.getAppContext());
+    public static String PATH_RESPONSES = FileUtils.createRootPath(AppUtils.getAppContext())+"/responses";
+
+    public static String PATH_PICTURES = FileUtils.createPicturePath(AppUtils.getAppContext())+"/MyCameraApp";
+
+    public static String PATH_UP_LOAD_PICTURES = FileUtils.createPicturePath(AppUtils.getAppContext())+"/upLoadImage";
 
     public static String PATH_COLLECT = FileUtils.createRootPath(AppUtils.getAppContext()) + "/collect";
 
@@ -123,6 +128,8 @@ public class Constant {
 
     public static final int FINISH_ACTIVITY=1;
     public static final int RETURN_DATA=2;
+    public static int TAKE_PHOTO_WITH_DATA=3;
+    public static int GET_PHOTO_WITH_DATA=4;
 
     public static int ALL_COMIC=100;
     public static int ORIGINAL_COMIC=1;
@@ -143,6 +150,10 @@ public class Constant {
     public static String CURRENT_RANK_TYPE="currentRankType";;
     public static String TAG_ID="tag_id";;
     public static String OBJECT_ID="object_id";;
+    public static String COMIC_ID="comic_id";;
+    public static String TITLE="title";;
+    public static String COMIC_DETAIL_BODY="comic_detail_body";;
+    public static String IMAGE_TYPE="image/*";;
 
 
     @IntDef({

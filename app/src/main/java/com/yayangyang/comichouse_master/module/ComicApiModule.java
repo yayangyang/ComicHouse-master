@@ -28,7 +28,7 @@ public class ComicApiModule {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         //设置缓存路径
-        File httpCacheDirectory = new File(Constant.PATH_RESPONSES, "/responses");
+        File httpCacheDirectory = new File(Constant.PATH_RESPONSES);
         //设置缓存 10M
         Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
 

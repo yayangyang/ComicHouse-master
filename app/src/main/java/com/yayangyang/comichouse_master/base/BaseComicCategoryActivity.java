@@ -80,6 +80,7 @@ public abstract class BaseComicCategoryActivity extends BaseActivity implements 
             add("欧美");
             add("港台");
             add("其他");
+            add("内地");
         }});
     }};
 

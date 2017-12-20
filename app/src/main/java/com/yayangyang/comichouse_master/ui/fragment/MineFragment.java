@@ -2,11 +2,8 @@ package com.yayangyang.comichouse_master.ui.fragment;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,24 +12,25 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.bumptech.glide.request.RequestOptions;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.base.BaseFragment;
-import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
-import com.yayangyang.comichouse_master.manager.SettingManager;
-import com.yayangyang.comichouse_master.transform.GlideCircleTransform;
-import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.ui.activity.LoginActivity;
+import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
+import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import jp.wasabeef.glide.transformations.BitmapTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/11/12.
@@ -72,13 +70,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void initDatas() {
-        View view_comic = View.inflate(getApplicationContext(), R.layout.view_comic, null);
+        View view_comic = View.inflate(getActivity(), R.layout.view_comic, null);
         view_comic.findViewById(R.id.rl_comic_subscribe).setOnClickListener(this);
         view_comic.findViewById(R.id.rl_browse_history).setOnClickListener(this);
         view_comic.findViewById(R.id.rl_comic_download).setOnClickListener(this);
         view_comic.findViewById(R.id.rl_comic_review).setOnClickListener(this);
 
-        View view_novel = View.inflate(getApplicationContext(), R.layout.view_novel, null);
+        View view_novel = View.inflate(getActivity(), R.layout.view_novel, null);
         view_novel.findViewById(R.id.rl_novel_subscribe).setOnClickListener(this);
         view_novel.findViewById(R.id.rl_browse_history).setOnClickListener(this);
         view_novel.findViewById(R.id.rl_novel_download).setOnClickListener(this);
@@ -95,6 +93,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void configViews() {
+        GlideApp.with(this)
+                .load(R.drawable.img_def_head)
+                .apply(GlideUtil.getCircleCornerRequestOptions())
+                .into(iv_cover);
+
         mViewPager.setAdapter(new MyAdapter());
         LogUtils.e("测试");
         mTabLayout.setupWithViewPager(mViewPager);
@@ -152,9 +155,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 GlideUrl cookie = new GlideUrl(ReaderApplication.sLogin.data.photo, new LazyHeaders.Builder()
                         .addHeader("Referer", Constant.IMG_BASE_URL)
                         .addHeader("Accept-Encoding","gzip").build());
-                Glide.with(mContext).load(cookie)
-                        .placeholder(R.drawable.avatar_default) .transform(new GlideCircleTransform
-                        (mContext)).into(iv_cover);
+                GlideApp.with(mContext).load(cookie)
+                        .apply(GlideUtil.getRoundCornerRequestOptions())
+                        .into(iv_cover);
                 tv_user_name.setText(ReaderApplication.sLogin.data.nickname);
                 tv_login_description.setText("");
             }else{

@@ -1,13 +1,7 @@
 package com.yayangyang.comichouse_master.utils;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
-import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.ReaderApplication;
-import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.manager.SettingManager;
-import com.yayangyang.comichouse_master.transform.GlideCircleTransform;
 
 /**
  * Created by Administrator on 2017/12/6.

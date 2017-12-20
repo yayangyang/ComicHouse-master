@@ -107,4 +107,10 @@ public class NewsAkiraInformationFragment extends BaseRVFragment<NewsCommonPrese
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsAkiraInformationFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

@@ -107,4 +107,10 @@ public class NewsAppreciatePictureFragment extends BaseRVFragment<NewsCommonPres
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsAppreciatePictureFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

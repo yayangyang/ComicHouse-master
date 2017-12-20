@@ -8,6 +8,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import com.yayangyang.comichouse_master.utils.LogUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +62,7 @@ public class BasePermissionActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        LogUtils.e("onRequestPermissionsResult-requestCode:"+requestCode);//全部权限申请完后调用一次
 
         if(grantResults.length>0){
             for(int i=0;i<grantResults.length;i++){

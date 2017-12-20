@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -34,6 +35,9 @@
         <activity android:name=".ui.activity.NovelCategoryDetailActivity"/>
         <activity android:name=".ui.activity.NewComicWeeklyActivity"/>
         <activity android:name=".ui.activity.AuthorIntroduceActivity"/>
+        <activity android:name=".ui.activity.TestActivity"/>
+        <activity android:name=".ui.activity.ComicDetailActivity"/>
+        <activity android:name=".ui.activity.PublishReviewActivity"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -52,6 +56,16 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.yayangyang.comichouse_master.fileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -72,7 +72,7 @@ public class NovelCategoryActivity extends BaseRVActivity<NovelCategory,BaseView
     public void initToolBar() {
         LogUtils.e("NovelCategoryActivity-initToolBar");
         mCommonToolbar.setTitle("");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        mCommonToolbar.setNavigationIcon(R.drawable.img_back);
     }
 
     @Override

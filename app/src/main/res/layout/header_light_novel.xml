@@ -4,28 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@color/common_bg">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="轻小说"
-            android:textSize="20sp"
-            android:layout_centerInParent="true"/>
-
-        <ImageView
-            android:id="@+id/iv_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentEnd="true"/>
-
-    </RelativeLayout>
-
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
@@ -43,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Bottom_Tab_Style"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/img_novel_title_dian"
             android:text="追小说"
             android:textColor="@android:color/black"/>
 
@@ -52,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Bottom_Tab_Style"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/img_novel_title_book"
             android:text="找小说"
             android:textColor="@android:color/black"/>
 
@@ -61,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Bottom_Tab_Style"
-            android:drawableTop="@mipmap/ic_launcher"
+            android:drawableTop="@drawable/img_novel_title_chart"
             android:text="排行榜"
             android:textColor="@android:color/black"/>
 

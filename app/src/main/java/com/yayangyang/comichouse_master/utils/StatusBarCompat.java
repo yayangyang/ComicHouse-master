@@ -15,7 +15,9 @@ public class StatusBarCompat {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static View compat(Activity activity, int statusColor) {
-        int color = ContextCompat.getColor(activity, R.color.colorPrimaryDark);
+        int color = ContextCompat.getColor(activity, R.color.common_bg);
+//        LogUtils.e("statusColor:"+statusColor);
+//        LogUtils.e("Build.VERSION.SDK_INT:"+Build.VERSION.SDK_INT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (statusColor != INVALID_VAL) {
                 color = statusColor;

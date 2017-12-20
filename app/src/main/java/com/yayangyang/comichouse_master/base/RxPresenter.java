@@ -1,5 +1,7 @@
 package com.yayangyang.comichouse_master.base;
 
+import com.yayangyang.comichouse_master.utils.LogUtils;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -20,6 +22,7 @@ public class RxPresenter<T extends BaseContract.BaseView>
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(disposable);
+        LogUtils.e("mCompositeDisposable.size():"+mCompositeDisposable.size());
     }
 
     @Override

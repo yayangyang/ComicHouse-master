@@ -3,6 +3,7 @@ package com.yayangyang.comichouse_master.ui.fragment;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -25,20 +26,26 @@ import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by Administrator on 2017/11/12.
  */
 
 public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,LightNovel,BaseViewHolder>
-        implements LightNovelContract.View,BaseQuickAdapter.OnItemChildClickListener,View.OnClickListener {
+        implements LightNovelContract.View,BaseQuickAdapter.OnItemChildClickListener,View.OnClickListener,OnBannerListener {
 
     private Banner banner;
     private View headerView;
     private ArrayList mArrayList=new ArrayList();
+
+    @BindView(R.id.iv_search)
+    ImageView iv_search;
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -48,6 +55,7 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         LogUtils.e("Wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+        NewestNovelActivity.startActivity(getActivity());
     }
 
     @Override
@@ -61,6 +69,11 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
         }else if(v.getId()==R.id.bt_ranking_list){
             NovelRankActivity.startActivity(getActivity());
         }
+    }
+
+    @Override
+    public void OnBannerClick(int position) {
+
     }
 
     @Override
@@ -84,9 +97,10 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
 
     @Override
     public void initDatas() {
+        iv_search.setOnClickListener(this);
+
         headerView = View.inflate(getActivity(), R.layout.header_light_novel,null);
         banner= headerView.findViewById(R.id.banner);
-        headerView.findViewById(R.id.iv_search).setOnClickListener(this);
         headerView.findViewById(R.id.bt_chasing_novels).setOnClickListener(this);
         headerView.findViewById(R.id.bt_looking_for_novel).setOnClickListener(this);
         headerView.findViewById(R.id.bt_ranking_list).setOnClickListener(this);
@@ -158,8 +172,19 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
         banner.setDelayTime(1500);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.RIGHT);
+        //设置page监听器
+        banner.setOnBannerListener(this);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        LogUtils.e("onHiddenChanged-hidden:"+hidden);
+        if(hidden){
+            banner.stopAutoPlay();
+        }else{
+            banner.startAutoPlay();
+        }
+    }
 }

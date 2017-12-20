@@ -2,6 +2,7 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yayangyang.comichouse_master.R;
@@ -29,6 +31,8 @@ import butterknife.ButterKnife;
 
 public class SplashActivity extends BasePermissionActivity{
 
+    @BindView(R.id.rl_root)
+    RelativeLayout rl_root;
 //    @BindView(R.id.tvSkip)
 //    TextView tvSkip;
 
@@ -37,7 +41,8 @@ public class SplashActivity extends BasePermissionActivity{
     private Runnable allow,refuse;
     private String[] permissionCollection={
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA
     };
 
 //    @Inject
@@ -60,7 +65,7 @@ public class SplashActivity extends BasePermissionActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 //        setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
 //        mPresenter.attachView(this);
 
@@ -131,7 +136,7 @@ public class SplashActivity extends BasePermissionActivity{
         //确保有权限后验证是否需要登录
         if(ReaderApplication.sLogin==null){
             LogUtils.e("sLogin为空");
-            mHandler.sendEmptyMessageDelayed(1,1000);
+//            mHandler.sendEmptyMessageDelayed(0,1000);
         }else if(!TextUtils.isEmpty(ReaderApplication.sLogin.data.dmzj_token)){
 //            mPresenter.checkLogin(ReaderApplication.sLogin.token);
         }
@@ -168,10 +173,15 @@ public class SplashActivity extends BasePermissionActivity{
 //
 //    }
 //
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        LogUtils.e("SplashActivity-onDestroy++++++++++++++++++++++");
+        super.onDestroy();
 //        mPresenter.detachView();
-//    }
+        BitmapDrawable drawable = (BitmapDrawable) rl_root.getBackground();
+        drawable.getBitmap().recycle();
+        System.runFinalization();
+        System.gc();
+    }
 
 }

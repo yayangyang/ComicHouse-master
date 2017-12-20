@@ -1,12 +1,15 @@
 package com.yayangyang.comichouse_master.api;
 
 
+import com.yayangyang.comichouse_master.Bean.Announcement;
 import com.yayangyang.comichouse_master.Bean.AuthorIntroduce;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
+import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
+import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
@@ -15,7 +18,9 @@ import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NovelCategory;
 import com.yayangyang.comichouse_master.Bean.NovelCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.NovelRank;
+import com.yayangyang.comichouse_master.Bean.ComicReview;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
+import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
@@ -24,11 +29,14 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -196,11 +204,78 @@ public interface ComicApiService {
      * @param version
      * @return
      */
+    @Headers("Cache-Control: max-age=0")
     @GET("/subject/{object_id}.json")
     Observable<NewComicWeekly> getNewComicWeekly(@Path("object_id") String object_id,
                                                  @Query("channel") String channel, @Query("version") String version);
 
+    /**
+     * 获取作者介绍页
+     * @param object_id
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
     @GET("/UCenter/author/{object_id}.json")
     Observable<AuthorIntroduce> getAuthorIntroduce(@Path("object_id") String object_id,
                                                         @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 获取漫画详情header
+     * @param comicId
+     * @param channel
+     * @param version
+     * @return
+     */
+    @GET("/comic/{comicId}.json")
+    Observable<ComicDetailHeader> getComicDetailHeader(@Path("comicId") String comicId,
+                                                       @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 获取漫画详情body
+     * @param comicId
+     * @param page
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/comment2/4/0/{comicId}/1/{page}.json")
+    Observable<List<Object>> getComicDetailBody(@Path("comicId") String comicId, @Path("page") String page,
+                                                         @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 获取公告
+     * @param comicId
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/comment2/getTopComment/4/4/{comicId}.json")
+    Observable<Announcement> getAnnouncement(@Path("comicId") String comicId,
+                                                @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 评论点赞
+     * @param obj_id
+     * @param comment_id
+     * @param type
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/old/comment/agree")
+    Observable<IsHelpful> getIsHelpful(@Query("obj_id") String obj_id,@Query("comment_id") String comment_id, @Query("type") String type,
+                                          @Query("channel") String channel, @Query("version") String version);
+
+    @FormUrlEncoded
+    @POST("/comment2/addv2")
+    Observable<ComicReview> publishReview(@FieldMap Map<String, String> params);
+
+    @Multipart
+    @POST("/comment2/uploadImg")
+    Observable<UploadImageResult> uploadImage(@PartMap Map<String, RequestBody> params);
 }

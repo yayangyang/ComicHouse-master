@@ -5,9 +5,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
@@ -33,6 +35,7 @@ import com.yayangyang.comichouse_master.utils.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +49,7 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class ComicRecommendFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        ComicRecommendContract.View,BaseQuickAdapter.OnItemChildClickListener,View.OnClickListener{
+        ComicRecommendContract.View,BaseQuickAdapter.OnItemChildClickListener,View.OnClickListener,OnBannerListener{
 
     private String strz[]={"我的订阅","近期必看","火热专题","猜你喜欢","大师级作者怎能不看","国漫也精彩",
             "美漫大事件","热门连载","条漫专区","最新上架"};
@@ -60,7 +63,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @BindView(R.id.banner)
-    Banner banner;
+    com.yayangyang.comichouse_master.view.Banner banner;
 
     @BindViews({R.id.rv_my_subscribe,R.id.rv_recent_must_look,R.id.rv_host_special,
             R.id.rv_guess_you_like,R.id.rv_master,R.id.rv_good_china_comic,
@@ -93,6 +96,14 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void onClick(View v) {
+        ToastUtils.showToast("点击了");
+        Glide.get(getActivity()).clearMemory();
+        System.runFinalization();
+        System.gc();
+    }
+
+    @Override
+    public void OnBannerClick(int position) {
 
     }
 
@@ -117,14 +128,14 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         mPresenter.getComicRecommendList();
-        getData(false);
-        mPresenter.getElatedComic(elatedParams);
-        if(LoginUtil.isLogin()){
-            getData(true);
-            mPresenter.getSubscriptionComic(subscriptionParams);
-        }else{
-            rvz[3].setVisibility(View.GONE);
-        }
+//            getData(false);
+//            mPresenter.getElatedComic(elatedParams);
+//            if(LoginUtil.isLogin()){
+//                getData(true);
+//                mPresenter.getSubscriptionComic(subscriptionParams);
+//            }else{
+//                rvz[0].setVisibility(View.GONE);
+//            }
     }
 
     @Override
@@ -137,10 +148,23 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             if(i==0){
                 holder.iv_cover.setOnClickListener(this);
             }
-            if(i==0||i==1||i==2||i==4||i==6){
+            if(i==0||i==2||i==3||i==5||i==7){
                 holder.iv_more.setOnClickListener(this);
                 holder.iv_more.setVisibility(View.VISIBLE);
             }
+            if(i==3||i==5||i==7){
+                holder.iv_more.setImageResource(R.drawable.img_refrsh_s);
+            }
+            if(i==0) holder.iv_cover.setImageResource(R.drawable.img_order_refresh);
+            if(i==1) holder.iv_cover.setImageResource(R.drawable.img_recent);
+            if(i==2) holder.iv_cover.setImageResource(R.drawable.img_hot);
+            if(i==3) holder.iv_cover.setImageResource(R.drawable.img_youlike);
+            if(i==4) holder.iv_cover.setImageResource(R.drawable.img_master_work);
+            if(i==5) holder.iv_cover.setImageResource(R.drawable.img_inner_cartoon);
+            if(i==6) holder.iv_cover.setImageResource(R.drawable.img_americ_eve);
+            if(i==7) holder.iv_cover.setImageResource(R.drawable.img_hot_serial);
+            if(i==8) holder.iv_cover.setImageResource(R.drawable.img_strip_cart);
+            if(i==9) holder.iv_cover.setImageResource(R.drawable.img_latest_pub);
             holder.tv_title.setText(strz[i]);
             mHeaderViewHolderArrayList.add(holder);
         }
@@ -151,13 +175,15 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     public void configViews() {
         LogUtils.e("configViews");
 
-        mAdapterList=new ArrayList();
+        mAdapterList=new ArrayList<>();
         for(int i=0;i<rvz.length;i++){
             ComicRecommendDetailAdapter adapter = new ComicRecommendDetailAdapter
                     (R.layout.item_comic_recommend_detail, null);
             adapter.setOnItemChildClickListener(this);
             mAdapterList.add(adapter);
-
+        }
+        for(int i=0;i<rvz.length;i++){
+            ComicRecommendDetailAdapter adapter=mAdapterList.get(i);
             rvz[i].setNestedScrollingEnabled(false);
             if(i==2||i==6||i==8){
                 rvz[i].setLayoutManager(new GridLayoutManager(getActivity(),2));
@@ -189,6 +215,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void showComicRecommendList(List<ComicRecommend> list) {
         LogUtils.e("showRecommendList");
+
         List<ComicRecommend> carouselList=new ArrayList<>();
         List<ComicRecommend> mainlList=new ArrayList<>();
         for(int i=0;i<list.size();i++){
@@ -203,8 +230,10 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         ArrayList<String> titles=new ArrayList();
         for(int i=0;i<data.size();i++){
             images.add(data.get(i).cover);
+            LogUtils.e("cover:"+data.get(i).cover);
             titles.add(data.get(i).title);
         }
+
         initBaner(images,titles);
 
         for(int i=0;i<mainlList.size();i++){
@@ -245,7 +274,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             mAdapterList.get(0).setHeaderView(mHeaderViewHolderArrayList.get(0).view);
         }
         mAdapterList.get(0).setNewData(beans);
-        rvz[0].setVisibility(View.VISIBLE);
+//        rvz[0].setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -272,22 +301,30 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
 
     private void getData(boolean isSubscription) {
         if(!isSubscription){
-            elatedParams=new HashMap<>();
-            elatedParams.put("category_id","50");
-            elatedParams.put("channel", Constant.CHANNEL);
-            elatedParams.put("version",Constant.VERSION);
-        }
-        if(ReaderApplication.sLogin!=null
-                &&!TextUtils.isEmpty(ReaderApplication.sLogin.data.dmzj_token)
-                &&!TextUtils.isEmpty(ReaderApplication.sLogin.data.uid)){
-            if(isSubscription){
+            if(elatedParams==null){
+                elatedParams=new HashMap<>();
+                elatedParams.put("category_id","50");
+                elatedParams.put("channel", Constant.CHANNEL);
+                elatedParams.put("version",Constant.VERSION);
+            }else{
+                if(LoginUtil.isLogin()){
+                    elatedParams.put("uid",ReaderApplication.sLogin.data.uid);
+                }else{
+                    elatedParams.remove("uid");
+                }
+            }
+        }else{
+            if(subscriptionParams==null){
                 subscriptionParams=new HashMap<>();
-                subscriptionParams.put("uid",ReaderApplication.sLogin.data.uid);
                 subscriptionParams.put("category_id","49");
                 subscriptionParams.put("channel", Constant.CHANNEL);
                 subscriptionParams.put("version",Constant.VERSION);
             }else{
-                elatedParams.put("uid",ReaderApplication.sLogin.data.uid);
+                if(LoginUtil.isLogin()){
+                    subscriptionParams.put("uid",ReaderApplication.sLogin.data.uid);
+                }else{
+                    subscriptionParams.remove("uid");
+                }
             }
         }
     }
@@ -303,23 +340,29 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         //设置图片集合
         banner.setImages(images);
         //设置banner动画效果
-        banner.setBannerAnimation(Transformer.DepthPage);
+//        banner.setBannerAnimation(Transformer.DepthPage);
         //设置标题集合（当banner样式有显示title时）
         banner.setBannerTitles(titles);
         //设置自动轮播，默认为true
         banner.isAutoPlay(true);
         //设置轮播时间
-        banner.setDelayTime(1500);
+        banner.setDelayTime(5000);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.RIGHT);
+        //设置page监听器
+        banner.setOnBannerListener(this);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
     }
 
     @Override
     public void onDestroyView() {
+        LogUtils.e("ComicRecommendFragment-onDestroyView");
         mPresenter.detachView();
-        //下面代码放在onDestroyView方法之前,
+
+        mAdapterList=null;
+        mHeaderViewHolderArrayList=null;
+        //stopAutoPlay方法放在onDestroyView方法之前,
         //BaseFragment的onDestroyView方法里unbind.unbind方法应该是将这些它赋值的变量置为空了
         banner.stopAutoPlay();
         super.onDestroyView();

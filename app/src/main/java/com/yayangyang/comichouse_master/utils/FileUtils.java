@@ -240,6 +240,21 @@ public class FileUtils {
         return cacheRootPath;
     }
 
+    /**
+     * 创建拍照所得照片存放路径
+     *
+     * @return
+     */
+    public static String createPicturePath(Context context) {
+        String cachePicturePath = "";
+        if (isSdCardAvailable()) {
+            cachePicturePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+        } else {
+            cachePicturePath = context.getCacheDir().getPath()+Environment.DIRECTORY_PICTURES;
+        }
+        return cachePicturePath;
+    }
+
     public static boolean isSdCardAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
@@ -263,13 +278,14 @@ public class FileUtils {
                 file.mkdir();
             }
         } catch (Exception e) {
+            LogUtils.e("建立文件夹失败");
             e.printStackTrace();
         }
         return dirPath;
     }
 
     /**
-     * 递归创建文件夹
+     * 递归创建文件
      *
      * @param file
      * @return 创建失败返回""
@@ -277,13 +293,13 @@ public class FileUtils {
     public static String createFile(File file) {
         try {
             if (file.getParentFile().exists()) {
-                LogUtils.i("----- 创建文件" + file.getAbsolutePath());
+                LogUtils.e("----- 创建文件" + file.getAbsolutePath());
                 file.createNewFile();
                 return file.getAbsolutePath();
             } else {
                 createDir(file.getParentFile().getAbsolutePath());
                 file.createNewFile();
-                LogUtils.i("----- 创建文件" + file.getAbsolutePath());
+                LogUtils.e("----- 创建文件" + file.getAbsolutePath());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -652,4 +668,6 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+    //---------------------------------------------------------------------------------
 }

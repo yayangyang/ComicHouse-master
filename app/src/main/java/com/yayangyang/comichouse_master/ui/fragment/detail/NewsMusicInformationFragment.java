@@ -107,4 +107,10 @@ public class NewsMusicInformationFragment extends BaseRVFragment<NewsCommonPrese
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsMusicInformationFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

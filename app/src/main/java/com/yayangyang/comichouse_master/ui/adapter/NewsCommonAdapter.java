@@ -6,17 +6,21 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
-import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
+import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/11/25.
@@ -35,13 +39,13 @@ public class NewsCommonAdapter extends BaseQuickAdapter<NewsCommonBody,BaseViewH
         SimpleDateFormat format = new SimpleDateFormat("MM月dd日  E");
         String dateString=format.format(new Date(Long.parseLong(item.create_time)*1000L));
         String preDateString="";
-        if(helper.getLayoutPosition()>1){
-            preDateString = format.format(new Date(Long.parseLong(mData.get(helper.getLayoutPosition()-2).create_time)*1000L));
+        if(helper.getLayoutPosition()>=1){
+            preDateString = format.format(new Date(Long.parseLong(mData.get(helper.getLayoutPosition()-1).create_time)*1000L));
             LogUtils.e(dateString+item.create_time);
-            LogUtils.e(preDateString+mData.get(helper.getLayoutPosition()-1).create_time);
+            LogUtils.e(preDateString+mData.get(helper.getLayoutPosition()).create_time);
         }
 
-        if(helper.getLayoutPosition()==1){
+        if(helper.getLayoutPosition()==0){
             helper.setVisible(R.id.tv_time,true);
             helper.setText(R.id.tv_time,dateString);
 
@@ -54,12 +58,12 @@ public class NewsCommonAdapter extends BaseQuickAdapter<NewsCommonBody,BaseViewH
         }
 
         ImageView view =helper.getView(R.id.iv_cover);
-        GlideUrl cookie = new GlideUrl(item.col_pic_url, new LazyHeaders.Builder()
+        GlideUrl cookie = new GlideUrl(item.row_pic_url, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        Glide.with(mContext).load(cookie)
-                .placeholder(R.drawable.avatar_default) .transform(new GlideRoundTransform
-                (mContext,6)).into(view);
+        GlideApp.with(mContext).load(cookie)
+                .apply(GlideUtil.getRoundCornerRequestOptions())
+                .into(view);
 
         helper.setText(R.id.tv_title,item.title);
 
@@ -67,9 +71,9 @@ public class NewsCommonAdapter extends BaseQuickAdapter<NewsCommonBody,BaseViewH
         cookie = new GlideUrl(item.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        Glide.with(mContext).load(cookie)
-                .placeholder(R.drawable.avatar_default) .transform(new GlideRoundTransform
-                (mContext,6)).into(view);
+        GlideApp.with(mContext).load(cookie)
+                .apply(GlideUtil.getRoundCornerRequestOptions())
+                .into(view);
 
         helper.setText(R.id.tv_author,item.nickname);
         helper.setText(R.id.tv_flower,item.mood_amount);

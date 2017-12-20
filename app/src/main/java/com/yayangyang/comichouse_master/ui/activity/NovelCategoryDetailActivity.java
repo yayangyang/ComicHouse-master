@@ -50,7 +50,7 @@ public class NovelCategoryDetailActivity extends BaseComicCategoryActivity {
     @Override
     public void initToolBar() {
         mCommonToolbar.setTitle("");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        mCommonToolbar.setNavigationIcon(R.drawable.img_back);
     }
 
     @Override

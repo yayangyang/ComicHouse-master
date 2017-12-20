@@ -9,26 +9,30 @@
         android:id="@+id/rl_news_collection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:padding="10dp"
+        android:background="@color/common_bg">
 
         <ImageView
             android:id="@+id/iv_news_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/img_americ_eve"
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新闻收藏"
-            android:layout_toRightOf="@id/iv_news_collection"
-            android:layout_centerVertical="true"/>
+            android:layout_toEndOf="@id/iv_news_collection"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/img_more_s"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 
@@ -36,27 +40,31 @@
         android:id="@+id/rl_news_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_marginTop="20dp">
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/common_bg">
 
         <ImageView
             android:id="@+id/iv_news_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/img_icon_cartoon_discuss"
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新闻评论"
-            android:layout_toRightOf="@id/iv_news_review"
-            android:layout_centerVertical="true"/>
+            android:layout_toEndOf="@id/iv_news_review"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"/>
+            android:src="@drawable/img_more_s"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 

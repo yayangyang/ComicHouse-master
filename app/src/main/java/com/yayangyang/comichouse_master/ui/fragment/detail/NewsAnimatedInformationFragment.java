@@ -107,4 +107,10 @@ public class NewsAnimatedInformationFragment extends BaseRVFragment<NewsCommonPr
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsAnimatedInformationFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

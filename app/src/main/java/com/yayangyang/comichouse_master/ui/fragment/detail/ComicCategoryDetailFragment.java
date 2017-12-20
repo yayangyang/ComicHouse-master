@@ -29,7 +29,6 @@ public class ComicCategoryDetailFragment extends BaseRVFragment<ComicCategoryDet
         implements ComicCategoryDetailContract.View,BaseQuickAdapter.OnItemChildClickListener{
 
     private String tagId="0",type="0";
-    private ArrayList mArrayList=new ArrayList();
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -82,7 +81,7 @@ public class ComicCategoryDetailFragment extends BaseRVFragment<ComicCategoryDet
     public void configViews() {
         LogUtils.e("configViews");
         initAdapter(ComicCategoryDetailAdapter.class,
-                R.layout.item_comic_category_detail,mArrayList,true,true);
+                R.layout.item_comic_category_detail,null,true,true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         mRecyclerView.setAdapter(mAdapter);//setAdapter会绑定GridLayoutManager的span监听
         mAdapter.setOnItemChildClickListener(this);

@@ -91,6 +91,7 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         bind.unbind();
+        parentView=null;
     }
 
     public FragmentActivity getSupportActivity() {

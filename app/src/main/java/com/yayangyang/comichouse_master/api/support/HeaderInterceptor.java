@@ -1,5 +1,7 @@
 package com.yayangyang.comichouse_master.api.support;
 
+import android.os.Looper;
+
 import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.DeviceUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
@@ -38,6 +40,8 @@ public final class HeaderInterceptor implements Interceptor {
             return chain.proceed(request);
         }else{
             LogUtils.e("请求头22222222222222"+chain.request().toString());
+            boolean isMainThread=Looper.getMainLooper() == Looper.myLooper();
+            LogUtils.e("是否主线程:"+ isMainThread);
         }
         return chain.proceed(original);
     }

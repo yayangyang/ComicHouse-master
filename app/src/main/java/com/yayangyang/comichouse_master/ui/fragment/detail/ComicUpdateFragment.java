@@ -36,8 +36,6 @@ import butterknife.OnClick;
 public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,ComicUpdate,BaseViewHolder>
         implements ComicUpdateContract.View,BaseQuickAdapter.OnItemChildClickListener,View.OnClickListener {
 
-    private ArrayList mArrayList=new ArrayList();
-
     private CustomPopWindow popWindow;
     private Button bt_all_comic,bt_original_comic,bt_dubbing_comic;
 
@@ -109,7 +107,7 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
     public void configViews() {
         LogUtils.e("configViews");
         initAdapter(ComicUpdateAdapter.class,
-                R.layout.item_comic_update_linear,mArrayList,true,true);
+                R.layout.item_comic_update_linear,null,true,true);
         mAdapter.setOnItemChildClickListener(this);
         onRefresh();
     }
@@ -193,4 +191,8 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
                 .showAsDropDown(view);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }

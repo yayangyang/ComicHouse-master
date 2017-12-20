@@ -27,6 +27,15 @@ public class LightNovelAdapter extends BaseQuickAdapter<LightNovel,BaseViewHolde
     @Override
     protected void convert(BaseViewHolder helper, LightNovel item) {
         LogUtils.e("convert+++++++++++++++");
+        if(helper.getLayoutPosition()==1){
+            helper.setVisible(R.id.iv_more,true);
+            helper.addOnClickListener(R.id.iv_more);
+        }else{
+            helper.setVisible(R.id.iv_more,false);
+        }
+        if(helper.getLayoutPosition()==2) helper.setImageResource(R.id.iv_cover,R.drawable.img_novel_more);
+        if(helper.getLayoutPosition()==3) helper.setImageResource(R.id.iv_cover,R.drawable.img_novel_play);
+        if(helper.getLayoutPosition()==4) helper.setImageResource(R.id.iv_cover,R.drawable.img_novel_eye);
         RecyclerView recyclerView = helper.getView(R.id.recyclerview);
         GridLayoutManager gridLayoutManager=null;
 //        SpaceItemDecoration decoration=null;

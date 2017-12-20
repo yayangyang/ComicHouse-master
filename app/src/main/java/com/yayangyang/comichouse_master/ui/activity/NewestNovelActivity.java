@@ -70,7 +70,7 @@ public class NewestNovelActivity extends BaseRVActivity<NewestNovel,BaseViewHold
     @Override
     public void initToolBar() {
         mCommonToolbar.setTitle("");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        mCommonToolbar.setNavigationIcon(R.drawable.img_back);
     }
 
     @Override

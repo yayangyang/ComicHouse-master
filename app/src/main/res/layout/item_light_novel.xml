@@ -7,20 +7,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/iv_cover"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@drawable/img_novel_refresh"
+            android:layout_centerVertical="true"/>
 
         <TextView
-            android:id="@+id/tv_tvTitle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="喜欢"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/iv_cover"/>
@@ -29,9 +31,10 @@
             android:id="@+id/iv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/img_more_s"
             android:layout_alignParentEnd="true"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 

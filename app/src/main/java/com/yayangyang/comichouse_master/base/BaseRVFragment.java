@@ -141,7 +141,8 @@ public abstract class BaseRVFragment<T1 extends BaseContract.BasePresenter, T2,K
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null)
-            mPresenter.detachView();
+        if (mPresenter != null) mPresenter.detachView();
+        //view(应该是onCreateView方法我们返回的view)销毁时置空,防止内存泄漏
+        if (mAdapter!=null) mAdapter=null;
     }
 }

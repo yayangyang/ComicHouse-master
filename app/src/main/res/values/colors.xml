@@ -92,4 +92,8 @@
     <!--IamgeView触摸背景色-->
     <color name="iv_touch_bg">@color/bg_transparent</color>
 
+    <color name="common_shallow_black">#727272</color>
+
+    <color name="transparent_blue">#885CACEE</color>
+
 </resources>

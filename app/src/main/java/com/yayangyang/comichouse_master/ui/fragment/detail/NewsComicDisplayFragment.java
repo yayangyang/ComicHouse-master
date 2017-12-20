@@ -107,4 +107,10 @@ public class NewsComicDisplayFragment extends BaseRVFragment<NewsCommonPresenter
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsComicDisplayFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

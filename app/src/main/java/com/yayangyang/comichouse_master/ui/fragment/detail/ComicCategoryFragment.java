@@ -1,9 +1,12 @@
 package com.yayangyang.comichouse_master.ui.fragment.detail;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
@@ -29,8 +32,6 @@ import java.util.List;
 
 public class ComicCategoryFragment extends BaseRVFragment<ComicCategoryPresenter,ComicCategory,BaseViewHolder>
         implements ComicCategoryContract.View,BaseQuickAdapter.OnItemChildClickListener{
-
-    private ArrayList mArrayList=new ArrayList();
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -63,14 +64,33 @@ public class ComicCategoryFragment extends BaseRVFragment<ComicCategoryPresenter
 
     @Override
     public void initDatas() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                LogUtils.e("newState:"+newState);
+                if(newState==2){
+                    LogUtils.e("Glide加载停止");
+                    Glide.with(recyclerView).pauseRequests();
+                }else{
+                    if(Glide.with(recyclerView).isPaused()){
+                        LogUtils.e("onScrollStateChanged-Glide加载恢复");
+                        Glide.with(recyclerView).resumeRequests();
+                    }
+                }
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                LogUtils.e("dx:"+dx+",dy:"+dy);
+            }
+        });
     }
 
     @Override
     public void configViews() {
         LogUtils.e("configViews");
         initAdapter(ComicCategoryAdapter.class,
-                R.layout.item_comic_category,mArrayList,true,false);
+                R.layout.item_comic_category,null,true,false);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         mRecyclerView.addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(10)));
         mRecyclerView.setAdapter(mAdapter);

@@ -198,7 +198,7 @@ public class RxUtil {
 
                 if (!TextUtils.isEmpty(json)) {
                     try{
-//                        LL.e("ww",json);
+//                        SubsectionLogUtil.e("ww",json);
 
                         List<ComicRecommend> list = (List<ComicRecommend>) getObjectList(json, clazz);
                         ComicRecommend recommend = list.get(list.size()-1);

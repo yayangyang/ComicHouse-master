@@ -47,12 +47,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         if (statusBarColor == 0) {
-            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.colorPrimaryDark));
+            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.common_bg));
         } else if (statusBarColor != -1) {
             statusBarView = StatusBarCompat.compat(this, statusBarColor);
         }
         Log.e("statusBarView","ww"+statusBarView);
-        transparent19and20();
+//        transparent19and20();
+        showStatusBar();
         mContext = this;
         ButterKnife.bind(this);
         setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());

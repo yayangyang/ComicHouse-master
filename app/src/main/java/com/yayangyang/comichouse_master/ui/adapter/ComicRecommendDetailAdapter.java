@@ -1,25 +1,30 @@
 package com.yayangyang.comichouse_master.ui.adapter;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
-import com.yayangyang.comichouse_master.transform.GlideRoundTransform;
 import com.yayangyang.comichouse_master.utils.LogUtils;
-import com.yayangyang.comichouse_master.utils.ScreenUtils;
+import com.yayangyang.comichouse_master.utils.GlideUtil;
 
+import java.io.File;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/11/13.
@@ -49,12 +54,16 @@ public class ComicRecommendDetailAdapter extends BaseQuickAdapter<ComicRecommend
             fr_normal.setVisibility(View.VISIBLE);
         }
 
+//        float density = mContext.getResources().getDisplayMetrics().density;
+//        RoundedCornersTransformation roundedCornersTransformation =
+//                new RoundedCornersTransformation((int) (density*20), 0);
         GlideUrl cookie = new GlideUrl(item.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        Glide.with(mContext).load(cookie)
-                .placeholder(R.drawable.avatar_default) .transform(new GlideRoundTransform
-                (mContext,6)).into(view);
+        GlideApp.with(mContext).load(cookie)
+                .apply(GlideUtil.getRoundCornerRequestOptions())
+//                .apply(RequestOptions.bitmapTransform(roundedCornersTransformation))
+                .into(view);
         LogUtils.e("哦哦哦"+item.cover);
         helper.addOnClickListener(R.id.fr_normal);
         helper.addOnClickListener(R.id.fr_big);

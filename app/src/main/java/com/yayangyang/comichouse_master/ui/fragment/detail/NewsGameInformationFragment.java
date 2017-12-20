@@ -107,4 +107,10 @@ public class NewsGameInformationFragment extends BaseRVFragment<NewsCommonPresen
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        LogUtils.e("NewsGameInformationFragment-onDestroyView");
+        super.onDestroyView();
+    }
+
 }

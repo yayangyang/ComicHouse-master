@@ -100,7 +100,7 @@ public class DeviceUtils {
         sb.append("\nscaledDensity   :").append(dm.scaledDensity);
         sb.append("\nxdpi            :").append(dm.xdpi);
         sb.append("\nydpi            :").append(dm.ydpi);
-        LogUtils.i(TAG, sb.toString());
+        LogUtils.e(TAG, sb.toString());
         return dm;
     }
 
