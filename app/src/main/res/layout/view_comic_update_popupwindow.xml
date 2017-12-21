@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:background="@color/common_h3">
+    android:background="@color/common_gray_bg">
 
     <Button
         android:id="@+id/bt_all_comic"

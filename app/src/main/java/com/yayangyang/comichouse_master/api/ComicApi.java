@@ -7,6 +7,7 @@ import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
+import com.yayangyang.comichouse_master.Bean.ComicRead;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
@@ -35,6 +36,7 @@ import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public class ComicApi {
@@ -153,6 +155,10 @@ public class ComicApi {
 
     public Observable<UploadImageResult> uploadImage(Map<String, RequestBody> params){
         return service.uploadImage(params);
+    }
+
+    public Observable<List<ComicRead>> getComicChapter(String comic_id,String chapter_id,String channel, String version){
+        return service.getComicChapter(comic_id,chapter_id,channel,version);
     }
 
 }

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/common_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,24 +18,34 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="#fff"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabTextColor="#000"
+            app:tabTextColor="@android:color/black"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabSelectedTextColor="@color/colorAccent">
         </android.support.design.widget.TabLayout>
 
-        <ImageView
-            android:id="@+id/showInfo"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_game_main"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_magnifier_s"/>
+            <ImageView
+                android:id="@+id/showInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_game_main"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_magnifier_s"
+                android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

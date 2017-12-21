@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
-import com.bumptech.glide.request.RequestOptions;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
@@ -23,14 +21,11 @@ import com.yayangyang.comichouse_master.ui.activity.LoginActivity;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
-import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import jp.wasabeef.glide.transformations.BitmapTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/11/12.
@@ -82,7 +77,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         view_novel.findViewById(R.id.rl_novel_download).setOnClickListener(this);
         view_novel.findViewById(R.id.rl_novel_review).setOnClickListener(this);
 
-        View view_news = View.inflate(getApplicationContext(), R.layout.view_news, null);
+        View view_news = View.inflate(getActivity(), R.layout.view_news, null);
         view_news.findViewById(R.id.rl_news_collection).setOnClickListener(this);
         view_news.findViewById(R.id.rl_news_review).setOnClickListener(this);
 
@@ -106,7 +101,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(ReaderApplication.sLogin!=null){
+        if(ComicApplication.sLogin!=null){
 
         }else{
             LoginActivity.startActivity(getActivity());
@@ -152,13 +147,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode== Constant.RETURN_DATA){
             if(LoginUtil.isLogin()){
-                GlideUrl cookie = new GlideUrl(ReaderApplication.sLogin.data.photo, new LazyHeaders.Builder()
+                GlideUrl cookie = new GlideUrl(ComicApplication.sLogin.data.photo, new LazyHeaders.Builder()
                         .addHeader("Referer", Constant.IMG_BASE_URL)
                         .addHeader("Accept-Encoding","gzip").build());
                 GlideApp.with(mContext).load(cookie)
                         .apply(GlideUtil.getRoundCornerRequestOptions())
                         .into(iv_cover);
-                tv_user_name.setText(ReaderApplication.sLogin.data.nickname);
+                tv_user_name.setText(ComicApplication.sLogin.data.nickname);
                 tv_login_description.setText("");
             }else{
                 ToastUtils.showToast("请重新登录");

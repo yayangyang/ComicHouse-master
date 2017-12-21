@@ -2,27 +2,20 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.Bean.user.TencentLoginResult;
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
-import com.yayangyang.comichouse_master.base.BaseActivity;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseLoginActivity;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
-import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.component.DaggerMineComponent;
 import com.yayangyang.comichouse_master.manager.SettingManager;
 import com.yayangyang.comichouse_master.ui.presenter.LoginActivityPresenter;
-import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.HashMap;
@@ -30,7 +23,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -103,7 +95,7 @@ public class LoginActivity extends BaseLoginActivity {
     @Override
     public void loginSuccess(Login login) {
         ToastUtils.showToast("动漫之家登录成功:");
-        ReaderApplication.sLogin=login;
+        ComicApplication.sLogin=login;
         SettingManager.getInstance().saveLoginInfo(login);
         setResult(Constant.RETURN_DATA);
         finish();
@@ -116,7 +108,7 @@ public class LoginActivity extends BaseLoginActivity {
         }else if(view.getId()==R.id.sina){
 
         }else if(view.getId()==R.id.qq){
-            ReaderApplication.mTencent.login(this,"all",loginListener);
+            ComicApplication.mTencent.login(this,"all",loginListener);
         }else if(view.getId()==R.id.wetchat){
 
         }

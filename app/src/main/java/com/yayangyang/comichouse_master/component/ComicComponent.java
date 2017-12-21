@@ -3,6 +3,7 @@ package com.yayangyang.comichouse_master.component;
 import com.yayangyang.comichouse_master.ui.activity.AuthorIntroduceActivity;
 import com.yayangyang.comichouse_master.ui.activity.ComicCategoryActivity;
 import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
+import com.yayangyang.comichouse_master.ui.activity.ComicReadActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
 import com.yayangyang.comichouse_master.ui.activity.PublishReviewActivity;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicCategoryDetailFragment;
@@ -37,4 +38,6 @@ public interface ComicComponent {
     ComicDetailActivity inject(ComicDetailActivity activity);
 
     PublishReviewActivity inject(PublishReviewActivity activity);
+
+    ComicReadActivity inject(ComicReadActivity activity);
 }

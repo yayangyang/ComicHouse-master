@@ -154,4 +154,9 @@ public class FormatUtils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DATE_TIME);
         return simpleDateFormat.format(date);
     }
+
+    public static String getStringByTimeStamp(String format,String timeStamp){
+        SimpleDateFormat myFormat = new SimpleDateFormat(format);
+        return myFormat.format(new Date(Long.parseLong(timeStamp)*1000L));
+    }
 }

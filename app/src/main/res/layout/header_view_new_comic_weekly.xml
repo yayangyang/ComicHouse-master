@@ -27,32 +27,60 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/tv_all_subscribe"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:drawableStart="@mipmap/ic_launcher"
-            android:gravity="center"
-            android:text="全部订阅"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_share"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:drawableStart="@mipmap/ic_launcher"
-            android:gravity="center"
-            android:text="分享"/>
+            <TextView
+                android:id="@+id/tv_all_subscribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/img_subscribe_grey"
+                android:text="全部订阅"
+                android:layout_centerInParent="true"/>
 
-        <TextView
-            android:id="@+id/tv_review"
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:drawableStart="@mipmap/ic_launcher"
-            android:gravity="center"
-            android:text="评论(25)"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/img_share_icon"
+                android:text="分享"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/intro_navi_vline"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/img_discuss_gray"
+                android:text="评论(25)"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/intro_navi_vline"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

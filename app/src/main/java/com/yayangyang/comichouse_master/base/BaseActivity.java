@@ -2,11 +2,9 @@ package com.yayangyang.comichouse_master.base;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
@@ -17,15 +15,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
 import com.yayangyang.comichouse_master.utils.StatusBarCompat;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 import com.yayangyang.comichouse_master.view.lodding.CustomDialog;
-
-import org.json.JSONObject;
 
 import java.lang.reflect.Method;
 
@@ -47,16 +43,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         if (statusBarColor == 0) {
-            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.common_bg));
-        } else if (statusBarColor != -1) {
+            statusBarView = StatusBarCompat.compat(this);
+        } else{
             statusBarView = StatusBarCompat.compat(this, statusBarColor);
         }
         Log.e("statusBarView","ww"+statusBarView);
 //        transparent19and20();
-        showStatusBar();
+//        showStatusBar();
         mContext = this;
         ButterKnife.bind(this);
-        setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
+        setupActivityComponent(ComicApplication.getsInstance().getAppComponent());
         mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
         if (mCommonToolbar != null) {
             initToolBar();
@@ -65,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     finish();
-                    ToastUtils.showToast("bookReader");
+                    ToastUtils.showToast("comicHouse");
                 }
             });
             //之前不知原因出现加这句触发toolbar的点击事件就crash且没错误提示

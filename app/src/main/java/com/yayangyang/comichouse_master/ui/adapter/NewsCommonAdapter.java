@@ -36,6 +36,7 @@ public class NewsCommonAdapter extends BaseQuickAdapter<NewsCommonBody,BaseViewH
     protected void convert(BaseViewHolder helper, NewsCommonBody item) {
         LogUtils.e("convert-getLayoutPosition"+helper.getLayoutPosition());//getLayoutPosition为总的数据索引,包含头等
 
+
         SimpleDateFormat format = new SimpleDateFormat("MM月dd日  E");
         String dateString=format.format(new Date(Long.parseLong(item.create_time)*1000L));
         String preDateString="";

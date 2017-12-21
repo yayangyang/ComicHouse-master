@@ -2,6 +2,7 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -76,6 +77,7 @@ public class AuthorIntroduceActivity extends BaseActivity
 
     @Override
     public int getLayoutId() {
+        statusBarColor= ContextCompat.getColor(this,R.color.colorAccent);
         return R.layout.activity_author_introduce;
     }
 
@@ -127,8 +129,8 @@ public class AuthorIntroduceActivity extends BaseActivity
         GlideUrl cookie = new GlideUrl(authorIntroduce.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
-        GlideApp.with(mContext).load(cookie)
-                .apply(GlideUtil.getRoundCornerRequestOptions())
+        GlideApp.with(this).load(cookie)
+                .apply(GlideUtil.getCircleCornerRequestOptions())
                 .into(iv_cover);
 
         tv_author_name.setText(authorIntroduce.nickname);

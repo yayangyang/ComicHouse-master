@@ -2,11 +2,8 @@ package com.yayangyang.comichouse_master.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatDelegate;
 
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tauth.Tencent;
 import com.yayangyang.comichouse_master.Bean.user.Login;
@@ -21,9 +18,9 @@ import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
 
-public class ReaderApplication extends Application {
+public class ComicApplication extends Application {
 
-    private static ReaderApplication sInstance;
+    private static ComicApplication sInstance;
     public static Tencent mTencent;
     private AppComponent appComponent;
 
@@ -65,7 +62,7 @@ public class ReaderApplication extends Application {
         sLogin= SettingManager.getInstance().getLoginInfo();
     }
 
-    public static ReaderApplication getsInstance() {
+    public static ComicApplication getsInstance() {
         return sInstance;
     }
 

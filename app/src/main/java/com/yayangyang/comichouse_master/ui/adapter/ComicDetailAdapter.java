@@ -14,6 +14,7 @@ import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.manager.SettingManager;
+import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -50,10 +51,9 @@ public class ComicDetailAdapter extends BaseQuickAdapter<ComicDetailBody,BaseVie
         }
 
         helper.setText(R.id.tv_content,item.content);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         BigDecimal bd = new BigDecimal(item.create_time);
         LogUtils.e("bd:"+bd);
-        String dateString=format.format(new Date(Long.parseLong(bd.toPlainString())*1000L));
+        String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", bd.toPlainString());
         helper.setText(R.id.tv_date,dateString);
         aFloat = Float.parseFloat(item.like_amount);
         helper.setText(R.id.rb_like_amount, (int) aFloat+"");

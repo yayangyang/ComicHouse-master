@@ -11,7 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class RxUtil {
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 threadInfo("本地处理");
                 LogUtils.e("get data from disk: key==" + key);
-                String json = ACache.get(ReaderApplication.getsInstance()).getAsString(key);
+                String json = ACache.get(ComicApplication.getsInstance()).getAsString(key);
                 LogUtils.e("get data from disk finish , json==" + json);
 
                 //对于设置可以加载更多的RecyclerView来说,刷新时缓存小于10的时候不显示,其他的不会影响需要显示
@@ -138,7 +138,7 @@ public class RxUtil {
                                             List list=(List) data;
                                             if(!list.isEmpty()){
                                                 try {
-                                                    ACache.get(ReaderApplication.getsInstance())
+                                                    ACache.get(ComicApplication.getsInstance())
                                                             .put(key, new Gson().toJson(data, clazz));
                                                     LogUtils.e("cache finish0000000"+key);
                                                 }catch (Exception e){
@@ -160,7 +160,7 @@ public class RxUtil {
                                                         List list = (List) field.get(data);
                                                         LogUtils.e("list==" + list);
                                                         if (list != null && !list.isEmpty()) {
-                                                            ACache.get(ReaderApplication.getsInstance())
+                                                            ACache.get(ComicApplication.getsInstance())
                                                                     .put(key,new Gson().toJson(data, clazz));
                                                             LogUtils.e("cache finish");
                                                             //如果缓存成功可以跳出防止类中有多个list多次缓存(自己觉得)
@@ -194,7 +194,7 @@ public class RxUtil {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 threadInfo("本地处理");
-                String json = ACache.get(ReaderApplication.getsInstance()).getAsString(key);
+                String json = ACache.get(ComicApplication.getsInstance()).getAsString(key);
 
                 if (!TextUtils.isEmpty(json)) {
                     try{
@@ -239,7 +239,7 @@ public class RxUtil {
                                     @Override
                                     public void run() {
                                         LogUtils.e("get data from network finish ,start cache...");
-                                        ACache.get(ReaderApplication.getsInstance())
+                                        ACache.get(ComicApplication.getsInstance())
                                                 .put(key, new Gson().toJson(data, data.getClass()));
                                         LogUtils.e("cache finish");
                                     }

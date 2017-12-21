@@ -24,24 +24,28 @@
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_home_selector"
             android:checked="true"
+            android:textColor="@color/tv_common_selector"
             android:text="漫画" />
 
         <RadioButton
             android:id="@+id/news"
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_news_selector"
+            android:textColor="@color/tv_common_selector"
             android:text="新闻" />
 
         <RadioButton
             android:id="@+id/light_novel"
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_smart_selector"
+            android:textColor="@color/tv_common_selector"
             android:text="轻小说" />
 
         <RadioButton
             android:id="@+id/mine"
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_gov_selector"
+            android:textColor="@color/tv_common_selector"
             android:text="我的" />
 
     </RadioGroup>

@@ -13,8 +13,10 @@ import com.yayangyang.comichouse_master.Bean.NovelRank;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
+import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,8 +50,8 @@ public class NovelRankAdapter extends BaseQuickAdapter<NovelRank,BaseViewHolder>
             type+=item.types[i];
         }
         helper.setText(R.id.tv_type,type);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString=format.format(new Date(Long.parseLong(item.last_update_time)*1000L));
+
+        String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", item.last_update_time);
         helper.setText(R.id.tv_date,dateString);
         helper.setText(R.id.tv_rank,helper.getLayoutPosition()+1+"");
     }

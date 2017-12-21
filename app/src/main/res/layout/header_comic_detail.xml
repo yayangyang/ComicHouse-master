@@ -83,7 +83,7 @@
                     android:text="取消订阅"
                     android:padding="10dp"
                     android:background="@drawable/bg_subscribe_choice"
-                    android:textColor="@color/tv_comic_detail_selector"/>
+                    android:textColor="@color/tv_gray_selector"/>
 
                 <TextView
                     android:id="@+id/tv_read_state"
@@ -93,7 +93,7 @@
                     android:padding="10dp"
                     android:layout_marginStart="10dp"
                     android:background="@drawable/bg_read_state"
-                    android:textColor="@color/tv_comic_detail_selector"/>
+                    android:textColor="@color/tv_gray_selector"/>
 
             </LinearLayout>
 

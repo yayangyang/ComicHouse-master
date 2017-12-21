@@ -10,7 +10,7 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 
-public interface PublishReviewActivityContract {
+public interface PublishReviewContract {
 
     interface View extends BaseContract.BaseView {
         void publishReviewResult(ComicReview review);

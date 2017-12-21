@@ -7,6 +7,7 @@ import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
+import com.yayangyang.comichouse_master.Bean.ComicRead;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
 import com.yayangyang.comichouse_master.Bean.IsHelpful;
@@ -271,11 +272,25 @@ public interface ComicApiService {
     Observable<IsHelpful> getIsHelpful(@Query("obj_id") String obj_id,@Query("comment_id") String comment_id, @Query("type") String type,
                                           @Query("channel") String channel, @Query("version") String version);
 
+    /**
+     * 提交评论
+     * @param params
+     * @return
+     */
     @FormUrlEncoded
     @POST("/comment2/addv2")
     Observable<ComicReview> publishReview(@FieldMap Map<String, String> params);
 
+    /**
+     * 上传图片
+     * @param params
+     * @return
+     */
     @Multipart
     @POST("/comment2/uploadImg")
     Observable<UploadImageResult> uploadImage(@PartMap Map<String, RequestBody> params);
+
+    @GET("/chapter/{comic_id}/{chapter_id}.json")
+    Observable<List<ComicRead>> getComicChapter(@Query("comic_id") String comic_id, @Query("chapter_id") String chapter_id,
+                                             @Query("channel") String channel, @Query("version") String version);
 }

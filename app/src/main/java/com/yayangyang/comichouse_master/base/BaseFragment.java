@@ -7,15 +7,12 @@ import android.view.View;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.view.lodding.CustomDialog;
@@ -60,7 +57,7 @@ public abstract class BaseFragment extends Fragment {
         Log.e("ww","我2");
         super.onViewCreated(view, savedInstanceState);
         bind = ButterKnife.bind(this, view);
-        setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
+        setupActivityComponent(ComicApplication.getsInstance().getAppComponent());
         attachView();
         initDatas();
         configViews();

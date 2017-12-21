@@ -2,8 +2,6 @@ package com.yayangyang.comichouse_master.ui.fragment.detail;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -11,7 +9,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.ComicCategory;
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
@@ -23,7 +20,6 @@ import com.yayangyang.comichouse_master.ui.presenter.ComicCategoryPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

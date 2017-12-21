@@ -16,9 +16,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".app.ReaderApplication">
+        android:name=".app.ComicApplication">
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +37,8 @@
         <activity android:name=".ui.activity.TestActivity"/>
         <activity android:name=".ui.activity.ComicDetailActivity"/>
         <activity android:name=".ui.activity.PublishReviewActivity"/>
+        <activity android:name=".ui.activity.ComicReadActivity"
+            android:screenOrientation="landscape"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

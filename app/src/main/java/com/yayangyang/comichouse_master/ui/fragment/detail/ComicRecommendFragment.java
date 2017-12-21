@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +14,12 @@ import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.decoration.CommonSpaceItemDecoration;
-import com.yayangyang.comichouse_master.decoration.SpaceItemDecoration;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
 import com.yayangyang.comichouse_master.ui.activity.AuthorIntroduceActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
@@ -32,9 +30,7 @@ import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
-import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
@@ -308,7 +304,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
                 elatedParams.put("version",Constant.VERSION);
             }else{
                 if(LoginUtil.isLogin()){
-                    elatedParams.put("uid",ReaderApplication.sLogin.data.uid);
+                    elatedParams.put("uid", ComicApplication.sLogin.data.uid);
                 }else{
                     elatedParams.remove("uid");
                 }
@@ -321,7 +317,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
                 subscriptionParams.put("version",Constant.VERSION);
             }else{
                 if(LoginUtil.isLogin()){
-                    subscriptionParams.put("uid",ReaderApplication.sLogin.data.uid);
+                    subscriptionParams.put("uid", ComicApplication.sLogin.data.uid);
                 }else{
                     subscriptionParams.remove("uid");
                 }

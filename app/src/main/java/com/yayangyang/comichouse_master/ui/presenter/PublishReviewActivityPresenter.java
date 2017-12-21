@@ -7,9 +7,8 @@ import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.api.ComicApi;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.RxPresenter;
-import com.yayangyang.comichouse_master.ui.contract.PublishReviewActivityContract;
+import com.yayangyang.comichouse_master.ui.contract.PublishReviewContract;
 import com.yayangyang.comichouse_master.utils.AppUtils;
-import com.yayangyang.comichouse_master.utils.BitmapUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
 import java.io.File;
@@ -21,7 +20,6 @@ import javax.inject.Inject;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -30,8 +28,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
 
-public class PublishReviewActivityPresenter extends RxPresenter<PublishReviewActivityContract.View>
-        implements PublishReviewActivityContract.Presenter {
+public class PublishReviewActivityPresenter extends RxPresenter<PublishReviewContract.View>
+        implements PublishReviewContract.Presenter {
 
     private ComicApi comicApi;
     private List<File> mFiles;

@@ -12,9 +12,13 @@ import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
+import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.StringUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -45,7 +49,9 @@ public class ComicRankAdapter extends BaseQuickAdapter<ComicInfo,BaseViewHolder>
         helper.setText(R.id.tv_title,item.title);
         helper.setText(R.id.tv_author,item.authors);
         helper.setText(R.id.tv_type,item.types);
-        helper.setText(R.id.tv_date,item.last_updatetime);
+
+        String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", item.last_updatetime);
+        helper.setText(R.id.tv_date,dateString);
         helper.setText(R.id.tv_rank,helper.getLayoutPosition()+1+"");
     }
 }

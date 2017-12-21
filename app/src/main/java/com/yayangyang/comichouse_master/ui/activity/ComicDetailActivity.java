@@ -32,6 +32,7 @@ import com.yayangyang.comichouse_master.ui.adapter.ComicChapterAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.ComicDetailAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicDetailContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicDetailActivityPresenter;
+import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
@@ -161,6 +162,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
             }else{
                 PublishReviewActivity.startActivity(this,comicId);
             }
+
         }else if (v.getId() == R.id.iv_message) {
 
         }
@@ -193,9 +195,10 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     @Override
     public void onRefresh() {
         super.onRefresh();
+        myPage=1;
         mPresenter.getComicDetailHeader(comicId);
 //        mPresenter.getAnnouncement(comicId);
-        mPresenter.getComicDetailBody(comicId,myPage);
+//        mPresenter.getComicDetailBody(comicId,myPage);
     }
 
     @Override
@@ -284,8 +287,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         for(int i=0;i<comicDetail.status.size();i++){
             status+=comicDetail.status.get(i).tag_name+" ";
         }
-        SimpleDateFormat format = new SimpleDateFormat("MM月dd日");
-        String dateString=format.format(new Date(Long.parseLong(comicDetail.last_updatetime)*1000L));
+        String dateString = FormatUtils.getStringByTimeStamp("MM月dd日", comicDetail.last_updatetime);
         headerViewHolder.tv_author.setText(authors);
         headerViewHolder.tv_type.setText(types);
         headerViewHolder.tv_subscribe.setText("订阅 "+comicDetail.subscribe_num);
@@ -323,6 +325,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 
             mPresenter.getAnnouncement(comicId);
         }
+        mPresenter.getComicDetailBody(comicId,myPage);
     }
 
     @Override
@@ -334,7 +337,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
             myPage=1;
             mAdapter.getData().clear();
             mAdapter.setEmptyView(inflate);
-            mRecyclerView.scrollToPosition(0);
+//            mRecyclerView.scrollToPosition(0);
             mAdapter.setNewData(list);
             myPage++;
         }else if(list==null||list.isEmpty()){
@@ -367,8 +370,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
                     mContext.getResources().getDrawable(R.drawable.img_newcomment_girl));
         }
         aHeaderViewHolder.tv_content.setText(announcement.content);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString=format.format(new Date(Long.parseLong(announcement.create_time)*1000L));
+        String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", announcement.create_time);
         aHeaderViewHolder.tv_date.setText(dateString);
 
         mAdapter.addHeaderView(aHeaderViewHolder.view);

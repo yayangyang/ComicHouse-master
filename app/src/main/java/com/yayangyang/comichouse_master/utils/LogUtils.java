@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 
 
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,7 +34,7 @@ public class LogUtils {
     private static String LOG_FILE_NAME;// 日志文件保存名称
 
     public static void init(Context context) { // 在Application中初始化
-        LOG_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + ReaderApplication.getsInstance().getPackageName();
+        LOG_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + ComicApplication.getsInstance().getPackageName();
         LOG_FILE_NAME = "Log";
     }
 

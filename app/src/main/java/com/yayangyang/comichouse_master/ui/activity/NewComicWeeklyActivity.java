@@ -26,6 +26,7 @@ import com.yayangyang.comichouse_master.ui.presenter.NewComicWeeklyActivityPrese
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
+import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.util.ArrayList;
 

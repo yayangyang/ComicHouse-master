@@ -25,13 +25,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="分类"
-                android:drawableEnd="@drawable/home_menu_0"/>
+                android:textColor="@color/tv_common_selector"
+                android:drawableEnd="@drawable/tv_down_arrow_selector"/>
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="日"
+                android:textColor="@android:color/black"
                 android:layout_marginStart="5dp"/>
 
             <TextView
@@ -39,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全部"
+                android:textColor="@android:color/black"
                 android:layout_marginStart="10dp"/>
 
         </LinearLayout>

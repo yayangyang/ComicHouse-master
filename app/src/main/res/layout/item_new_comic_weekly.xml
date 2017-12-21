@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:padding="10dp"
+    android:padding="5dp"
     android:background="@drawable/touch_bg_selector">
 
     <FrameLayout
@@ -11,6 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
         android:foreground="@drawable/iv_touch_bg_selector">
 
         <ImageView
@@ -31,41 +32,34 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            style="@style/common_tv"
             android:text="只属于你的单马尾"
-            android:textSize="18sp"
-            android:maxLines="1"
-            android:ellipsize="end"/>
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/tv_recommend_brief"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="ww"
-            android:layout_marginTop="7dp"
-            android:maxLines="1"
-            android:ellipsize="end"/>
+            style="@style/common_tv"
+            android:layout_marginTop="7dp"/>
 
         <TextView
             android:id="@+id/tv_recommend_reason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ww"
             android:layout_marginTop="7dp"
             android:maxLines="3"
             android:ellipsize="end"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_last_comic_subscribe"
+    <TextView
+        android:id="@+id/tv_last_comic_subscribe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/touch_bg_selector"
+        android:background="@drawable/tv_touch_bg_selector"
         android:text="漫画订阅"
+        android:padding="5dp"
         android:layout_alignParentEnd="true"
-        android:maxLines="3"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

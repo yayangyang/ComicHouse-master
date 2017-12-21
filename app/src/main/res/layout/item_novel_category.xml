@@ -27,10 +27,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="漫画名"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        style="@style/common_tv"
+        android:text="漫画名" />
 
 </LinearLayout>

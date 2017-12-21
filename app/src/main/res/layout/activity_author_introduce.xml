@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -51,7 +51,7 @@
                 android:id="@+id/tv_comic_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@mipmap/ic_launcher"
+                android:drawableStart="@drawable/img_author_work_icon"
                 android:text="xxxx"
                 android:gravity="center"/>
 
@@ -59,7 +59,7 @@
                 android:id="@+id/tv_all_subscribe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@mipmap/ic_launcher"
+                android:drawableStart="@drawable/img_subscribe_grey"
                 android:text="全部订阅"
                 android:gravity="center"
                 android:layout_alignParentEnd="true"/>

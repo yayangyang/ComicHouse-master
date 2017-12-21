@@ -40,18 +40,14 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
+        style="@style/common_tv"
         tools:text="女朋友、借我一下"
         android:textColor="@android:color/black"
         android:textSize="13sp"/>
 
     <TextView
         android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
+        style="@style/common_tv"
         tools:text="宫岛礼吏"
         android:textSize="12sp"/>
 

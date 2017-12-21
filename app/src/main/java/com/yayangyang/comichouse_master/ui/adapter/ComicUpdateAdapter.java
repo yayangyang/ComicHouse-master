@@ -12,6 +12,7 @@ import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.MyBaseMultiItemQuickAdapter;
+import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -61,8 +62,7 @@ public class ComicUpdateAdapter extends MyBaseMultiItemQuickAdapter<ComicUpdate,
             helper.setText(R.id.tv_title,item.title);
             helper.setText(R.id.tv_author,item.authors);
             helper.setText(R.id.tv_type,item.types);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            String dateString=format.format(new Date(Long.parseLong(item.last_updatetime)*1000L));
+            String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", item.last_updatetime);
             helper.setText(R.id.tv_date,dateString);
             helper.setText(R.id.bt_last_update_chapter_name,item.last_update_chapter_name);
         }

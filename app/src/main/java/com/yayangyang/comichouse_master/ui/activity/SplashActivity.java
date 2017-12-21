@@ -9,22 +9,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BasePermissionActivity;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.manager.SettingManager;
 import com.yayangyang.comichouse_master.utils.LogUtils;
-import com.yayangyang.comichouse_master.utils.NetworkUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +60,7 @@ public class SplashActivity extends BasePermissionActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
-//        setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
+//        setupActivityComponent(ComicApplication.getsInstance().getAppComponent());
 //        mPresenter.attachView(this);
 
         if (SettingManager.getInstance().isFirstEnter()) {
@@ -134,11 +128,11 @@ public class SplashActivity extends BasePermissionActivity{
         mHandler.sendEmptyMessage(0);
 
         //确保有权限后验证是否需要登录
-        if(ReaderApplication.sLogin==null){
+        if(ComicApplication.sLogin==null){
             LogUtils.e("sLogin为空");
 //            mHandler.sendEmptyMessageDelayed(0,1000);
-        }else if(!TextUtils.isEmpty(ReaderApplication.sLogin.data.dmzj_token)){
-//            mPresenter.checkLogin(ReaderApplication.sLogin.token);
+        }else if(!TextUtils.isEmpty(ComicApplication.sLogin.data.dmzj_token)){
+//            mPresenter.checkLogin(ComicApplication.sLogin.token);
         }
     }
 
@@ -152,7 +146,7 @@ public class SplashActivity extends BasePermissionActivity{
 //    @Override
 //    public void showIsLogin(boolean isLogin) {
 //        if(!isLogin){
-//            ReaderApplication.sLogin=null;
+//            ComicApplication.sLogin=null;
 //            SettingManager.getInstance().saveLoginInfo(null);
 //            mHandler.sendEmptyMessageDelayed(1,1000);
 //        }else{

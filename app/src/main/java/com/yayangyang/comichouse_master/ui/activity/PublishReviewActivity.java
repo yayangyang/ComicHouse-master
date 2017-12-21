@@ -7,14 +7,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -26,52 +20,40 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.zhouwei.library.CustomPopWindow;
 import com.yayangyang.comichouse_master.Bean.ComicDetailBody;
 import com.yayangyang.comichouse_master.Bean.ComicReview;
 import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.R;
-import com.yayangyang.comichouse_master.app.GlideApp;
-import com.yayangyang.comichouse_master.app.ReaderApplication;
+import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseActivity;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
-import com.yayangyang.comichouse_master.ui.adapter.SelAdapter;
-import com.yayangyang.comichouse_master.ui.contract.PublishReviewActivityContract;
+import com.yayangyang.comichouse_master.ui.contract.PublishReviewContract;
 import com.yayangyang.comichouse_master.ui.presenter.PublishReviewActivityPresenter;
 import com.yayangyang.comichouse_master.utils.BitmapUtil;
 import com.yayangyang.comichouse_master.utils.FileUtils;
-import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.NetworkUtils;
-import com.yayangyang.comichouse_master.utils.NumberUtil;
 import com.yayangyang.comichouse_master.utils.OpenAppUtil;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.OnClick;
-import id.zelory.compressor.Compressor;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -80,9 +62,9 @@ import okhttp3.RequestBody;
  */
 
 public class PublishReviewActivity extends BaseActivity
-        implements PublishReviewActivityContract.View,View.OnClickListener{
+        implements PublishReviewContract.View,View.OnClickListener{
 
-    private int index=0,compressSuccessCount=0;
+    private int index=0,compressSuccessCount=0,screenHeight,keyHeight;
     private String objectId;
 
     private String imagePathZ[]={"","",""};
@@ -99,6 +81,8 @@ public class PublishReviewActivity extends BaseActivity
 
     private CustomPopWindow popWindow;
 
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     @BindView(R.id.et_content)
     EditText et_content;
     @BindView(R.id.tv_content_size)
@@ -197,6 +181,30 @@ public class PublishReviewActivity extends BaseActivity
 
     @Override
     public void configViews() {
+        screenHeight = this.getWindowManager().getDefaultDisplay().getHeight();
+        keyHeight = screenHeight / 3;
+
+        findViewById(android.R.id.content).addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                LogUtils.e("keyHeight:"+keyHeight);
+                LogUtils.e("oldBottom:"+oldBottom);
+                LogUtils.e("bottom:"+bottom);
+                LogUtils.e("oldBottom - bottom:"+(oldBottom - bottom));
+                if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+//                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+//                            LinearLayout.LayoutParams.WRAP_CONTENT);
+//                    scrollView.setLayoutParams(params);
+                    LogUtils.e("键盘弹起");
+                } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+//                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+//                            LinearLayout.LayoutParams.MATCH_PARENT);
+//                    scrollView.setLayoutParams(params);
+                    LogUtils.e("键盘落下");
+                }
+            }
+        });
+
         et_content.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -291,7 +299,7 @@ public class PublishReviewActivity extends BaseActivity
         params.put("to_uid","0");
         params.put("sender_terminal","1");
         params.put("origin_comment_id","0");
-        params.put("sender_uid",ReaderApplication.sLogin.data.uid);//105670846(小明)
+        params.put("sender_uid", ComicApplication.sLogin.data.uid);//105670846(小明)
         params.put("type","4");
         params.put("content",et_content.getText().toString());
     }

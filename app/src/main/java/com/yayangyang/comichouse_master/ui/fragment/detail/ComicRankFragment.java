@@ -125,6 +125,7 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
 
     @OnClick(R.id.tv_category)
     public void tv_category(View view){
+        view.setSelected(true);
         if(popWindow==null){
             LogUtils.e("为空");
             getData();
@@ -134,7 +135,6 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
             popWindow.showAsDropDown(rl_bar);
             initPopUpWindow();
         }
-        tv_category.setTextColor(getResources().getColor(R.color.colorAccent));
     }
 
     private ComicRankPopupWindowAdapter adapter;
@@ -170,7 +170,7 @@ public class ComicRankFragment extends BaseFragment implements BaseQuickAdapter.
                 .setOnDissmissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
-                        tv_category.setTextColor(getResources().getColor(R.color.black));
+                        tv_category.setSelected(false);
                     }
                 })
                 .create()//创建PopupWindow

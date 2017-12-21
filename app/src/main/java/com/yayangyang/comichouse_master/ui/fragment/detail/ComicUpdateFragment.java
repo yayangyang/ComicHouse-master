@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -43,6 +45,8 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
 
     @BindView(R.id.rl_bar)
     RelativeLayout rl_bar;
+    @BindView(R.id.tv_all_comic)
+    TextView tv_all_comic;
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -148,6 +152,7 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
 
     @OnClick(R.id.tv_all_comic)
     public void tv_all_comic(View view){
+        view.setSelected(true);
         if(popWindow==null){
             LogUtils.e("为空");
             showPopupwindow(rl_bar);
@@ -157,19 +162,16 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
         }
     }
 
-    private SpaceItemDecoration decoration;
-
     @OnClick(R.id.iv_change_layout)
-    public void iv_change_layout(){
+    public void iv_change_layout(ImageView view){
         if(mRecyclerView.getLayoutManager() instanceof GridLayoutManager){
             LogUtils.e("GridLayoutManager-LinearLayoutManager");
-//            mRecyclerView.removeItemDecoration(decoration);
+            view.setImageResource(R.drawable.img_list_style_list);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }else{
             LogUtils.e("LinearLayoutManager-GridLayoutManager");
+            view.setImageResource(R.drawable.img_list_style_grid);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-//            decoration=new SpaceItemDecoration(ScreenUtils.dpToPxInt(10),3);
-//            mRecyclerView.addItemDecoration(decoration);
         }
     }
 
@@ -187,6 +189,12 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
                 .size(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT) //设置显示的大小，不设置就默认包裹内容
                 .setFocusable(true)//是否获取焦点，默认为ture
                 .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
+                .setOnDissmissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        tv_all_comic.setSelected(false);
+                    }
+                })
                 .create()//创建PopupWindow
                 .showAsDropDown(view);
     }

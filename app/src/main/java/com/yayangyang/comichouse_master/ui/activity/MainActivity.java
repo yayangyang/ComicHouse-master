@@ -2,6 +2,7 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 
@@ -12,6 +13,7 @@ import com.yayangyang.comichouse_master.ui.fragment.ComicFragment;
 import com.yayangyang.comichouse_master.ui.fragment.LightNovelFragment;
 import com.yayangyang.comichouse_master.ui.fragment.MineFragment;
 import com.yayangyang.comichouse_master.ui.fragment.NewsFragment;
+import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import butterknife.BindView;

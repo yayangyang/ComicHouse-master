@@ -142,7 +142,7 @@ public class Constant {
     public static int SUSCRIBE_RANK=2;
 
     public static String CHANNEL="Android";
-    public static String VERSION="2.7.001";
+    public static String VERSION="2.7.003";
 
     public static String MY_INDEX="my_index";
     public static String CURRENT_COMIC_TYPE="currentComicType";;

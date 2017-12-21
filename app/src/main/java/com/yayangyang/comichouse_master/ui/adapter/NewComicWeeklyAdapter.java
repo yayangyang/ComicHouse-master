@@ -41,5 +41,6 @@ public class NewComicWeeklyAdapter extends BaseQuickAdapter<NewComicWeekly.DataB
         helper.setText(R.id.tv_title,item.name);
         helper.setText(R.id.tv_recommend_brief,item.recommend_brief);
         helper.setText(R.id.tv_recommend_reason,item.recommend_reason);
+//        helper.addOnClickListener(R.id.tv_last_comic_subscribe);
     }
 }
