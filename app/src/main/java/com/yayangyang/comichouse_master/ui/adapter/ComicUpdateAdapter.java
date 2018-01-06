@@ -2,31 +2,24 @@ package com.yayangyang.comichouse_master.ui.adapter;
 
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
-import com.yayangyang.comichouse_master.base.MyBaseMultiItemQuickAdapter;
 import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Administrator on 2017/11/28.
  */
 
-public class ComicUpdateAdapter extends MyBaseMultiItemQuickAdapter<ComicUpdate,BaseViewHolder> {
+public class ComicUpdateAdapter extends ComicUpdateMultiItemQuickAdapter<ComicUpdate,BaseViewHolder> {
 
     public ComicUpdateAdapter(int id,List<ComicUpdate> data) {
         super(data);

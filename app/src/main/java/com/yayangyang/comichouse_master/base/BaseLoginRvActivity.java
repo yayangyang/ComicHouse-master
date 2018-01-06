@@ -44,7 +44,7 @@ public abstract class BaseLoginRvActivity<T,K extends BaseViewHolder> extends Ba
             Gson gson = new Gson();
             TencentLoginResult result = gson.fromJson(json, TencentLoginResult.class);
             LogUtils.e(result.toString());
-            loginZhuiShu(result);
+            loginComicHouse(result);
         }
 
         @Override
@@ -63,24 +63,24 @@ public abstract class BaseLoginRvActivity<T,K extends BaseViewHolder> extends Ba
      * qq操作取得数据后的回调(例:qq登录,qq分享)
      * @param result
      */
-    protected abstract void loginZhuiShu(TencentLoginResult result);
+    protected abstract void loginComicHouse(TencentLoginResult result);
 
     /**
-     * qq取消回调
+     * qq取消回调(可选择重写)
      */
-    protected abstract void loginCancel();
+    protected void loginCancel(){}
 
     /**
      * 追书神器登录成功的回调(有登录功能需要重写)
      * @param login
      */
-    public abstract void loginSuccess(Login login);
+    public void loginSuccess(Login login){}
 
     /**
-     * 登录弹出框的回调(有登录功能需要重写)
+     * 登录弹出框的回调(有实现LoginPopupWindow监听需要重写)
      * @param view
      * @param type
      */
-    public abstract void onLogin(ImageView view, String type);
+    public void onLogin(ImageView view, String type){}
 
 }

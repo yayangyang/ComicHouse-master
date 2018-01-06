@@ -349,9 +349,9 @@ public class PublishReviewActivity extends BaseActivity
                     @Override
                     public void onDismiss() {
                         //取消遮罩
-                        WindowManager.LayoutParams lp =getWindow().getAttributes();
-                        lp.alpha = 1.0f;
-                        getWindow().setAttributes(lp);
+//                        WindowManager.LayoutParams lp =getWindow().getAttributes();
+//                        lp.alpha = 1.0f;
+//                        getWindow().setAttributes(lp);
                     }
                 })
                 .create();//创建PopupWindow

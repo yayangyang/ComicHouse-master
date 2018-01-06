@@ -303,13 +303,14 @@ public class ScreenUtils {
      * @param mActivity
      */
     public static void setScreenBrightness(int paramInt, Activity mActivity) {
-        if (paramInt <= 5) {
-            paramInt = 5;
-        }
+//        if (paramInt <= 5) {
+//            paramInt = 5;
+//        }
         Window localWindow = mActivity.getWindow();
         WindowManager.LayoutParams localLayoutParams = localWindow.getAttributes();
-        float f = paramInt / 100.0F;
-        localLayoutParams.screenBrightness = f;
+        float f = (paramInt+50) / 100.0F;
+        LogUtils.e("f"+f);
+        localLayoutParams.alpha = f;//screenBrightness无效
         localWindow.setAttributes(localLayoutParams);
     }
 }

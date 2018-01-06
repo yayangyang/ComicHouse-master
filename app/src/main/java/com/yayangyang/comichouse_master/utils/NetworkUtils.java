@@ -55,7 +55,7 @@ public class NetworkUtils {
     }
 
     /**
-     * 判断网络是否可用
+     * 判断网络是否可用(连接上wifi但不能上网仍返回true)
      * <p>需添加权限 {@code <uses-permission android:name="android.permission
      * .ACCESS_NETWORK_STATE"/>}</p>
      *

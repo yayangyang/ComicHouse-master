@@ -130,12 +130,16 @@ public class Constant {
     public static final int RETURN_DATA=2;
     public static int TAKE_PHOTO_WITH_DATA=3;
     public static int GET_PHOTO_WITH_DATA=4;
+    public static int CHANGE_TIME=5;
+    public static int LOAD_MORE=6;
 
     public static int ALL_COMIC=100;
     public static int ORIGINAL_COMIC=1;
     public static int DUBBING_COMIC=0;
     public static int LINEARLAYOUT_MANAGER=1;
     public static int GRIDLAYOUT_MANAGER=2;
+    public static int ITEM_COMIC_READ=5;
+    public static int ITEM_COMIC_READ_FOOTER=6;
 
     public static int POPULAR_RANK=0;
     public static int REVIEW_RANK=1;
@@ -145,15 +149,19 @@ public class Constant {
     public static String VERSION="2.7.003";
 
     public static String MY_INDEX="my_index";
-    public static String CURRENT_COMIC_TYPE="currentComicType";;
-    public static String CURRENT_DATE="currentdate";;
-    public static String CURRENT_RANK_TYPE="currentRankType";;
-    public static String TAG_ID="tag_id";;
-    public static String OBJECT_ID="object_id";;
-    public static String COMIC_ID="comic_id";;
+    public static String CURRENT_COMIC_TYPE="currentComicType";
+    public static String CURRENT_DATE="currentdate";
+    public static String CURRENT_RANK_TYPE="currentRankType";
+    public static String TAG_ID="tag_id";
+    public static String OBJECT_ID="object_id";
+    public static String COMIC_ID="comic_id";
     public static String TITLE="title";;
-    public static String COMIC_DETAIL_BODY="comic_detail_body";;
-    public static String IMAGE_TYPE="image/*";;
+    public static String COMIC_DETAIL_BODY="comic_detail_body";
+    public static String IMAGE_TYPE="image/*";
+    public static String DATA_BEANS="data_beans";
+    public static String COMIC_READ="comic_read";
+    public static String IS_LOAD_TOP="isLoadTop";
+    public static String CHAPTER_ID="chapterId";
 
 
     @IntDef({

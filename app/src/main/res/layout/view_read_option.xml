@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/transparent_black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_sun_little"/>
+
+        <SeekBar
+            android:id="@+id/seekBar_change_light"
+            style="@android:style/Widget.SeekBar"
+            android:progressDrawable="@drawable/my_seekbar_style"
+            android:thumb="@drawable/browse_page_bar"
+            android:splitTrack="false"
+            android:minHeight="5dp"
+            android:maxHeight="5dp"
+            android:max="50"
+            android:progress="0"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_sun_big"/>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="系统亮度"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="双页切分"
+            android:textColor="@color/light_blue"
+            android:layout_centerVertical="true"/>
+
+        <RadioGroup
+            android:id="@+id/rg_clip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <RadioButton
+                android:id="@+id/rb_auto_clip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自动切分"
+                android:button="@null"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_close_clip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关闭切分"
+                android:button="@null"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="吐槽方式"
+            android:textColor="@color/light_blue"
+            android:layout_centerVertical="true"/>
+
+        <RadioGroup
+            android:id="@+id/rg_talk_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <RadioButton
+                android:id="@+id/rb_viewpoint_pattern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="观点模式"
+                android:button="@null"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_barrage_pattern"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="弹幕模式"
+                android:button="@null"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="屏幕方向"
+            android:textColor="@color/light_blue"
+            android:layout_centerVertical="true"/>
+
+        <RadioGroup
+            android:id="@+id/rg_screen_orientation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <RadioButton
+                android:id="@+id/rb_land_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="横屏阅读"
+                android:button="@null"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_portrait_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="竖屏阅读"
+                android:button="@null"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_common_selector"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"/>
+
+</LinearLayout>

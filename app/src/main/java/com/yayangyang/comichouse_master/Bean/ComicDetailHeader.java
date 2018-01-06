@@ -4,6 +4,7 @@ import com.yayangyang.comichouse_master.Bean.base.Base;
 
 import org.w3c.dom.Comment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -53,9 +54,9 @@ public class ComicDetailHeader extends Base {
      * "comment_count": 9543,
      * "latest_comment": [{
      * "comment_id": 3499115,
-     * "uid": 104770154,
-     * "content": "\u8bdd\u8bf4\u7537\u4e3b\u7684\u753b\u98ce\u592a\u9634\u6c89\u4e86\u5427\u2026\u2026",
-     * "createtime": 1513232416,
+     * "uintent": "\u8bdd\u8bf4\u7537\u4e3b\u7684\u753b\u98ce\u592a\u9634\u6c89\u4e86\u5427\u2026\u2026",
+     * "crd": 104770154,
+     * "coeatetime": 1513232416,
      * "nickname": "qzuser73504517",
      * "avatar": "http:\/\/images.dmzj.com\/user\/94\/af\/94af8b3d0cde6d781f68b30a0f27962b.png"
      * }]
@@ -83,16 +84,16 @@ public class ComicDetailHeader extends Base {
     public ArrayList<ChaptersBean> chapters;
     public Comment comment;
 
-    public static class TagBean{
+    public static class TagBean implements Serializable{
         public String tag_id;
         public String tag_name;
     }
 
-    public static class ChaptersBean{
+    public static class ChaptersBean implements Serializable{
         public String title;
         public ArrayList<DataBean> data;
 
-        public static class DataBean{
+        public static class DataBean implements Serializable{
             public String chapter_id;
             public String chapter_title;
             public String updatetime;
@@ -101,11 +102,11 @@ public class ComicDetailHeader extends Base {
         }
     }
 
-    public static class Comment{
+    public static class Comment implements Serializable{
         public String comment_count;
         public ArrayList<ChaptersBean> latest_comment;
 
-        public static class CommentBean{
+        public static class CommentBean implements Serializable{
             public String comment_id;
             public String uid;
             public String content;

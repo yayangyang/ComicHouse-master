@@ -19,7 +19,7 @@ public class StatusBarCompat {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             LogUtils.e("statusColor:"+statusColor);
             View decorView = activity.getWindow().getDecorView();
-            //重点：SYSTEM_UI_FLAG_LIGHT_STATUS_BAR(解决当状态栏为白色时字体看不清问题)
+            //SYSTEM_UI_FLAG_LIGHT_STATUS_BAR(解决当状态栏为白色时字体看不清问题)
             int option = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             decorView.setSystemUiVisibility(option);
             activity.getWindow().setStatusBarColor(statusColor);

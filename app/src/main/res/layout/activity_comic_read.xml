@@ -1,69 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/common_toolbar"
-        android:layout_width="match_parent"
+    <include layout="@layout/common_easyrecyclerview"/>
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Theme.ToolBar.Menu">
+        android:layout_above="@id/ll_bottom"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/common_tv"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_gravity="center"/>
+        <include layout="@layout/view_read_option"/>
 
-        <TextView
-            android:id="@+id/tv_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="操作"
-            android:layout_gravity="end"
-            android:layout_marginEnd="10dp"/>
-
-    </android.support.v7.widget.Toolbar>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"/>
-
-    <include layout="@layout/common_easyrecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/common_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Theme.ToolBar.Menu"
+            android:background="@color/common_bg">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/common_tv"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="操作"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_drag_read_progress"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_above="@id/ll_bottom"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@drawable/bg_small_radius_shallow_transparent"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_current_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/read_placer"
-        android:gravity="center_vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true">
 
         <SeekBar
-            android:id="@+id/sb_read_progress"
-            android:layout_width="200dp"
+            android:id="@+id/seekBar"
+            style="@android:style/Widget.SeekBar"
+            android:progressDrawable="@drawable/my_seekbar_style"
+            android:thumb="@drawable/browse_page_bar"
+            android:splitTrack="false"
+            android:minHeight="5dp"
+            android:maxHeight="5dp"
+            android:max="100"
+            android:progress="0"
+            android:layout_width="0dp"
+            android:layout_weight="6"
             android:layout_height="wrap_content"
-            android:progress="50"/>
+            android:layout_marginRight="4dp"
+            android:layout_marginLeft="4dp"/>
 
         <TextView
             android:id="@+id/tv_read_progress"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="132/133页"
             android:textColor="@color/white"
-            android:textSize="13sp"
-            android:layout_marginStart="10dp"/>
+            android:textSize="13sp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="7"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -78,6 +132,19 @@
                 android:padding="5dp"
                 android:gravity="center"
                 android:drawableTop="@drawable/img_read_options"/>
+
+            <TextView
+                android:id="@+id/tv_close"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="收起"
+                android:textColor="@color/tv_gray_selector"
+                android:drawablePadding="5dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:drawableTop="@drawable/img_novel_close"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_read_share"
@@ -103,8 +170,21 @@
                 android:gravity="center"
                 android:drawableTop="@drawable/img_novel_discurss"/>
 
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="详细"
+                android:textColor="@color/tv_gray_selector"
+                android:drawablePadding="5dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:drawableTop="@drawable/img_novel_talk"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

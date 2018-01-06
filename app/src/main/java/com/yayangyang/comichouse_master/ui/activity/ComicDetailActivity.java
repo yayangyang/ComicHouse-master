@@ -59,6 +59,8 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     private String title;
     private String shortDescription,description;
 
+    private ComicDetailHeader comicDetail;
+
     private HeaderViewHolder headerViewHolder;
     private AnnouncementHeaderViewHolder aHeaderViewHolder;
 
@@ -134,7 +136,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         }else if (v.getId() == R.id.tv_subscribe_choice) {
 
         }else if (v.getId() == R.id.tv_read_state) {
-
+            ComicReadActivity.startActivity(this,comicId,comicDetail.chapters.get(0).data);
         }else if (v.getId() == R.id.iv_switch) {
             if (headerViewHolder.tv_description.getText().length() <= 30) {
                 headerViewHolder.tv_description.setText(description);
@@ -267,6 +269,8 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     public void showComicDetailHeader(ComicDetailHeader comicDetail) {
         LogUtils.e("ComicDetailActivity-showComicDetailHeader");
 //        mAdapter.setEmptyView(inflate);
+
+        this.comicDetail=comicDetail;
 
         GlideUrl cookie = new GlideUrl(comicDetail.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)

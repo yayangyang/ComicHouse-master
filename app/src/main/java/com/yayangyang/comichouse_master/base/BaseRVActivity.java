@@ -50,7 +50,7 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
                     onRefresh();
                 }
             });
-            network = View.inflate(this, R.layout.activity_nonetwork, null);
+            network = View.inflate(this, R.layout.common_net_error_view, null);
             network.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -113,7 +113,10 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
         }
         if(!NetworkUtils.isAvailable(this)){
             ToastUtils.showToast("网络异常");
+            mAdapter.loadMoreFail();
         }
+        mSwipeRefreshLayout.setRefreshing(false);
+        dismissDialog();
     }
 
 }

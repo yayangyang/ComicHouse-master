@@ -39,6 +39,7 @@
         <activity android:name=".ui.activity.PublishReviewActivity"/>
         <activity android:name=".ui.activity.ComicReadActivity"
             android:screenOrientation="landscape"/>
+        <activity android:name=".ui.activity.PublishViewPointActivity"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

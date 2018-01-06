@@ -2,11 +2,15 @@ package com.yayangyang.comichouse_master.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tauth.Tencent;
 import com.yayangyang.comichouse_master.Bean.user.Login;
+import com.yayangyang.comichouse_master.Receiver.NetworkChangeReceiver;
+import com.yayangyang.comichouse_master.Receiver.TimeChangeReceiver;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.CrashHandler;
 import com.yayangyang.comichouse_master.component.AppComponent;
@@ -36,7 +40,7 @@ public class ComicApplication extends Application {
             // You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 
         sInstance = this;
         initCompoent();
@@ -48,6 +52,21 @@ public class ComicApplication extends Application {
 
         initLoginInfo();
         compatibleVersion();
+        initReceiver();
+    }
+
+    private void initReceiver() {
+        //注册监听网络状态改变广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+        filter.addAction("android.net.wifi.STATE_CHANGE");
+        registerReceiver(NetworkChangeReceiver.getInstance(), filter);
+
+        //注册监听系统时间广播
+        filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_TIME_TICK);
+        registerReceiver(TimeChangeReceiver.getInstance(), filter);
     }
 
     private void compatibleVersion() {

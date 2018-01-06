@@ -6,6 +6,7 @@ import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.activity.ComicReadActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
 import com.yayangyang.comichouse_master.ui.activity.PublishReviewActivity;
+import com.yayangyang.comichouse_master.ui.activity.PublishViewPointActivity;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicCategoryDetailFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicCategoryFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicRankDetailFragment;
@@ -40,4 +41,6 @@ public interface ComicComponent {
     PublishReviewActivity inject(PublishReviewActivity activity);
 
     ComicReadActivity inject(ComicReadActivity activity);
+
+    PublishViewPointActivity inject(PublishViewPointActivity activity);
 }

@@ -8,6 +8,8 @@ import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRead;
+import com.yayangyang.comichouse_master.Bean.ComicReadHotView;
+import com.yayangyang.comichouse_master.Bean.ComicReadViewPoint;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
 import com.yayangyang.comichouse_master.Bean.IsHelpful;
@@ -290,7 +292,26 @@ public interface ComicApiService {
     @POST("/comment2/uploadImg")
     Observable<UploadImageResult> uploadImage(@PartMap Map<String, RequestBody> params);
 
+    /**
+     * 取得漫画章节详情
+     * @param comic_id
+     * @param chapter_id
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
     @GET("/chapter/{comic_id}/{chapter_id}.json")
-    Observable<List<ComicRead>> getComicChapter(@Query("comic_id") String comic_id, @Query("chapter_id") String chapter_id,
+    Observable<ComicRead> getComicChapter(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
                                              @Query("channel") String channel, @Query("version") String version);
+
+    @Headers("Cache-Control: max-age=0")
+    @GET("/hotView/{comic_id}/{chapter_id}.json")
+    Observable<List<ComicReadHotView>> getComicReadHotView(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
+                                                           @Query("channel") String channel, @Query("version") String version);
+
+    @Headers("Cache-Control: max-age=0")
+    @GET("/viewPoint/0/{comic_id}/{chapter_id}.json")
+    Observable<List<ComicReadViewPoint>> getComicReadViewPoint(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
+                                                             @Query("channel") String channel, @Query("version") String version);
 }

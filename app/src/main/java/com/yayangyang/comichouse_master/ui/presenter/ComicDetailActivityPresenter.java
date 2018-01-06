@@ -40,11 +40,11 @@ public class ComicDetailActivityPresenter extends RxPresenter<ComicDetailContrac
                 .subscribe(
                         new Consumer<ComicDetailHeader>() {
                             @Override
-                            public void accept(ComicDetailHeader comicDetail) throws Exception {
+                            public void accept(ComicDetailHeader comicDetailHeader) throws Exception {
                                 LogUtils.e("getComicDetailHeader-accept");
                                 if (mView != null) {
                                     LogUtils.e("eeeeeeeeeeeee");
-                                    mView.showComicDetailHeader(comicDetail);
+                                    mView.showComicDetailHeader(comicDetailHeader);
                                 }
                             }
                         },

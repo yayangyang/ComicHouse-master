@@ -159,4 +159,14 @@ public class FormatUtils {
         SimpleDateFormat myFormat = new SimpleDateFormat(format);
         return myFormat.format(new Date(Long.parseLong(timeStamp)*1000L));
     }
+
+    public static String getMeaninglessStringByStringLength(int length){
+        String strz[]={"□","△","X"};
+        int index= (int) (Math.random()*3);
+        String str="";
+        for(int i=0;i<length;i++){
+            str+=strz[index];
+        }
+        return str;
+    }
 }

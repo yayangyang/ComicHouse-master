@@ -230,4 +230,36 @@ public class SettingManager {
         SharedPreferencesUtil.getInstance().putBoolean(sectionId,is_helpful);
     }
 
+    public int getReadLightProgress(){
+        return SharedPreferencesUtil.getInstance().getInt("readLightProgress",50);
+    }
+
+    public void saveReadLightProgress(int readLight){
+        SharedPreferencesUtil.getInstance().putInt("readLightProgress",readLight);
+    }
+
+    public boolean getIsSystemLight(){
+        return SharedPreferencesUtil.getInstance().getBoolean("isSystemLight",false);
+    }
+
+    public void saveIsSystemLight(boolean isSystemLight){
+        SharedPreferencesUtil.getInstance().putBoolean("isSystemLight",isSystemLight);
+    }
+
+    public boolean getIsVisibleReview(){
+        return SharedPreferencesUtil.getInstance().getBoolean("isVisibleReview",false);
+    }
+
+    public void saveIsVisibleReview(boolean isVisibleReview){
+        SharedPreferencesUtil.getInstance().putBoolean("isVisibleReview",isVisibleReview);
+    }
+
+    public boolean getIsViewPointPattern(){
+        return SharedPreferencesUtil.getInstance().getBoolean("isViewPointPattern",true);
+    }
+
+    public void saveIsViewPointPattern(boolean isViewPointPattern){
+        SharedPreferencesUtil.getInstance().putBoolean("isViewPointPattern",isViewPointPattern);
+    }
+
 }

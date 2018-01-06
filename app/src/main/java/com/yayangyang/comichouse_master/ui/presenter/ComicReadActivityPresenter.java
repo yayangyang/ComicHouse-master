@@ -6,6 +6,8 @@ import com.yayangyang.comichouse_master.Bean.Announcement;
 import com.yayangyang.comichouse_master.Bean.ComicDetailBody;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicRead;
+import com.yayangyang.comichouse_master.Bean.ComicReadHotView;
+import com.yayangyang.comichouse_master.Bean.ComicReadViewPoint;
 import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.api.ComicApi;
 import com.yayangyang.comichouse_master.base.Constant;
@@ -36,17 +38,17 @@ public class ComicReadActivityPresenter extends RxPresenter<ComicReadContract.Vi
     }
 
     @Override
-    public void getComicChapter(String comicId,String chapterId) {
+    public void getComicChapterDetail(String comicId,String chapterId,boolean isLoadTop) {
         Disposable rxDisposable = comicApi.getComicChapter(comicId,chapterId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        new Consumer<List<ComicRead>>() {
+                        new Consumer<ComicRead>() {
                             @Override
-                            public void accept(List<ComicRead> list) throws Exception {
+                            public void accept(ComicRead comicRead) throws Exception {
                                 LogUtils.e("getComicChapter-accept");
                                 if (mView != null) {
                                     LogUtils.e("eeeeeeeeeeeee");
-                                    mView.showComicChapter(list);
+                                    mView.showComicChapter(comicRead,isLoadTop);
                                 }
                             }
                         },
@@ -56,6 +58,7 @@ public class ComicReadActivityPresenter extends RxPresenter<ComicReadContract.Vi
                                 LogUtils.e("getComicChapter"+e.toString());
                                 if(mView!=null){
                                     mView.showError();
+                                    mView.showError(isLoadTop);
                                 }
                             }
                         },
@@ -66,6 +69,75 @@ public class ComicReadActivityPresenter extends RxPresenter<ComicReadContract.Vi
                                 if(mView!=null){
                                     mView.complete();
                                 }
+                            }
+                        }
+                );
+        addDisposable(rxDisposable);
+    }
+
+    @Override
+    public void getComicReadHotView(String comicId, String chapterId,boolean isLoadTop) {
+        Disposable rxDisposable = comicApi.getComicReadHotView(comicId,chapterId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Consumer<List<ComicReadHotView>>() {
+                            @Override
+                            public void accept(List<ComicReadHotView> list) throws Exception {
+                                LogUtils.e("getComicReadHotView-accept");
+                                if (mView != null) {
+                                    LogUtils.e("eeeeeeeeeeeee");
+                                    mView.showComicReadHotView(list,chapterId,isLoadTop);
+                                }
+                            }
+                        },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable e) throws Exception {
+                                LogUtils.e("getComicReadHotView"+e.toString());
+                                if(mView!=null){
+                                    mView.showError();
+                                    mView.showError(isLoadTop);
+                                }
+                            }
+                        },
+                        new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                LogUtils.e("complete");
+                            }
+                        }
+                );
+        addDisposable(rxDisposable);
+    }
+
+    @Override
+    public void getComicReadViewPoint(String comicId, String chapterId,boolean isLoadTop) {
+        Disposable rxDisposable = comicApi.getComicReadViewPoint(comicId,chapterId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Consumer<List<ComicReadViewPoint>>() {
+                            @Override
+                            public void accept(List<ComicReadViewPoint> list) throws Exception {
+                                LogUtils.e("getComicReadViewPoint-accept");
+                                if (mView != null) {
+                                    mView.showComicReadViewPoint(list,chapterId,isLoadTop);
+                                }
+                            }
+                        },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable e) throws Exception {
+                                LogUtils.e("getComicReadViewPoint"+e.toString());
+                                if(mView!=null){
+                                    mView.showError();
+                                    mView.showError(isLoadTop);
+                                }
+                            }
+                        },
+                        new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                LogUtils.e("complete");
                             }
                         }
                 );

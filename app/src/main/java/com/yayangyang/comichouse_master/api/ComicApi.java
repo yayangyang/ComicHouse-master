@@ -8,6 +8,8 @@ import com.yayangyang.comichouse_master.Bean.ComicCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRead;
+import com.yayangyang.comichouse_master.Bean.ComicReadHotView;
+import com.yayangyang.comichouse_master.Bean.ComicReadViewPoint;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
@@ -157,8 +159,16 @@ public class ComicApi {
         return service.uploadImage(params);
     }
 
-    public Observable<List<ComicRead>> getComicChapter(String comic_id,String chapter_id,String channel, String version){
+    public Observable<ComicRead> getComicChapter(String comic_id,String chapter_id,String channel, String version){
         return service.getComicChapter(comic_id,chapter_id,channel,version);
+    }
+
+    public Observable<List<ComicReadHotView>> getComicReadHotView(String comic_id, String chapter_id, String channel, String version){
+        return service.getComicReadHotView(comic_id,chapter_id,channel,version);
+    }
+
+    public Observable<List<ComicReadViewPoint>> getComicReadViewPoint(String comic_id, String chapter_id, String channel, String version){
+        return service.getComicReadViewPoint(comic_id,chapter_id,channel,version);
     }
 
 }
