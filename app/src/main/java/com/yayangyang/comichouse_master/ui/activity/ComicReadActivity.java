@@ -11,6 +11,7 @@ import android.os.MessageQueue;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -25,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Scroller;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,7 +87,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
 
     private int x=0;
 
-    private int topPage=0,bottomPage=0,currentLoadPage=0;
+    private int topPage=0,bottomPage=0,currentLoadPage=0,oldPageIndex=0;
 
     private boolean isEnter=true;
     private boolean canScrollToTop=false,canScrollToBottom=false,isCallScroll=false;
@@ -420,7 +422,27 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         mCommonToolbar.setTitle("");
         mCommonToolbar.setNavigationIcon(R.drawable.img_back);
 
-        currentLoadPage=0;//到时传章节索引进来
+        comicId=getIntent().getStringExtra(Constant.COMIC_ID);
+        data_beans= (ArrayList<ComicDetailHeader.ChaptersBean.DataBean>)
+                getIntent().getSerializableExtra(Constant.DATA_BEANS);
+
+        //没指定阅读位置,默认读取阅读记录
+        String readProgress = SettingManager.getInstance().getReadProgress(comicId);
+        LogUtils.e("readProgress:"+readProgress);
+        if(!TextUtils.isEmpty(readProgress)){
+            String[] split = readProgress.split("-");
+            int chapterIndex=0;
+            for(int i=0;i<data_beans.size();i++){
+                if(data_beans.get(i).chapter_title.equals(split[0])){
+                    chapterIndex=i;
+                    break;
+                }
+            }
+            currentLoadPage=chapterIndex;//章节记录
+            oldPageIndex=Integer.parseInt(split[1]);//页面索引记录
+            LogUtils.e("currentLoadPage:"+currentLoadPage);
+            LogUtils.e("oldPageIndex:"+oldPageIndex);
+        }
         topPage=currentLoadPage;
         bottomPage=currentLoadPage;
     }
@@ -435,10 +457,6 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     @Override
     public void initDatas() {
         LogUtils.e("ComicReadActivity-initToolBar");
-        comicId=getIntent().getStringExtra(Constant.COMIC_ID);
-        data_beans= (ArrayList<ComicDetailHeader.ChaptersBean.DataBean>)
-                getIntent().getSerializableExtra(Constant.DATA_BEANS);
-
         mPresenter.attachView(this);
 
         stateInfo= MyNetWorkUtil.getNetInfo(this);
@@ -515,6 +533,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
                         mRecyclerView.scrollBy(0, top);
                     }
 
+                    LogUtils.e("eeeeeeeeeeeeeeeeee");
                     if(ll_top.getVisibility()==View.GONE
                             ||ll_bottom.getVisibility()==View.GONE){
                         ll_top.setVisibility(View.VISIBLE);
@@ -693,7 +712,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
             if(!beans.isEmpty()){
                 isEnter=false;
 
-                ChapterReadBean bean = beans.get(0);//先默认从章节第一页开始
+                ChapterReadBean bean = beans.get(oldPageIndex);
                 init(bean,bean.page_url);
             }else{
                 ToastUtils.showToast("刷新数据为空");
@@ -704,8 +723,11 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
             mAdapter.setEmptyView(inflate);
             mAdapter.setNewData(beans);
             //滚动通知内部数据已改变然后requestLayout,不是平滑滚动而是直接到达指定item
-//            mRecyclerView.scrollToPosition(1);
-            mRecyclerView.scrollBy(0,mRecyclerView.getChildAt(1).getTop());//即时调用滚动监听
+            if(oldPageIndex==0){
+                mRecyclerView.scrollBy(0,mRecyclerView.getChildAt(1).getTop());//即时调用滚动监听
+            }else{
+                moveToPosition(oldPageIndex+1);
+            }
         }else if(beans.isEmpty()){
             ToastUtils.showToast("下拉数据为空");
         }else{
@@ -887,6 +909,11 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         mHandler.removeCallbacksAndMessages(null);
         NetworkChangeReceiver.getInstance().delOnNetWorkChange(this);
         TimeChangeReceiver.getInstance().delOnNetTimeChangeListener(this);
+
+        //保存阅读进度
+        String readProgress=chapterTitle+"-"+seekBar.getProgress();
+        LogUtils.e("onDestroy-readProgress:"+readProgress);
+        SettingManager.getInstance().saveReadProgress(comicId,readProgress);
     }
 
     public interface OnAgainLoadListener{

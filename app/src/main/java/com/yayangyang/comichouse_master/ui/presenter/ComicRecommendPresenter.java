@@ -37,6 +37,7 @@ public class ComicRecommendPresenter extends RxPresenter<ComicRecommendContract.
 
     @Override
     public void getComicRecommendList() {
+        LogUtils.e("getComicRecommendList");
 //        String key = StringUtils.creatAcacheKey("recommend-list",channel,version);
 //        Observable<List<ComicRecommend>> fromNetWork = comicApi.getRecommend(channel,version)
 //                .compose(RxUtil.<List<ComicRecommend>>rxCacheListHelper(key));

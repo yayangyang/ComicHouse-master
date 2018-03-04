@@ -271,6 +271,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 //        mAdapter.setEmptyView(inflate);
 
         this.comicDetail=comicDetail;
+        tv_title.setText(comicDetail.title);
 
         GlideUrl cookie = new GlideUrl(comicDetail.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)

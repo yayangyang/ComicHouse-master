@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
@@ -22,6 +23,7 @@ import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.decoration.CommonSpaceItemDecoration;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
 import com.yayangyang.comichouse_master.ui.activity.AuthorIntroduceActivity;
+import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicRecommendDetailAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicRecommendContract;
@@ -77,7 +79,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         ComicRecommend.DataBean dataBean = (ComicRecommend.DataBean) adapter.getData().get(position);
         if(!TextUtils.isEmpty(dataBean.type)){
             if(dataBean.type.equals("1")){
-
+                ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
             }else if(dataBean.type.equals("5")){
                 NewComicWeeklyActivity.startActivity(getActivity(),dataBean.obj_id);
             }else if(dataBean.type.equals("6")){
@@ -124,14 +126,13 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onRefresh() {
         mPresenter.getComicRecommendList();
-//            getData(false);
-//            mPresenter.getElatedComic(elatedParams);
-//            if(LoginUtil.isLogin()){
-//                getData(true);
-//                mPresenter.getSubscriptionComic(subscriptionParams);
-//            }else{
-//                rvz[0].setVisibility(View.GONE);
-//            }
+        getData();
+//        if(LoginUtil.isLogin()){
+//            getData(true);
+//            mPresenter.getSubscriptionComic(subscriptionParams);
+//        }else{
+//            rvz[0].setVisibility(View.GONE);
+//        }
     }
 
     @Override
@@ -188,7 +189,8 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
                 rvz[i].setLayoutManager(new GridLayoutManager(getActivity(),3));
             }
             rvz[i].addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(5)));
-            //使用了brvah框架bindToRecyclerView方法里面执行了setAdapter,所以应该在setLayoutManager之后才能绑定spancount
+            //使用了brvah框架bindToRecyclerView方法里面执行了setAdapter,
+            //执行onAttachedToRecyclerView方法绑定spanCount,所以应该在setLayoutManager之后才能绑定spancount
             adapter.bindToRecyclerView(rvz[i]);
         }
         LogUtils.e("mAdapterList.size"+mAdapterList.size());
@@ -295,34 +297,35 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         mAdapterList.get(3).setNewData(beans);
     }
 
-    private void getData(boolean isSubscription) {
-        if(!isSubscription){
-            if(elatedParams==null){
-                elatedParams=new HashMap<>();
-                elatedParams.put("category_id","50");
-                elatedParams.put("channel", Constant.CHANNEL);
-                elatedParams.put("version",Constant.VERSION);
-            }else{
-                if(LoginUtil.isLogin()){
-                    elatedParams.put("uid", ComicApplication.sLogin.data.uid);
-                }else{
-                    elatedParams.remove("uid");
-                }
-            }
-        }else{
-            if(subscriptionParams==null){
-                subscriptionParams=new HashMap<>();
-                subscriptionParams.put("category_id","49");
-                subscriptionParams.put("channel", Constant.CHANNEL);
-                subscriptionParams.put("version",Constant.VERSION);
-            }else{
-                if(LoginUtil.isLogin()){
-                    subscriptionParams.put("uid", ComicApplication.sLogin.data.uid);
-                }else{
-                    subscriptionParams.remove("uid");
-                }
-            }
+    private void getData() {
+        if(elatedParams==null){
+            elatedParams=new HashMap<>();
+            elatedParams.put("category_id","50");
+            elatedParams.put("channel", Constant.CHANNEL);
+            elatedParams.put("version",Constant.VERSION);
         }
+
+        if(subscriptionParams==null){
+            subscriptionParams=new HashMap<>();
+            subscriptionParams.put("category_id","49");
+            subscriptionParams.put("channel", Constant.CHANNEL);
+            subscriptionParams.put("version",Constant.VERSION);
+        }
+
+        if(LoginUtil.isLogin()){
+            elatedParams.put("uid", ComicApplication.sLogin.data.uid);
+            subscriptionParams.put("uid", ComicApplication.sLogin.data.uid);
+
+            //由于使用qq的测试码登录所以取不到我的订阅的数据
+            rvz[0].setVisibility(View.VISIBLE);
+            mPresenter.getSubscriptionComic(subscriptionParams);
+        }else{
+            elatedParams.remove("uid");
+            subscriptionParams.remove("uid");
+
+            rvz[0].setVisibility(View.GONE);
+        }
+        mPresenter.getElatedComic(elatedParams);
     }
 
     private void initBaner(ArrayList images,ArrayList<String> titles) {

@@ -75,4 +75,5 @@ public class ComicRecommendDetailAdapter extends BaseQuickAdapter<ComicRecommend
             helper.setGone(R.id.tv_author,false);
         }
     }
+
 }

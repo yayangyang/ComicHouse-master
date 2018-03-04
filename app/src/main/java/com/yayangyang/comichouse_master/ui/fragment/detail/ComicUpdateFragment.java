@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.zhouwei.library.CustomPopWindow;
+import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
@@ -20,6 +21,7 @@ import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.decoration.SpaceItemDecoration;
+import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicUpdateAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicUpdateContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicUpdatePresenter;
@@ -50,7 +52,8 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicUpdate comicUpdate = (ComicUpdate) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
     }
 
     @Override

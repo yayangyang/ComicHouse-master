@@ -53,6 +53,7 @@ public class BaseInterceptor implements Interceptor{
         }else{
             isCache=true;
         }
+        LogUtils.e("网络是否可用:"+NetworkUtils.isAvailable(AppUtils.getAppContext()));
         if (!NetworkUtils.isAvailable(AppUtils.getAppContext())&&isCache) {
             /**
              * 离线缓存控制  总的缓存时间=在线缓存时间(在这个时间内只会走缓存)+设置离线缓存时间(在线缓存时间结束开始离线缓存时间倒计时)

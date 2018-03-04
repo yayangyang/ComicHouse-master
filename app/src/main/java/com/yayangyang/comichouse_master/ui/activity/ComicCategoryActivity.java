@@ -74,12 +74,12 @@ public class ComicCategoryActivity extends BaseComicCategoryActivity {
         if(Constant.ageTypeList.contains(tagId)){
             tagIdZ[1]=tagId;
             index=Constant.ageTypeList.indexOf(tagId);
-            mTitleList.set(0,list.get(1).get(index));
+            mTitleList.set(1,list.get(1).get(index));
         }
         if(Constant.scheduleTypeList.contains(tagId)){
             tagIdZ[2]=tagId;
             index=Constant.scheduleTypeList.indexOf(tagId);
-            mTitleList.set(3,list.get(2).get(index));
+            mTitleList.set(2,list.get(2).get(index));
         }
         if(Constant.regionTypeList.contains(tagId)){
             tagIdZ[3]=tagId;

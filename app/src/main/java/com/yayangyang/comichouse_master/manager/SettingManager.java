@@ -3,6 +3,7 @@ package com.yayangyang.comichouse_master.manager;
 import com.yayangyang.comichouse_master.Bean.support.BookMark;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.base.Constant;
+import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
@@ -70,27 +71,6 @@ public class SettingManager {
 
     private String getLightnessKey() {
         return "readLightness";
-    }
-
-    public synchronized void saveReadProgress(String bookId, int currentChapter, int m_mbBufBeginPos, int m_mbBufEndPos) {
-        SharedPreferencesUtil.getInstance()
-                .putInt(getChapterKey(bookId), currentChapter)
-                .putInt(getStartPosKey(bookId), m_mbBufBeginPos)
-                .putInt(getEndPosKey(bookId), m_mbBufEndPos);
-    }
-
-    /**
-     * 获取上次阅读章节及位置
-     *
-     * @param bookId
-     * @return
-     */
-    public int[] getReadProgress(String bookId) {
-        int lastChapter = SharedPreferencesUtil.getInstance().getInt(getChapterKey(bookId), 1);
-        int startPos = SharedPreferencesUtil.getInstance().getInt(getStartPosKey(bookId), 0);
-        int endPos = SharedPreferencesUtil.getInstance().getInt(getEndPosKey(bookId), 0);
-
-        return new int[]{lastChapter, startPos, endPos};
     }
 
     public void removeReadProgress(String bookId) {
@@ -260,6 +240,14 @@ public class SettingManager {
 
     public void saveIsViewPointPattern(boolean isViewPointPattern){
         SharedPreferencesUtil.getInstance().putBoolean("isViewPointPattern",isViewPointPattern);
+    }
+
+    public String getReadProgress(String comicId){
+        return SharedPreferencesUtil.getInstance().getString(comicId,"");
+    }
+
+    public void saveReadProgress(String comicId,String readProgress){
+        SharedPreferencesUtil.getInstance().putString(comicId,readProgress);
     }
 
 }
