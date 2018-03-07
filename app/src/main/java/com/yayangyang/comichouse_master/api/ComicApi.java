@@ -13,15 +13,19 @@ import com.yayangyang.comichouse_master.Bean.ComicReadViewPoint;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
+import com.yayangyang.comichouse_master.Bean.Fabulous;
+import com.yayangyang.comichouse_master.Bean.HotSearch;
 import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
 import com.yayangyang.comichouse_master.Bean.NewestNovel;
+import com.yayangyang.comichouse_master.Bean.NewsBean;
 import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NovelCategory;
 import com.yayangyang.comichouse_master.Bean.NovelCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.NovelRank;
 import com.yayangyang.comichouse_master.Bean.ComicReview;
+import com.yayangyang.comichouse_master.Bean.SearchInfo;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
 import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
@@ -159,8 +163,8 @@ public class ComicApi {
         return service.uploadImage(params);
     }
 
-    public Observable<ComicRead> getComicChapter(String comic_id,String chapter_id,String channel, String version){
-        return service.getComicChapter(comic_id,chapter_id,channel,version);
+    public Observable<ComicRead> getComicChapterDetail(String comic_id,String chapter_id,String channel, String version){
+        return service.getComicChapterDetail(comic_id,chapter_id,channel,version);
     }
 
     public Observable<List<ComicReadHotView>> getComicReadHotView(String comic_id, String chapter_id, String channel, String version){
@@ -169,6 +173,22 @@ public class ComicApi {
 
     public Observable<List<ComicReadViewPoint>> getComicReadViewPoint(String comic_id, String chapter_id, String channel, String version){
         return service.getComicReadViewPoint(comic_id,chapter_id,channel,version);
+    }
+
+    public Observable<NewsBean> getNews(String objectId, String channel, String version){
+        return service.getNews(objectId,channel,version);
+    }
+
+    public Observable<Fabulous> fabulous(String objectId, String channel, String version){
+        return service.fabulous(objectId,channel,version);
+    }
+
+    public Observable<List<HotSearch>> getHotSearch(String type, String channel, String version){
+        return service.getHotSearch(type,channel,version);
+    }
+
+    public Observable<List<SearchInfo>> getSearchInfo(String type, String keyWord,String page, String channel, String version){
+        return service.getSearchInfo(type,keyWord,page,channel,version);
     }
 
 }

@@ -67,7 +67,8 @@ public class AuthorIntroduceActivity extends BaseActivity
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        AuthorIntroduce.DataBean dataBean = (AuthorIntroduce.DataBean) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(this,dataBean.id,dataBean.name);
     }
 
     @Override

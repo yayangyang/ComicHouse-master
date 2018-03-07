@@ -145,6 +145,9 @@ public class Constant {
     public static int REVIEW_RANK=1;
     public static int SUSCRIBE_RANK=2;
 
+    public static int COMIC_TYPE=0;
+    public static int NOVEL_TYPE=1;
+
     public static String CHANNEL="Android";
     public static String VERSION="2.7.003";
 
@@ -155,13 +158,18 @@ public class Constant {
     public static String TAG_ID="tag_id";
     public static String OBJECT_ID="object_id";
     public static String COMIC_ID="comic_id";
-    public static String TITLE="title";;
+    public static String TITLE="title";
     public static String COMIC_DETAIL_BODY="comic_detail_body";
     public static String IMAGE_TYPE="image/*";
     public static String DATA_BEANS="data_beans";
     public static String COMIC_READ="comic_read";
     public static String IS_LOAD_TOP="isLoadTop";
     public static String CHAPTER_ID="chapterId";
+    public static String APPOINT_CHAPTER_NAME="appoint_chapter_name";
+    public static String CHAPTERS_BEAN="chapters_bean";
+    public static String MOOD_AMOUNT="mood_amount";
+    public static String COMMENT_AMOUNT="comment_amount";
+    public static String READING_TYPE="reading_type";
 
 
     @IntDef({

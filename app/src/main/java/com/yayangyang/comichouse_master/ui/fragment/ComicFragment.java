@@ -8,7 +8,9 @@ import android.widget.ImageView;
 
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseFragment;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
+import com.yayangyang.comichouse_master.ui.activity.SearchActivity;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicCategoryFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicRankDetailFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.ComicRankFragment;
@@ -88,9 +90,14 @@ public class ComicFragment extends BaseFragment{
         LogUtils.e("测试");
     }
 
-    @OnClick(R.id.showInfo)
-    public void show(){
+    @OnClick(R.id.iv_game)
+    public void game(){
         DeviceUtils.printDisplayInfo(getActivity());
+    }
+
+    @OnClick(R.id.iv_search)
+    public void search(){
+        SearchActivity.startActivity(getActivity(),Constant.COMIC_TYPE);
     }
 
 }

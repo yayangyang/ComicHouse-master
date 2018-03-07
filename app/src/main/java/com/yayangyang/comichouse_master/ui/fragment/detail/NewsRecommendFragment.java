@@ -17,6 +17,7 @@ import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerNewsComponent;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
+import com.yayangyang.comichouse_master.ui.activity.NewsActivity;
 import com.yayangyang.comichouse_master.ui.adapter.NewsCommonAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.NewsRecommenedAdapter;
 import com.yayangyang.comichouse_master.ui.contract.NewsRecommendContract;
@@ -44,6 +45,10 @@ public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         ToastUtils.showToast("点击了");
 //        Glide.get(mRecyclerView.getContext()).clearMemory();
+
+        NewsCommonBody newsCommonBody= (NewsCommonBody) adapter.getData().get(position);
+        NewsActivity.startActivity(getActivity(),newsCommonBody.article_id,
+                newsCommonBody.comment_amount,newsCommonBody.mood_amount);
     }
 
     @Override

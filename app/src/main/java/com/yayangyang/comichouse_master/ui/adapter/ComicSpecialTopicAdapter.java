@@ -17,6 +17,8 @@ import com.yayangyang.comichouse_master.transform.MyTransform;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,6 +44,8 @@ public class ComicSpecialTopicAdapter extends BaseQuickAdapter<ComicSpecialTopic
         helper.addOnClickListener(R.id.frameLayout);
 
         helper.setText(R.id.tv_title,item.title);
-        helper.setText(R.id.tv_create_time,item.create_time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString=format.format(new Date(Long.parseLong(item.create_time)*1000L));
+        helper.setText(R.id.tv_create_time,dateString);
     }
 }

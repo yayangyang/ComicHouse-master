@@ -157,6 +157,5 @@ public abstract class BaseFragment extends Fragment {
         return view.getVisibility() == View.VISIBLE;
     }
 
-
 }
 

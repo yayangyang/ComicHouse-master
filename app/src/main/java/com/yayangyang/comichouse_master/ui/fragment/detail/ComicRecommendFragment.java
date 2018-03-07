@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -79,7 +80,11 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         ComicRecommend.DataBean dataBean = (ComicRecommend.DataBean) adapter.getData().get(position);
         if(!TextUtils.isEmpty(dataBean.type)){
             if(dataBean.type.equals("1")){
-                ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
+                if(dataBean.obj_id==null){
+                    ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title);
+                }else{
+                    ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
+                }
             }else if(dataBean.type.equals("5")){
                 NewComicWeeklyActivity.startActivity(getActivity(),dataBean.obj_id);
             }else if(dataBean.type.equals("6")){
@@ -87,8 +92,9 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             }else if(dataBean.type.equals("8")){
                 AuthorIntroduceActivity.startActivity(getActivity(),dataBean.obj_id);
             }
-        }else if(dataBean.title.equals("最新上架")){
+        }else{
             ToastUtils.showToast("最新上架");
+            ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title);
         }
     }
 

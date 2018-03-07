@@ -1,7 +1,17 @@
 package com.yayangyang.comichouse_master.utils;
 
 import android.content.Context;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.yayangyang.comichouse_master.R;
 
 public class ToastUtils {
 
@@ -61,5 +71,25 @@ public class ToastUtils {
 
     public static Toast getToast(String text, int duration) {
         return Toast.makeText(context, text, duration);
+    }
+
+    //---------------------------------------------------
+    public static void showCustomToast(int resId) {
+        //加载Toast布局
+        View toastRoot = LayoutInflater.from(context).inflate(resId, null);
+//        LinearLayout myll = toastRoot.findViewById(R.id.myll);
+//        RelativeLayout.LayoutParams layoutParams =
+//                new RelativeLayout.LayoutParams(ScreenUtils.dpToPxInt(130), ScreenUtils.dpToPxInt(130));
+//        myll.setLayoutParams(layoutParams);
+        //Toast的初始化
+        Toast toastStart = new Toast(context);
+        //获取屏幕高度
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        //Toast的Y坐标是屏幕高度的1/3，不会出现不适配的问题
+        toastStart.setGravity(Gravity.TOP, 0, height / 3);
+        toastStart.setDuration(Toast.LENGTH_LONG);
+        toastStart.setView(toastRoot);
+        toastStart.show();
     }
 }

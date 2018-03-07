@@ -67,12 +67,12 @@ public abstract class BaseLoginActivity extends BaseActivity
     /**
      * qq取消回调
      */
-    protected abstract void loginCancel();
+    protected void loginCancel(){}
 
     /**
-     * 追书神器登录成功的回调(有登录功能需要重写)
+     * 动漫之家登录成功的回调(有登录功能需要重写)
      * @param login
      */
-    public abstract void loginSuccess(Login login);
+    public void loginSuccess(Login login){}
 
 }

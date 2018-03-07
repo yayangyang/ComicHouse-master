@@ -38,8 +38,45 @@ public class ComicReadActivityPresenter extends RxPresenter<ComicReadContract.Vi
     }
 
     @Override
+    public void getComicChapter(String comicId) {
+        Disposable rxDisposable = comicApi.getComicDetailHeader(comicId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Consumer<ComicDetailHeader>() {
+                            @Override
+                            public void accept(ComicDetailHeader comicDetailHeader) throws Exception {
+                                LogUtils.e("getComicDetailHeader-accept");
+                                if (mView != null) {
+                                    LogUtils.e("eeeeeeeeeeeee");
+                                    mView.showComicChapter(comicDetailHeader.chapters.get(0).data);
+                                }
+                            }
+                        },
+                        new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable e) throws Exception {
+                                LogUtils.e("getComicDetailHeader"+e.toString());
+                                if(mView!=null){
+                                    mView.showError();
+                                }
+                            }
+                        },
+                        new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                LogUtils.e("complete");
+                                if(mView!=null){
+                                    mView.complete();
+                                }
+                            }
+                        }
+                );
+        addDisposable(rxDisposable);
+    }
+
+    @Override
     public void getComicChapterDetail(String comicId,String chapterId,boolean isLoadTop) {
-        Disposable rxDisposable = comicApi.getComicChapter(comicId,chapterId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
+        Disposable rxDisposable = comicApi.getComicChapterDetail(comicId,chapterId,Constant.CHANNEL,Constant.VERSION).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         new Consumer<ComicRead>() {
@@ -48,7 +85,7 @@ public class ComicReadActivityPresenter extends RxPresenter<ComicReadContract.Vi
                                 LogUtils.e("getComicChapter-accept");
                                 if (mView != null) {
                                     LogUtils.e("eeeeeeeeeeeee");
-                                    mView.showComicChapter(comicRead,isLoadTop);
+                                    mView.showComicChapterDetail(comicRead,isLoadTop);
                                 }
                             }
                         },

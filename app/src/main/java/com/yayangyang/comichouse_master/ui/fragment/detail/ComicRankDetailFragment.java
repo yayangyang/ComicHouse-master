@@ -1,7 +1,10 @@
 package com.yayangyang.comichouse_master.ui.fragment.detail;
 
 import android.os.Bundle;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -17,6 +20,7 @@ import com.yayangyang.comichouse_master.ui.adapter.ComicRankAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicRankDetailContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicRankDetailPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
+import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,6 +28,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPresenter,ComicInfo,BaseViewHolder>
         implements ComicRankDetailContract.View,BaseQuickAdapter.OnItemChildClickListener {
@@ -41,7 +47,10 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        //RecyclerView的View即使setGone隐藏了仍占地方,它的父容器仍触发不了点击事件
+//        view.setVisibility(View.GONE);
+        ComicInfo comicInfo = (ComicInfo) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title);
     }
 
     @Override

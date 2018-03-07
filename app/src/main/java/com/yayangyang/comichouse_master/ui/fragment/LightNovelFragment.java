@@ -12,12 +12,14 @@ import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerLightNovelComponent;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
 import com.yayangyang.comichouse_master.ui.activity.NewestNovelActivity;
 import com.yayangyang.comichouse_master.ui.activity.NovelCategoryActivity;
 import com.yayangyang.comichouse_master.ui.activity.NovelRankActivity;
+import com.yayangyang.comichouse_master.ui.activity.SearchActivity;
 import com.yayangyang.comichouse_master.ui.adapter.LightNovelAdapter;
 import com.yayangyang.comichouse_master.ui.contract.LightNovelContract;
 import com.yayangyang.comichouse_master.ui.presenter.LightNovelPresenter;
@@ -61,7 +63,7 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.iv_search){
-
+            SearchActivity.startActivity(getActivity(), Constant.NOVEL_TYPE);
         }else if(v.getId()==R.id.bt_chasing_novels){
             NewestNovelActivity.startActivity(getActivity());
         }else if(v.getId()==R.id.bt_looking_for_novel){

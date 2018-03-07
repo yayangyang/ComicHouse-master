@@ -250,4 +250,20 @@ public class SettingManager {
         SharedPreferencesUtil.getInstance().putString(comicId,readProgress);
     }
 
+    public boolean getIsAlreadyFabulous(String objectId){
+        return SharedPreferencesUtil.getInstance().getBoolean(objectId,false);
+    }
+
+    public void saveFabulous(String objectId,boolean is_fabulous){
+        SharedPreferencesUtil.getInstance().putBoolean(objectId,is_fabulous);
+    }
+
+    public List<String> getSearchHistory(String type){
+        return SharedPreferencesUtil.getInstance().getObject(type,ArrayList.class);
+    }
+
+    public void saveSearchHistory(String type,List<String> list){
+        SharedPreferencesUtil.getInstance().putObject(type,list);
+    }
+
 }

@@ -13,6 +13,7 @@ import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
+import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicCategoryDetailAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicCategoryDetailContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicCategoryDetailPresenter;
@@ -32,7 +33,8 @@ public class ComicCategoryDetailFragment extends BaseRVFragment<ComicCategoryDet
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicCategoryDetail comicCategoryDetail = (ComicCategoryDetail) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(getActivity(),comicCategoryDetail.id,comicCategoryDetail.title);
     }
 
     @Override

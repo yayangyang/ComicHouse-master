@@ -1,14 +1,10 @@
 package com.yayangyang.comichouse_master.ui.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.MessageQueue;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,19 +13,14 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.Scroller;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -45,7 +36,6 @@ import com.yayangyang.comichouse_master.Receiver.NetworkChangeReceiver;
 import com.yayangyang.comichouse_master.Receiver.TimeChangeReceiver;
 import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseLoginRvActivity;
-import com.yayangyang.comichouse_master.base.BaseRVActivity;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
@@ -62,7 +52,6 @@ import com.yayangyang.comichouse_master.utils.ToastUtils;
 import com.yayangyang.comichouse_master.view.CustomPopWindow;
 import com.yayangyang.comichouse_master.view.myView.MyLoadMoreView;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,7 +62,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -92,7 +80,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     private boolean isEnter=true;
     private boolean canScrollToTop=false,canScrollToBottom=false,isCallScroll=false;
 
-    private String comicId,currentChapterId;
+    private String comicId,currentChapterId,appoint_chapter_name;
     private String chapterTitle,chapterProgress,stateInfo;
 
     private List<ComicDetailHeader.ChaptersBean.DataBean> data_beans;
@@ -163,10 +151,11 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     });
 
     public static void startActivity(Context context, String comic_id,
-                                     ArrayList<ComicDetailHeader.ChaptersBean.DataBean> dataBeans) {
+                                     String appoint_chapter_name) {
         Intent intent = new Intent(context, ComicReadActivity.class);
         intent.putExtra(Constant.COMIC_ID,comic_id);
-        intent.putExtra(Constant.DATA_BEANS,dataBeans);
+        intent.putExtra(Constant.APPOINT_CHAPTER_NAME,appoint_chapter_name);
+//        intent.putExtra(Constant.DATA_BEANS,dataBeans);
         context.startActivity(intent);
     }
 
@@ -245,7 +234,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
                 LogUtils.e("firstVisibleItemPosition:"+firstVisibleItemPosition);
                 ChapterReadBean bean=null;
-                int myIndex = firstVisibleItemPosition - mAdapter.getHeaderLayoutCount();
+                int myIndex =firstVisibleItemPosition  - mAdapter.getHeaderLayoutCount();
                 if(myIndex>0&&myIndex<mAdapter.getData().size()){
                     bean=mAdapter.getItem(myIndex);
                 }
@@ -423,35 +412,15 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         mCommonToolbar.setNavigationIcon(R.drawable.img_back);
 
         comicId=getIntent().getStringExtra(Constant.COMIC_ID);
-        data_beans= (ArrayList<ComicDetailHeader.ChaptersBean.DataBean>)
-                getIntent().getSerializableExtra(Constant.DATA_BEANS);
-
-        //没指定阅读位置,默认读取阅读记录
-        String readProgress = SettingManager.getInstance().getReadProgress(comicId);
-        LogUtils.e("readProgress:"+readProgress);
-        if(!TextUtils.isEmpty(readProgress)){
-            String[] split = readProgress.split("-");
-            int chapterIndex=0;
-            for(int i=0;i<data_beans.size();i++){
-                if(data_beans.get(i).chapter_title.equals(split[0])){
-                    chapterIndex=i;
-                    break;
-                }
-            }
-            currentLoadPage=chapterIndex;//章节记录
-            oldPageIndex=Integer.parseInt(split[1]);//页面索引记录
-            LogUtils.e("currentLoadPage:"+currentLoadPage);
-            LogUtils.e("oldPageIndex:"+oldPageIndex);
-        }
-        topPage=currentLoadPage;
-        bottomPage=currentLoadPage;
+        appoint_chapter_name=getIntent().getStringExtra(Constant.APPOINT_CHAPTER_NAME);
+//        data_beans= (ArrayList<ComicDetailHeader.ChaptersBean.DataBean>)
+//                getIntent().getSerializableExtra(Constant.DATA_BEANS);
     }
 
     @Override
     public void onRefresh() {
-//        mPresenter.getComicChapterDetail(comicId,data_beans.get(currentLoadPage).chapter_id,false);
-        mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,false);
-        mPresenter.getComicReadViewPoint(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+        mAdapter.setEmptyView(loddingView);
+        mPresenter.getComicChapter(comicId);
     }
 
     @Override
@@ -580,35 +549,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
             }
         });
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        //ComicReadActivity实现不了OnAgainLoadListener(可能类实现不了自己的内部接口)
-        OnAgainLoadListener onAgainLoadListener = new OnAgainLoadListener() {
-            @Override
-            public void loadAgain(View view) {
-//                mPresenter.getComicChapterDetail(comicId,data_beans.get(currentLoadPage).chapter_id,false);
-                if(view==header){
-                    header.loadMoreComplete();
-                    currentLoadPage=topPage;
-                    mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,true);
-                }else{
-                    footer.loadMoreComplete();
-                    currentLoadPage=bottomPage;
-                    mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,false);
-                }
-
-            }
-        };
-        header = new MyLoadMoreView(this);
-        header.setOnAgainLoadListener(onAgainLoadListener);
-        header.setLayoutParams(params);
-
-        footer = new MyLoadMoreView(this);
-        footer.setOnAgainLoadListener(onAgainLoadListener);
-        footer.setLayoutParams(params);
-
-        mAdapter.setHeaderView(header);
-        mAdapter.setFooterView(footer);
+        hha();
 
         seekBar.setOnSeekBarChangeListener(this);
         seekBar_change_light.setOnSeekBarChangeListener(this);
@@ -641,6 +582,43 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         onRefresh();
     }
 
+    private void hha() {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        //ComicReadActivity实现不了OnAgainLoadListener(可能类实现不了自己的内部接口)
+        OnAgainLoadListener onAgainLoadListener = new OnAgainLoadListener() {
+            @Override
+            public void loadAgain(View view) {
+//                mPresenter.getComicChapterDetail(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+                header.loadMoreComplete();
+                checkMap.remove(data_beans.get(currentLoadPage).chapter_id);
+                if(view==header){
+                    currentLoadPage=topPage;
+                    mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,true);
+                    mPresenter.getComicReadViewPoint(comicId,data_beans.get(currentLoadPage).chapter_id,true);
+                }else{
+                    currentLoadPage=bottomPage;
+                    mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+                    mPresenter.getComicReadViewPoint(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+                }
+
+            }
+        };
+        header = new MyLoadMoreView(this);
+        header.setOnAgainLoadListener(onAgainLoadListener);
+        header.setLayoutParams(params);
+
+        footer = new MyLoadMoreView(this);
+        footer.setOnAgainLoadListener(onAgainLoadListener);
+        footer.setLayoutParams(params);
+
+        mAdapter.setHeaderView(header);
+        mAdapter.setFooterView(footer);
+        //这里如果隐藏的是header和footer这两个View之后显示不出(不知原因)
+        mAdapter.getHeaderLayout().setVisibility(View.GONE);
+        mAdapter.getFooterLayout().setVisibility(View.GONE);
+    }
+
     @Override
     public void showError() {
         loaddingError();
@@ -665,8 +643,65 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     }
 
     @Override
-    public void showComicChapter(ComicRead comicRead,boolean isLoadTop) {
+    public void showComicChapter(ArrayList<ComicDetailHeader.ChaptersBean.DataBean> list) {
         LogUtils.e("showComicChapter");
+        if(list!=null&&!list.isEmpty()){
+            data_beans=list;
+
+            String readProgress = SettingManager.getInstance().getReadProgress(comicId);
+            int chapterIndex=0;
+            LogUtils.e("readProgress:"+readProgress);
+            LogUtils.e("appoint_chapter_name:"+appoint_chapter_name);
+            //阅读记录不为空
+            if(!TextUtils.isEmpty(readProgress)){
+                String[] split = readProgress.split("-");
+                //指定阅读章节与阅读记录是相同章节或没指定阅读章节,读取阅读记录
+                if(TextUtils.isEmpty(appoint_chapter_name)
+                        ||split[0].equals(appoint_chapter_name)){
+                    for(int i=0;i<data_beans.size();i++){
+                        LogUtils.e("chapter_title:"+data_beans.get(i).chapter_title);
+                        if(data_beans.get(i).chapter_title.equals(split[0])){
+                            chapterIndex=i;
+                            break;
+                        }
+                    }
+                    oldPageIndex=Integer.parseInt(split[1]);//页面索引记录
+                }else{
+                    //指定阅读章节与阅读记录不是相同章节
+                    for(int i=0;i<data_beans.size();i++){
+                        if(data_beans.get(i).chapter_title.equals(appoint_chapter_name)){
+                            chapterIndex=i;
+                            break;
+                        }
+                    }
+                }
+            }else if(!TextUtils.isEmpty(appoint_chapter_name)){
+                //无阅读记录且有指定阅读章节
+                for(int i=0;i<data_beans.size();i++){
+                    if(data_beans.get(i).chapter_title.equals(appoint_chapter_name)){
+                        chapterIndex=i;
+                        break;
+                    }
+                }
+            }
+            currentLoadPage=chapterIndex;//章节记录
+            LogUtils.e("currentLoadPage:"+currentLoadPage);
+            LogUtils.e("oldPageIndex:"+oldPageIndex);
+            topPage=currentLoadPage;
+            bottomPage=currentLoadPage;
+
+            //以防网络错误一个刷新完成另一个未完成导致下次请求完成一个就请求章节详情
+            checkMap.remove(data_beans.get(currentLoadPage).chapter_id);
+            mPresenter.getComicReadHotView(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+            mPresenter.getComicReadViewPoint(comicId,data_beans.get(currentLoadPage).chapter_id,false);
+        }else{
+            ToastUtils.showToast("没有章节可阅读");
+        }
+    }
+
+    @Override
+    public void showComicChapterDetail(ComicRead comicRead,boolean isLoadTop) {
+        LogUtils.e("showComicChapterDetail");
 
         if(!isCallScroll){
             comicChapterDealWith(comicRead,isLoadTop);
@@ -714,6 +749,8 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
 
                 ChapterReadBean bean = beans.get(oldPageIndex);
                 init(bean,bean.page_url);
+
+//                hha();
             }else{
                 ToastUtils.showToast("刷新数据为空");
             }
@@ -724,7 +761,13 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
             mAdapter.setNewData(beans);
             //滚动通知内部数据已改变然后requestLayout,不是平滑滚动而是直接到达指定item
             if(oldPageIndex==0){
+//                if(mRecyclerView.getChildAt(0)==mAdapter.getEmptyView()){
+//                    LogUtils.e("emptyView");//最开始在RecyclerView上的是emptyView
+//                }else if(mRecyclerView.getChildAt(0)==header){
+//                    LogUtils.e("header");
+//                }
                 mRecyclerView.scrollBy(0,mRecyclerView.getChildAt(1).getTop());//即时调用滚动监听
+                LogUtils.e("qqqqqqqqqqqqq");
             }else{
                 moveToPosition(oldPageIndex+1);
             }
@@ -748,6 +791,9 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
                 init(bean,bean.page_url);
             }
         }
+
+        mAdapter.getHeaderLayout().setVisibility(View.VISIBLE);
+        mAdapter.getFooterLayout().setVisibility(View.VISIBLE);
     }
 
     private void init(ChapterReadBean bean,String page_url) {
@@ -844,7 +890,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     private View contentView;
 
     private void createPopupWindow() {
-        contentView = View.inflate(mContext, R.layout.view_bottom_share_popupwindow, null);
+        contentView = View.inflate(mContext, R.layout.view_read_bottom_share_popupwindow, null);
         contentView.findViewById(R.id.tv_sina).setOnClickListener(this);
         contentView.findViewById(R.id.tv_qq).setOnClickListener(this);
         contentView.findViewById(R.id.tv_friend_circle).setOnClickListener(this);
@@ -903,17 +949,31 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(!isEnter){
+            //保存阅读进度
+            String substring = chapterTitle.substring(1, chapterTitle.length());
+            char[] chars = substring.toCharArray();
+            if("0".equals(chars[0]+"")&&Character.isDigit(chars[1])){
+                substring=substring.substring(1,substring.length());
+            }
+            String readProgress=substring+"-"+seekBar.getProgress();
+
+            LogUtils.e("chapterTitle:"+chapterTitle);
+            LogUtils.e("onPause-readProgress:"+readProgress);
+            SettingManager.getInstance().saveReadProgress(comicId,readProgress);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
         mHandler.removeCallbacksAndMessages(null);
         NetworkChangeReceiver.getInstance().delOnNetWorkChange(this);
         TimeChangeReceiver.getInstance().delOnNetTimeChangeListener(this);
-
-        //保存阅读进度
-        String readProgress=chapterTitle+"-"+seekBar.getProgress();
-        LogUtils.e("onDestroy-readProgress:"+readProgress);
-        SettingManager.getInstance().saveReadProgress(comicId,readProgress);
     }
 
     public interface OnAgainLoadListener{

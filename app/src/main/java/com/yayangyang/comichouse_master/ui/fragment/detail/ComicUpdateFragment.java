@@ -22,6 +22,7 @@ import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.decoration.SpaceItemDecoration;
 import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
+import com.yayangyang.comichouse_master.ui.activity.ComicReadActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicUpdateAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicUpdateContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicUpdatePresenter;
@@ -53,12 +54,17 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ComicUpdate comicUpdate = (ComicUpdate) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
+        if(view.getId()==R.id.frameLayout){
+            ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
+        }else{
+            ComicReadActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.last_update_chapter_name);
+        }
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicUpdate comicUpdate = (ComicUpdate) adapter.getData().get(position);
+        ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
     }
 
     @Override

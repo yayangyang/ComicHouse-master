@@ -1,5 +1,6 @@
 package com.yayangyang.comichouse_master.component;
 
+import com.yayangyang.comichouse_master.ui.activity.NewsActivity;
 import com.yayangyang.comichouse_master.ui.fragment.NewsFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.NewsAkiraInformationFragment;
 import com.yayangyang.comichouse_master.ui.fragment.detail.NewsAnimatedInformationFragment;
@@ -38,4 +39,6 @@ public interface NewsComponent {
     NewsMusicInformationFragment inject(NewsMusicInformationFragment fragment);
 
     NewsHodgepodgeFragment inject(NewsHodgepodgeFragment fragment);
+
+    NewsActivity inject(NewsActivity activity);
 }

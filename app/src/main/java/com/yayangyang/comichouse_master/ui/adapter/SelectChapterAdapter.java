@@ -12,23 +12,21 @@ import com.yayangyang.comichouse_master.utils.LogUtils;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/12/14.
+ * Created by Administrator on 2018/3/6.
  */
 
-public class ComicChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.ChaptersBean.DataBean,BaseViewHolder> {
+public class SelectChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.ChaptersBean.DataBean,BaseViewHolder> {
 
     private String currentChapterName,comicId;
 
-    public ComicChapterAdapter(int layoutResId, @Nullable List<ComicDetailHeader.ChaptersBean.DataBean> data,String comicId) {
+    public SelectChapterAdapter(int layoutResId, @Nullable List<ComicDetailHeader.ChaptersBean.DataBean> data,String comicId) {
         super(layoutResId, data);
+
         this.comicId=comicId;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, ComicDetailHeader.ChaptersBean.DataBean item) {
-        LogUtils.e("ComicChapterAdapter-convert"+helper.getLayoutPosition());
-        LogUtils.e("getItemCount():"+getItemCount());
-        LogUtils.e("mData.size():"+mData.size());
         helper.setText(R.id.tv_chapter,item.chapter_title);
         if(item.chapter_title.equals(currentChapterName)){
             helper.setTextColor(R.id.tv_chapter,mContext.getResources().getColor(R.color.white));

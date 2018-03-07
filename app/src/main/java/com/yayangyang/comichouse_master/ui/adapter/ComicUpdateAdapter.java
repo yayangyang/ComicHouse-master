@@ -58,6 +58,9 @@ public class ComicUpdateAdapter extends ComicUpdateMultiItemQuickAdapter<ComicUp
             String dateString = FormatUtils.getStringByTimeStamp("yyyy-MM-dd", item.last_updatetime);
             helper.setText(R.id.tv_date,dateString);
             helper.setText(R.id.bt_last_update_chapter_name,item.last_update_chapter_name);
+
+            helper.addOnClickListener(R.id.frameLayout);
+            helper.addOnClickListener(R.id.bt_last_update_chapter_name);
         }
     }
 }

@@ -16,6 +16,7 @@
         android:textSize="13sp"
         android:text="ww"
         android:ellipsize="end"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

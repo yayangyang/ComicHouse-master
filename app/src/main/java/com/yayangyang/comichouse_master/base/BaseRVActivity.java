@@ -102,7 +102,7 @@ public abstract class BaseRVActivity<T,K extends BaseViewHolder> extends BaseAct
     @Override
     public void onRefresh() {
         Log.e("onRefresh","onRefresh");
-        start = 0;
+        page = 0;
     }
 
     protected void loaddingError(){

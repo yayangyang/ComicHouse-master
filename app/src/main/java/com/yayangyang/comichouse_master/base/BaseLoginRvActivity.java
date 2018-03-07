@@ -71,7 +71,7 @@ public abstract class BaseLoginRvActivity<T,K extends BaseViewHolder> extends Ba
     protected void loginCancel(){}
 
     /**
-     * 追书神器登录成功的回调(有登录功能需要重写)
+     * 动漫之家登录成功的回调(有登录功能需要重写)
      * @param login
      */
     public void loginSuccess(Login login){}

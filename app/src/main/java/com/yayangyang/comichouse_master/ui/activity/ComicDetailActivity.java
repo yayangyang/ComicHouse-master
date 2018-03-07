@@ -42,6 +42,7 @@ import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 
     private ComicChapterAdapter comicChapterAdapter;
 
+    private ComicDetailHeader.ChaptersBean chaptersBean=null;
     private List list=null;
 
     private RadioButton rb_like_amount;
@@ -121,6 +123,15 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
             }
         }else if(view.getId()==R.id.iv_cover){
 
+        }else if(view.getId()==R.id.frameLayout){
+            ComicDetailHeader.ChaptersBean.DataBean dataBean =
+                    (ComicDetailHeader.ChaptersBean.DataBean) adapter.getData().get(position);
+            if(!dataBean.chapter_title.equals("...")){
+                LogUtils.e("chapter_title:"+dataBean.chapter_title);
+                ComicReadActivity.startActivity(this,comicId,dataBean.chapter_title);
+            }else{
+                SelectChapterActivity.startActivity(this,comicId,chaptersBean);
+            }
         }
     }
 
@@ -136,7 +147,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         }else if (v.getId() == R.id.tv_subscribe_choice) {
 
         }else if (v.getId() == R.id.tv_read_state) {
-            ComicReadActivity.startActivity(this,comicId,comicDetail.chapters.get(0).data);
+            ComicReadActivity.startActivity(this,comicId,null);
         }else if (v.getId() == R.id.iv_switch) {
             if (headerViewHolder.tv_description.getText().length() <= 30) {
                 headerViewHolder.tv_description.setText(description);
@@ -214,29 +225,31 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 
         View headerView = View.inflate(this, R.layout.header_comic_detail, null);
         headerViewHolder = new HeaderViewHolder(headerView);
-        comicChapterAdapter = new ComicChapterAdapter(R.layout.item_comic_chapter, null);
+        comicChapterAdapter = new ComicChapterAdapter(R.layout.item_comic_chapter, null,comicId);
         comicChapterAdapter.setOnItemChildClickListener(this);
         headerViewHolder.rv_chapter.setLayoutManager(new GridLayoutManager(this,4));
-        headerViewHolder.rv_chapter.addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(5)));
+        headerViewHolder.rv_chapter.addItemDecoration(new CommonSpaceItemDecoration(ScreenUtils.dpToPxInt(4)));
         headerViewHolder.rv_chapter.setAdapter(comicChapterAdapter);
 
         headerViewHolder.iv_switch.setOnClickListener(this);
         headerViewHolder.rg_order.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(list.size()<=11){
-                    comicChapterAdapter.setNewData(list);
-                }else{
-                    List<ComicDetailHeader.ChaptersBean.DataBean> dataBeans = null;
-                    if(checkedId==R.id.rb_positive){
-                        dataBeans=list.subList(0, 11);
+                if(list!=null){
+                    if(list.size()<=11){
+                        comicChapterAdapter.setNewData(list);
                     }else{
-                        dataBeans=list.subList(list.size()-11,list.size());
+                        List<ComicDetailHeader.ChaptersBean.DataBean> dataBeans = null;
+                        if(checkedId==R.id.rb_positive){
+                            dataBeans=list.subList(0, 11);
+                        }else{
+                            dataBeans=list.subList(list.size()-11,list.size());
+                        }
+                        ComicDetailHeader.ChaptersBean.DataBean dataBean = new ComicDetailHeader.ChaptersBean.DataBean();
+                        dataBean.chapter_title="...";
+                        dataBeans.add(dataBean);
+                        comicChapterAdapter.setNewData(dataBeans);
                     }
-                    ComicDetailHeader.ChaptersBean.DataBean dataBean = new ComicDetailHeader.ChaptersBean.DataBean();
-                    dataBean.chapter_title="...";
-                    dataBeans.add(dataBean);
-                    comicChapterAdapter.setNewData(dataBeans);
                 }
             }
         });
@@ -310,16 +323,23 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         headerViewHolder.tv_relevant_content.setOnClickListener(this);
         headerViewHolder.tv_share.setOnClickListener(this);
 
+        chaptersBean=comicDetail.chapters.get(0);
+        LogUtils.e(chaptersBean.data.size()+"ww");
         list=comicDetail.chapters.get(0).data;
         LogUtils.e("data.size():"+comicDetail.chapters.get(0).data.size());
-        if(comicDetail.chapters.get(0).data.size()<=11){
-            comicChapterAdapter.setNewData(comicDetail.chapters.get(0).data);
-        }else{
-            List<ComicDetailHeader.ChaptersBean.DataBean> dataBeans = comicDetail.chapters.get(0).data.subList(0, 11);
-            ComicDetailHeader.ChaptersBean.DataBean dataBean = new ComicDetailHeader.ChaptersBean.DataBean();
-            dataBean.chapter_title="...";
-            dataBeans.add(dataBean);
-            comicChapterAdapter.setNewData(dataBeans);
+        if(comicDetail.chapters.get(0).data!=null){
+            if(comicDetail.chapters.get(0).data.size()<=11){
+                comicChapterAdapter.setNewData(comicDetail.chapters.get(0).data);
+            }else{
+                //使用subList截取得到的list添加后原list也会添加,这里根据截取得到list新建一个list
+                List<ComicDetailHeader.ChaptersBean.DataBean> dataBeans =
+                        new ArrayList<ComicDetailHeader.ChaptersBean.DataBean>(comicDetail.chapters.get(0).data.subList(0, 11));
+                ComicDetailHeader.ChaptersBean.DataBean dataBean = new ComicDetailHeader.ChaptersBean.DataBean();
+                dataBean.chapter_title="...";
+                dataBeans.add(dataBean);
+                comicChapterAdapter.setNewData(dataBeans);
+                LogUtils.e(chaptersBean.data.size()+"ww22");
+            }
         }
         if(mAdapter.getHeaderLayout()==null){
             mAdapter.setHeaderView(headerViewHolder.view,0);
@@ -401,6 +421,17 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
             mAdapter.addData(0,comicDetailBody);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        LogUtils.e("ComicDetailActivity-onResume");
+        super.onResume();
+        if(headerViewHolder.rv_chapter.getAdapter()!=null){
+            ComicChapterAdapter comicChapterAdapter= (ComicChapterAdapter) headerViewHolder.rv_chapter.getAdapter();
+            comicChapterAdapter.getCurrentChapterName();
+            comicChapterAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

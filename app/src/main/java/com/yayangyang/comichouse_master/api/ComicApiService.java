@@ -12,16 +12,20 @@ import com.yayangyang.comichouse_master.Bean.ComicReadHotView;
 import com.yayangyang.comichouse_master.Bean.ComicReadViewPoint;
 import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
+import com.yayangyang.comichouse_master.Bean.Fabulous;
+import com.yayangyang.comichouse_master.Bean.HotSearch;
 import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.NewComicWeekly;
 import com.yayangyang.comichouse_master.Bean.NewestNovel;
+import com.yayangyang.comichouse_master.Bean.NewsBean;
 import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NovelCategory;
 import com.yayangyang.comichouse_master.Bean.NovelCategoryDetail;
 import com.yayangyang.comichouse_master.Bean.NovelRank;
 import com.yayangyang.comichouse_master.Bean.ComicReview;
+import com.yayangyang.comichouse_master.Bean.SearchInfo;
 import com.yayangyang.comichouse_master.Bean.SubscriptionComic;
 import com.yayangyang.comichouse_master.Bean.UploadImageResult;
 import com.yayangyang.comichouse_master.Bean.user.ComicUpdate;
@@ -302,7 +306,7 @@ public interface ComicApiService {
      */
     @Headers("Cache-Control: max-age=0")
     @GET("/chapter/{comic_id}/{chapter_id}.json")
-    Observable<ComicRead> getComicChapter(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
+    Observable<ComicRead> getComicChapterDetail(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
                                              @Query("channel") String channel, @Query("version") String version);
 
     @Headers("Cache-Control: max-age=0")
@@ -314,4 +318,45 @@ public interface ComicApiService {
     @GET("/viewPoint/0/{comic_id}/{chapter_id}.json")
     Observable<List<ComicReadViewPoint>> getComicReadViewPoint(@Path("comic_id") String comic_id, @Path("chapter_id") String chapter_id,
                                                              @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 获取特定新闻信息
+     * @param objectId
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/v3/article/total/{objectId}.json")
+    Observable<NewsBean> getNews(@Path("objectId") String objectId,
+                                 @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 点赞
+     * @param objectId
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/article/mood/{objectId}")
+    Observable<Fabulous> fabulous(@Path("objectId") String objectId,
+                                 @Query("channel") String channel, @Query("version") String version);
+
+    /**
+     * 取得热搜漫画或小说
+     * @param type
+     * @param channel
+     * @param version
+     * @return
+     */
+    @Headers("Cache-Control: max-age=0")
+    @GET("/search/hot/{type}.json")
+    Observable<List<HotSearch>> getHotSearch(@Path("type") String type,
+                                       @Query("channel") String channel, @Query("version") String version);
+
+    @Headers("Cache-Control: max-age=0")
+    @GET("/search/show/{type}/{keyWord}/{page}.json")
+    Observable<List<SearchInfo>> getSearchInfo(@Path("type") String type,@Path("keyWord") String keyWord,@Path("page") String page,
+                                              @Query("channel") String channel, @Query("version") String version);
 }

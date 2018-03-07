@@ -10,12 +10,15 @@ import com.yayangyang.comichouse_master.Bean.IsHelpful;
 import com.yayangyang.comichouse_master.base.BaseContract;
 import com.yayangyang.comichouse_master.base.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ComicReadContract {
 
     interface View extends BaseContract.BaseView {
-        void showComicChapter(ComicRead comicRead,boolean isLoadTop);
+        void showComicChapter(ArrayList<ComicDetailHeader.ChaptersBean.DataBean> list);
+
+        void showComicChapterDetail(ComicRead comicRead,boolean isLoadTop);
 
         void showComicReadHotView(List<ComicReadHotView> list,String chapterId,boolean isLoadTop);
 
@@ -25,6 +28,8 @@ public interface ComicReadContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View> {
+        void getComicChapter(String comicId);
+
         void getComicChapterDetail(String comicId,String chapterId,boolean isLoadTop);
 
         void getComicReadHotView(String comicId,String chapterId,boolean isLoadTop);
