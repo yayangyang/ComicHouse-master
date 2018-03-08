@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
         import android.widget.PopupWindow;
         import android.widget.PopupWindow.OnDismissListener;
 
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.manager.SettingManager;
 
 public class CustomPopWindow implements OnDismissListener {
@@ -46,6 +47,9 @@ public class CustomPopWindow implements OnDismissListener {
     private boolean mIsBackgroundDark;
     private float mBackgroundDrakValue;
     private boolean enableOutsideTouchDisMiss;
+
+    //----------------------------------------------------
+    private String lightType= Constant.NORMAL_LIGHT;
 
     private CustomPopWindow(Context context) {
         this.mIsFocusable = true;
@@ -219,7 +223,11 @@ public class CustomPopWindow implements OnDismissListener {
 
         if(this.mWindow != null) {
             LayoutParams params = this.mWindow.getAttributes();
-            params.alpha = (SettingManager.getInstance().getReadLightProgress()+50)/100f;
+            if(lightType.equals(Constant.NORMAL_LIGHT)){
+                params.alpha = 1.0f;
+            }else if(lightType.equals(Constant.COMIC_READ_LIGHT)){
+                params.alpha = (SettingManager.getInstance().getReadLightProgress()+50)/100f;
+            }
             this.mWindow.setAttributes(params);
         }
 
@@ -326,6 +334,12 @@ public class CustomPopWindow implements OnDismissListener {
         public CustomPopWindow create() {
             this.mCustomPopWindow.build();
             return this.mCustomPopWindow;
+        }
+
+        //-----------------------------------------------
+        public CustomPopWindow.PopupWindowBuilder setLightType(String lightType){
+            mCustomPopWindow.lightType=lightType;
+            return this;
         }
     }
 }

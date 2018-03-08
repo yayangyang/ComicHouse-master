@@ -40,6 +40,7 @@ public class SelectChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.Cha
     }
 
     public void getCurrentChapterName(){
+        LogUtils.e("currentChapterName:"+currentChapterName);
         String readProgress = SettingManager.getInstance().getReadProgress(comicId);
         String[] split = readProgress.split("-");
         currentChapterName=split[0];

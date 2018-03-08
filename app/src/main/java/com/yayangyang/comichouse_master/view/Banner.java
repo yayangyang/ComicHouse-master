@@ -236,10 +236,15 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
+    //imageUrls不一定只是图片的url集合
     public Banner setImages(List<?> imageUrls) {
         this.imageUrls = imageUrls;
         this.count = imageUrls.size();
         return this;
+    }
+
+    public List getImages() {
+        return imageUrls;
     }
 
     public void update(List<?> imageUrls, List<String> titles) {

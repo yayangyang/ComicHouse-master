@@ -44,6 +44,7 @@
         <activity android:name=".ui.activity.PublishViewPointActivity"/>
         <activity android:name=".ui.activity.NewsActivity"/>
         <activity android:name=".ui.activity.SearchActivity"/>
+        <activity android:name=".ui.activity.CommonWebActivity"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

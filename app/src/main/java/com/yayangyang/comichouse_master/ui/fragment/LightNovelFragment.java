@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.yayangyang.comichouse_master.Bean.BannerBean;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.LightNovel;
 import com.yayangyang.comichouse_master.R;
@@ -25,7 +26,7 @@ import com.yayangyang.comichouse_master.ui.contract.LightNovelContract;
 import com.yayangyang.comichouse_master.ui.presenter.LightNovelPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
-import com.youth.banner.Banner;
+import com.yayangyang.comichouse_master.view.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
@@ -143,13 +144,23 @@ public class LightNovelFragment extends BaseRVFragment<LightNovelPresenter,Light
             }
         }
         List<LightNovel.DataBean> data = carouselList.get(0).data;
-        ArrayList images=new ArrayList();
+        ArrayList<BannerBean> dataList=new ArrayList();
         ArrayList<String> titles=new ArrayList();
         for(int i=0;i<data.size();i++){
-            images.add(data.get(i).cover);
+            BannerBean dataBean = new BannerBean();
+            dataBean.cover=data.get(i).cover;
+            dataBean.id=data.get(i).id;
+            dataBean.obj_id=data.get(i).obj_id;
+            dataBean.status=data.get(i).status;
+            dataBean.sub_title=data.get(i).sub_title;
+            dataBean.title=data.get(i).title;
+            dataBean.type=data.get(i).type;
+            dataBean.url=data.get(i).url;
+            dataList.add(dataBean);
+//            images.add(data.get(i).cover);
             titles.add(data.get(i).title);
         }
-        initBaner(images,titles);
+        initBaner(dataList,titles);
         mAdapter.setHeaderView(headerView);
         mAdapter.setNewData(mainlList);
     }

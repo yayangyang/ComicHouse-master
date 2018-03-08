@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.yayangyang.comichouse_master.Bean.BannerBean;
 import com.yayangyang.comichouse_master.Bean.NewsRecommendHeader;
 import com.yayangyang.comichouse_master.Bean.NewsCommonBody;
 import com.yayangyang.comichouse_master.R;
@@ -17,6 +18,8 @@ import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerNewsComponent;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
+import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
+import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewsActivity;
 import com.yayangyang.comichouse_master.ui.adapter.NewsCommonAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.NewsRecommenedAdapter;
@@ -25,7 +28,7 @@ import com.yayangyang.comichouse_master.ui.presenter.NewsRecommendPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
-import com.youth.banner.Banner;
+import com.yayangyang.comichouse_master.view.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter,NewsCommonBody,BaseViewHolder>
-        implements NewsRecommendContract.View,BaseQuickAdapter.OnItemChildClickListener,OnBannerListener{
+        implements NewsRecommendContract.View,BaseQuickAdapter.OnItemChildClickListener,OnBannerListener {
 
     private int newsType= Constant.NewsType.RECOMMEND;
 
@@ -53,12 +56,16 @@ public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        NewsCommonBody newsCommonBody= (NewsCommonBody) adapter.getData().get(position);
+        NewsActivity.startActivity(getActivity(),newsCommonBody.article_id,
+                newsCommonBody.comment_amount,newsCommonBody.mood_amount);
     }
 
     @Override
     public void OnBannerClick(int position) {
-
+        List<BannerBean> list = banner.getImages();
+        BannerBean dataBean = list.get(position);
+        NewsActivity.startActivity(getActivity(),dataBean.obj_id,null,null);
     }
 
     @Override
@@ -146,13 +153,21 @@ public class NewsRecommendFragment extends BaseRVFragment<NewsRecommendPresenter
     @Override
     public void showNewsRecommendHeader(List<NewsRecommendHeader.DataBean> data) {
         LogUtils.e("showNewsRecommendHeader");
-        ArrayList images=new ArrayList();
+        ArrayList<BannerBean> dataList=new ArrayList();
         ArrayList<String> titles=new ArrayList();
         for(int i=0;i<data.size();i++){
-            images.add(data.get(i).pic_url);
+            BannerBean dataBean = new BannerBean();
+            dataBean.id=data.get(i).id;
+            dataBean.obj_id=data.get(i).object_id;
+            dataBean.status=data.get(i).object_url;
+            dataBean.cover=data.get(i).pic_url;
+            dataBean.title=data.get(i).title;
+            dataBean.object_url=data.get(i).object_url;
+            dataList.add(dataBean);
+//            images.add(data.get(i).pic_url);
             titles.add(data.get(i).title);
         }
-        initBaner(images,titles);
+        initBaner(dataList,titles);
         mAdapter.setHeaderView(banner);
     }
 

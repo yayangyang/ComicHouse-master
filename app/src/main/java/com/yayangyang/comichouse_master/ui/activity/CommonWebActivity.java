@@ -3,31 +3,23 @@ package com.yayangyang.comichouse_master.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tencent.open.SocialConstants;
-import com.yayangyang.comichouse_master.Bean.Fabulous;
-import com.yayangyang.comichouse_master.Bean.NewsBean;
-import com.yayangyang.comichouse_master.Bean.user.Login;
+import com.yayangyang.comichouse_master.Bean.ComicSpecialTopic;
 import com.yayangyang.comichouse_master.Bean.user.TencentLoginResult;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.ComicApplication;
 import com.yayangyang.comichouse_master.base.BaseActivity;
 import com.yayangyang.comichouse_master.base.BaseLoginActivity;
-import com.yayangyang.comichouse_master.base.BaseLoginRvActivity;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
-import com.yayangyang.comichouse_master.component.DaggerNewsComponent;
 import com.yayangyang.comichouse_master.manager.SettingManager;
-import com.yayangyang.comichouse_master.ui.contract.NewsContract;
-import com.yayangyang.comichouse_master.ui.presenter.NewsActivityPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
 import com.yayangyang.comichouse_master.utils.PopWindowUtil;
@@ -35,43 +27,26 @@ import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 import com.yayangyang.comichouse_master.view.CustomPopWindow;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 
 /**
- * Created by Administrator on 2018/3/6.
+ * Created by Administrator on 2018/3/8.
  */
 
-public class NewsActivity extends BaseLoginActivity implements NewsContract.View,View.OnClickListener{
+public class CommonWebActivity extends BaseLoginActivity implements View.OnClickListener{
 
-    private String objectId,moodAmount,commentAmount;
+    private ComicSpecialTopic comicSpecialTopic;
 
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     @BindView(R.id.iv_share)
     ImageView iv_share;
     @BindView(R.id.webView)
     WebView mWebView;
-    @BindView(R.id.edit_publish)
-    EditText edit_publish;
-    @BindView(R.id.iv_comment)
-    ImageView iv_comment;
-    @BindView(R.id.tv_comment)
-    TextView tv_comment;
-    @BindView(R.id.iv_oraise)
-    ImageView iv_oraise;
-    @BindView(R.id.tv_oraise)
-    TextView tv_oraise;
-    @BindView(R.id.iv_save)
-    ImageView iv_save;
 
-    @Inject
-    NewsActivityPresenter mPresenter;
-
-    public static void startActivity(Context context,String objectId,String commentAmount,String moodAmount){
-        Intent intent = new Intent(context, NewsActivity.class);
-        intent.putExtra(Constant.OBJECT_ID,objectId);
-        intent.putExtra(Constant.COMMENT_AMOUNT,commentAmount);
-        intent.putExtra(Constant.MOOD_AMOUNT,moodAmount);
+    public static void startActivity(Context context, ComicSpecialTopic comicSpecialTopic){
+        Intent intent = new Intent(context, CommonWebActivity.class);
+        intent.putExtra(Constant.COMIC_SPECIAL_TOPIC,comicSpecialTopic);
         context.startActivity(intent);
     }
 
@@ -85,21 +60,6 @@ public class NewsActivity extends BaseLoginActivity implements NewsContract.View
             ScreenUtils.setScreenBrightness(SettingManager.getInstance().getReadLightProgress()-20,this);
 
             popWindow.showAtLocation(findViewById(android.R.id.content), Gravity.BOTTOM,0,0);
-        }else if (v.getId() == R.id.edit_publish) {
-            LogUtils.e("点击了editText");
-            if(!LoginUtil.isLogin()){
-                LoginActivity.startActivity(this);
-            }else{
-                PublishReviewActivity.startActivity(this,objectId);
-            }
-        }else if(v.getId() == R.id.iv_comment){
-
-        }else if(v.getId() == R.id.iv_oraise){
-            if(!SettingManager.getInstance().getIsAlreadyFabulous(objectId)){
-                mPresenter.fabulous(objectId);
-            }else{
-                ToastUtils.showToast("不能重复点赞喔!");
-            }
         }else if(v.getId() == R.id.iv_save){
 
         }else if(v.getId()==R.id.tv_sina){
@@ -128,7 +88,7 @@ public class NewsActivity extends BaseLoginActivity implements NewsContract.View
         contentView.findViewById(R.id.tv_qq_zone).setOnClickListener(this);
         contentView.findViewById(R.id.tv_wetchat).setOnClickListener(this);
         contentView.findViewById(R.id.tv_copy_url).setOnClickListener(this);
-        popWindow=PopWindowUtil.createPopupWindow(this,contentView,Constant.NORMAL_LIGHT);
+        popWindow= PopWindowUtil.createPopupWindow(this,contentView,Constant.NORMAL_LIGHT);
     }
 
     @Override
@@ -139,24 +99,18 @@ public class NewsActivity extends BaseLoginActivity implements NewsContract.View
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_news;
+        return R.layout.activity_common_web;
     }
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerNewsComponent.builder()
-                .appComponent(appComponent)
-                .build().inject(this);
+
     }
 
     @Override
     public void initToolBar() {
-        objectId=getIntent().getStringExtra(Constant.OBJECT_ID);
-        commentAmount=getIntent().getStringExtra(Constant.COMMENT_AMOUNT);
-        moodAmount=getIntent().getStringExtra(Constant.MOOD_AMOUNT);
-        LogUtils.e("objectId:"+objectId);
-        LogUtils.e("commentAmount:"+commentAmount);
-        LogUtils.e("moodAmount:"+moodAmount);
+        comicSpecialTopic= (ComicSpecialTopic) getIntent().getSerializableExtra(Constant.COMIC_SPECIAL_TOPIC);
+        LogUtils.e("pageUrl:"+comicSpecialTopic.page_url);
 
         mCommonToolbar.setTitle("");
         mCommonToolbar.setNavigationIcon(R.drawable.img_back);
@@ -164,57 +118,27 @@ public class NewsActivity extends BaseLoginActivity implements NewsContract.View
 
     @Override
     public void initDatas() {
-        mPresenter.attachView(this);
+
     }
 
     @Override
     public void configViews() {
-        if(commentAmount!=null) tv_comment.setText(commentAmount);
-        if(moodAmount!=null) tv_oraise.setText(moodAmount);
-        if(SettingManager.getInstance().getIsAlreadyFabulous(objectId)){
-            iv_oraise.setImageResource(R.drawable.icon_news_details_oraise_first);
-        }else{
-            iv_oraise.setImageResource(R.drawable.icon_news_details_oraise_two);
-        }
-
+        tv_title.setText(comicSpecialTopic.title);
         iv_share.setOnClickListener(this);
-        edit_publish.setOnClickListener(this);
-        iv_comment.setOnClickListener(this);
-        iv_oraise.setOnClickListener(this);
-        iv_save.setOnClickListener(this);
 
-        showDialog();
-        mPresenter.getNews(objectId);
-    }
-
-    @Override
-    public void showError() {
-        dismissDialog();
-    }
-
-    @Override
-    public void complete() {
-        dismissDialog();
-    }
-
-    @Override
-    public void showNews(NewsBean newsBean) {
-        LogUtils.e("showNews");
-
-        if(!TextUtils.isEmpty(newsBean.data.comment_amount)) tv_comment.setText(newsBean.data.comment_amount);
-        if(!TextUtils.isEmpty(newsBean.data.mood_amount)) tv_oraise.setText(newsBean.data.mood_amount);
-
-        mWebView.loadUrl(Constant.API_BASE_URL+"/v3/article/show/"+objectId+".html");
+        mWebView.loadUrl(comicSpecialTopic.page_url);
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);//支持js功能,不加显示不了图片
     }
 
     @Override
-    public void showFabulousResult(Fabulous fabulous) {
-        iv_oraise.setImageResource(R.drawable.icon_news_details_oraise_first);
-        SettingManager.getInstance().saveFabulous(objectId,true);
+    public void showError() {
 
-        ToastUtils.showCustomToast(R.layout.view_fabulous);
+    }
+
+    @Override
+    public void complete() {
+
     }
 
     public void share() {
@@ -238,12 +162,6 @@ public class NewsActivity extends BaseLoginActivity implements NewsContract.View
         bundle.putString(SocialConstants.PARAM_APP_SOURCE, "星期几" + "222222");
 
         ComicApplication.mTencent.shareToQQ(this, bundle , loginListener);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.detachView();
     }
 
 }

@@ -5,6 +5,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.yayangyang.comichouse_master.Bean.BannerBean;
+import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.Constant;
@@ -14,10 +16,11 @@ import com.yayangyang.comichouse_master.view.myView.MyImageView;
 public class GlideImageLoader extends BaseImageLoader {
     @Override
     public void displayImage(Context context, Object path, MyImageView imageView) {
-        LogUtils.e("path:"+path);
+        BannerBean dataBean = (BannerBean) path;
+        LogUtils.e("url:"+dataBean.cover);
 //        Glide.with(context).load(R.drawable.ab_back).into(imageView);
 
-        GlideUrl cookie = new GlideUrl((String)path, new LazyHeaders.Builder()
+        GlideUrl cookie = new GlideUrl(dataBean.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)
                 .addHeader("Accept-Encoding","gzip").build());
         //使用同一个对象才不会引起内存泄漏

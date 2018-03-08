@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,8 +38,10 @@ import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
 import com.yayangyang.comichouse_master.utils.NetworkUtils;
+import com.yayangyang.comichouse_master.utils.PopWindowUtil;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
+import com.yayangyang.comichouse_master.view.CustomPopWindow;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -159,7 +162,13 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         }else if (v.getId() == R.id.tv_relevant_content) {
 
         }else if (v.getId() == R.id.tv_share) {
+            if(popWindow==null){
+                createPopupWindow();
+            }
+            //设置遮罩
+            ScreenUtils.setScreenBrightness(SettingManager.getInstance().getReadLightProgress()-20,this);
 
+            popWindow.showAtLocation(findViewById(android.R.id.content), Gravity.BOTTOM,0,0);
         }else if (v.getId() == R.id.tv_switch) {
             if(aHeaderViewHolder.tv_content.getMaxLines()==4){
                 aHeaderViewHolder.tv_content.setMaxLines(10);
@@ -179,6 +188,20 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         }else if (v.getId() == R.id.iv_message) {
 
         }
+    }
+
+    private CustomPopWindow popWindow;
+    private View contentView;
+
+    private void createPopupWindow() {
+        View contentView = View.inflate(mContext, R.layout.view_news_bottom_share_popupwindow, null);
+        contentView.findViewById(R.id.tv_sina).setOnClickListener(this);
+        contentView.findViewById(R.id.tv_qq).setOnClickListener(this);
+        contentView.findViewById(R.id.tv_friend_circle).setOnClickListener(this);
+        contentView.findViewById(R.id.tv_qq_zone).setOnClickListener(this);
+        contentView.findViewById(R.id.tv_wetchat).setOnClickListener(this);
+        contentView.findViewById(R.id.tv_copy_url).setOnClickListener(this);
+        popWindow= PopWindowUtil.createPopupWindow(this,contentView,Constant.NORMAL_LIGHT);
     }
 
     @Override

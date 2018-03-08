@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.yayangyang.comichouse_master.Bean.BannerBean;
 import com.yayangyang.comichouse_master.Bean.ComicInfo;
 import com.yayangyang.comichouse_master.Bean.ComicRecommend;
 import com.yayangyang.comichouse_master.Bean.ElatedComic;
@@ -23,9 +24,11 @@ import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
 import com.yayangyang.comichouse_master.decoration.CommonSpaceItemDecoration;
 import com.yayangyang.comichouse_master.loader.GlideImageLoader;
+import com.yayangyang.comichouse_master.manager.SettingManager;
 import com.yayangyang.comichouse_master.ui.activity.AuthorIntroduceActivity;
 import com.yayangyang.comichouse_master.ui.activity.ComicDetailActivity;
 import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
+import com.yayangyang.comichouse_master.ui.activity.NewsActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicRecommendDetailAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicRecommendContract;
 import com.yayangyang.comichouse_master.ui.presenter.ComicRecommendPresenter;
@@ -108,7 +111,17 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
 
     @Override
     public void OnBannerClick(int position) {
+        List<BannerBean> list = banner.getImages();
+        BannerBean dataBean = list.get(position);
+        if(dataBean.type.equals("1")){
+            ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
+        }else if(dataBean.type.equals("5")){
+            NewComicWeeklyActivity.startActivity(getActivity(),dataBean.obj_id);
+        }else if(dataBean.type.equals("6")){
 
+        }else if(dataBean.type.equals("7")){
+            NewsActivity.startActivity(getActivity(),dataBean.obj_id,null,null);
+        }
     }
 
     @Override
@@ -229,16 +242,25 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
                 mainlList.add(list.get(i));
             }
         }
-        List<ComicRecommend.DataBean> data = carouselList.get(0).data;
-        ArrayList images=new ArrayList();
+        List<ComicRecommend.DataBean> dataBeans = carouselList.get(0).data;
+        ArrayList<BannerBean> dataList=new ArrayList();
         ArrayList<String> titles=new ArrayList();
-        for(int i=0;i<data.size();i++){
-            images.add(data.get(i).cover);
-            LogUtils.e("cover:"+data.get(i).cover);
-            titles.add(data.get(i).title);
+        for(int i=0;i<dataBeans.size();i++){
+            BannerBean dataBean = new BannerBean();
+            dataBean.cover=dataBeans.get(i).cover;
+            dataBean.obj_id=dataBeans.get(i).obj_id;
+            dataBean.status=dataBeans.get(i).status;
+            dataBean.sub_title=dataBeans.get(i).sub_title;
+            dataBean.title=dataBeans.get(i).title;
+            dataBean.type=dataBeans.get(i).type;
+            dataBean.url=dataBeans.get(i).url;
+            dataList.add(dataBean);
+//            images.add(data.get(i).cover);
+            LogUtils.e("cover:"+dataBeans.get(i).cover);
+            titles.add(dataBeans.get(i).title);
         }
 
-        initBaner(images,titles);
+        initBaner(dataList,titles);
 
         for(int i=0;i<mainlList.size();i++){
             LogUtils.e("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"+i);

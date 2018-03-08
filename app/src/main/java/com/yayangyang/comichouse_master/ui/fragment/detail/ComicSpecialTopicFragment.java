@@ -12,6 +12,8 @@ import com.yayangyang.comichouse_master.app.GlideApp;
 import com.yayangyang.comichouse_master.base.BaseRVFragment;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerComicComponent;
+import com.yayangyang.comichouse_master.ui.activity.CommonWebActivity;
+import com.yayangyang.comichouse_master.ui.activity.NewComicWeeklyActivity;
 import com.yayangyang.comichouse_master.ui.adapter.ComicRankAdapter;
 import com.yayangyang.comichouse_master.ui.adapter.ComicSpecialTopicAdapter;
 import com.yayangyang.comichouse_master.ui.contract.ComicRecommendContract;
@@ -38,7 +40,13 @@ public class ComicSpecialTopicFragment extends BaseRVFragment<ComicSpecialTopicP
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        ComicSpecialTopic comicSpecialTopic = (ComicSpecialTopic) adapter.getData().get(position);
+        LogUtils.e("page_type:"+comicSpecialTopic.page_type);
+        if(comicSpecialTopic.page_type.equals("2")){
+            CommonWebActivity.startActivity(getActivity(),comicSpecialTopic);
+        }else if(comicSpecialTopic.page_type.equals("3")){
+            NewComicWeeklyActivity.startActivity(getActivity(),comicSpecialTopic.id);
+        }
     }
 
     @Override

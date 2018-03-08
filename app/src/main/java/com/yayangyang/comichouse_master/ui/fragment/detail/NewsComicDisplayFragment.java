@@ -12,6 +12,7 @@ import com.yayangyang.comichouse_master.base.NewsCommonContract;
 import com.yayangyang.comichouse_master.base.NewsCommonPresenter;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.component.DaggerNewsComponent;
+import com.yayangyang.comichouse_master.ui.activity.NewsActivity;
 import com.yayangyang.comichouse_master.ui.adapter.NewsCommonAdapter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -27,12 +28,16 @@ public class NewsComicDisplayFragment extends BaseRVFragment<NewsCommonPresenter
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+        NewsCommonBody newsCommonBody= (NewsCommonBody) adapter.getData().get(position);
+        NewsActivity.startActivity(getActivity(),newsCommonBody.article_id,
+                newsCommonBody.comment_amount,newsCommonBody.mood_amount);
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+        NewsCommonBody newsCommonBody= (NewsCommonBody) adapter.getData().get(position);
+        NewsActivity.startActivity(getActivity(),newsCommonBody.article_id,
+                newsCommonBody.comment_amount,newsCommonBody.mood_amount);
     }
 
     @Override

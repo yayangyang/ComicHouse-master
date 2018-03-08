@@ -11,6 +11,7 @@
     android:gravity="center">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="364dp"
         android:layout_height="145dp"
         android:foreground="@drawable/iv_touch_bg_selector">

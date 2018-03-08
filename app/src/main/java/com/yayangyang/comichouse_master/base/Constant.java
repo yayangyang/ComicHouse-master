@@ -170,6 +170,9 @@ public class Constant {
     public static String MOOD_AMOUNT="mood_amount";
     public static String COMMENT_AMOUNT="comment_amount";
     public static String READING_TYPE="reading_type";
+    public static String COMIC_SPECIAL_TOPIC="comic_special_topic";
+    public static String NORMAL_LIGHT="normal_light";
+    public static String COMIC_READ_LIGHT="comic_read_light";
 
 
     @IntDef({

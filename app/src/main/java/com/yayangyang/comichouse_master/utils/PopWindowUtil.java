@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.view.CustomPopWindow;
 
 /**
@@ -14,13 +15,14 @@ import com.yayangyang.comichouse_master.view.CustomPopWindow;
 
 public class PopWindowUtil {
 
-    public static CustomPopWindow createPopupWindow(Context mContext,View contentView) {
+    public static CustomPopWindow createPopupWindow(Context mContext,View contentView,String LightType) {
         return new CustomPopWindow.PopupWindowBuilder(mContext)
                 .setView(contentView)//显示的布局，还可以通过设置一个View
                 .size(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT) //设置显示的大小，不设置就默认包裹内容
                 .setFocusable(true)//是否获取焦点，默认为ture
                 .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
                 .enableBackgroundDark(true)
+                .setLightType(LightType)
                 .setOnDissmissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {

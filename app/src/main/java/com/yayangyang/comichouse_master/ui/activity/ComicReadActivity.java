@@ -46,6 +46,7 @@ import com.yayangyang.comichouse_master.ui.presenter.ComicReadActivityPresenter;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.MyNetWorkUtil;
 import com.yayangyang.comichouse_master.utils.NetworkUtils;
+import com.yayangyang.comichouse_master.utils.PopWindowUtil;
 import com.yayangyang.comichouse_master.utils.ScreenUtils;
 import com.yayangyang.comichouse_master.utils.StringUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
@@ -899,22 +900,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         contentView.findViewById(R.id.tv_save_album).setOnClickListener(this);
         contentView.findViewById(R.id.tv_copy_url).setOnClickListener(this);
 
-        popWindow = new CustomPopWindow.PopupWindowBuilder(mContext)
-                .setView(contentView)//显示的布局，还可以通过设置一个View
-                .size(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT) //设置显示的大小，不设置就默认包裹内容
-                .setFocusable(true)//是否获取焦点，默认为ture
-                .setOutsideTouchable(true)//是否PopupWindow 以外触摸dissmiss
-                .enableBackgroundDark(true)
-                .setOnDissmissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        //取消遮罩()
-//                        WindowManager.LayoutParams lp =getWindow().getAttributes();
-//                        lp.alpha = 0.5f;
-//                        getWindow().setAttributes(lp);
-                    }
-                })
-                .create();//创建PopupWindow
+        popWindow= PopWindowUtil.createPopupWindow(this,contentView,Constant.COMIC_READ_LIGHT);
     }
 
     public void share() {
