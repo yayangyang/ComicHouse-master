@@ -56,7 +56,7 @@ public class SelectChapterActivity extends BaseActivity
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ComicDetailHeader.ChaptersBean.DataBean dataBean =
                 (ComicDetailHeader.ChaptersBean.DataBean) adapter.getData().get(position);
-        ComicReadActivity.startActivity(this,comicId,dataBean.chapter_title);
+        ComicReadActivity.startActivity(this,comicId,dataBean.chapter_id);
     }
 
     @Override

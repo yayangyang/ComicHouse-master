@@ -266,4 +266,12 @@ public class SettingManager {
         SharedPreferencesUtil.getInstance().putObject(type,list);
     }
 
+    public List<String> getComicChapterDownLoadInfo(String comicId){
+        return SharedPreferencesUtil.getInstance().getObject(comicId,ArrayList.class);
+    }
+
+    public void saveComicChapterDownLoadInfo(String comicId,List<String> list){
+        SharedPreferencesUtil.getInstance().putObject(comicId,list);
+    }
+
 }

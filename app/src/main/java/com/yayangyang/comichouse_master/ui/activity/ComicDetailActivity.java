@@ -131,7 +131,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
                     (ComicDetailHeader.ChaptersBean.DataBean) adapter.getData().get(position);
             if(!dataBean.chapter_title.equals("...")){
                 LogUtils.e("chapter_title:"+dataBean.chapter_title);
-                ComicReadActivity.startActivity(this,comicId,dataBean.chapter_title);
+                ComicReadActivity.startActivity(this,comicId,dataBean.chapter_id);
             }else{
                 SelectChapterActivity.startActivity(this,comicId,chaptersBean);
             }
@@ -147,6 +147,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     public void onClick(View v) {
         if (v.getId() == R.id.tv_download) {
             LogUtils.e("点击了下载");
+            ComicSelectDownLoadActivity.startActivity(this,comicId,list);
         }else if (v.getId() == R.id.tv_subscribe_choice) {
 
         }else if (v.getId() == R.id.tv_read_state) {
@@ -270,8 +271,9 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
                         }
                         ComicDetailHeader.ChaptersBean.DataBean dataBean = new ComicDetailHeader.ChaptersBean.DataBean();
                         dataBean.chapter_title="...";
-                        dataBeans.add(dataBean);
-                        comicChapterAdapter.setNewData(dataBeans);
+                        ArrayList<ComicDetailHeader.ChaptersBean.DataBean> dataBeans1 = new ArrayList<>(dataBeans);
+                        dataBeans1.addAll(dataBeans);
+                        comicChapterAdapter.setNewData(dataBeans1);
                     }
                 }
             }
@@ -288,6 +290,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         initAdapter(ComicDetailAdapter.class,
                 R.layout.item_comic_detail,null,true,true);
         mAdapter.setOnItemChildClickListener(this);
+        tv_download.setOnClickListener(this);
         onRefresh();
     }
 

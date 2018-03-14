@@ -47,8 +47,8 @@ public class AuthorIntroduceActivityPresenter extends RxPresenter<AuthorIntroduc
                         new Consumer<Throwable>() {
                             @Override
                             public void accept(Throwable e) throws Exception {
-                                LogUtils.e("getAuthorIntroduce"+e.toString());
-                                if(mView!=null){
+                                LogUtils.e("getAuthorIntroduce" + e.toString());
+                                if (mView != null) {
                                     mView.showError();
                                 }
                             }
@@ -57,7 +57,7 @@ public class AuthorIntroduceActivityPresenter extends RxPresenter<AuthorIntroduc
                             @Override
                             public void run() throws Exception {
                                 LogUtils.e("complete");
-                                if(mView!=null){
+                                if (mView != null) {
                                     mView.complete();
                                 }
                             }

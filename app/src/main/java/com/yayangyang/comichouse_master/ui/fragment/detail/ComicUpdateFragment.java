@@ -57,7 +57,7 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
         if(view.getId()==R.id.frameLayout){
             ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
         }else{
-            ComicReadActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.last_update_chapter_name);
+            ComicReadActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.last_update_chapter_id);
         }
     }
 

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/common_toolbar"
+                style="@style/Theme.ToolBar.Menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@color/common_bg"
+                android:gravity="center_vertical">
+
+                <RadioGroup
+                    android:id="@+id/rg_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_download_complete"
+                        style="@style/common_tv"
+                        android:background="@drawable/tv_download_bg_tab_selector_left"
+                        android:text="下载完成"
+                        android:textColor="@color/tv_download_tab_reverse_selector"
+                        android:textSize="15sp"
+                        android:padding="5dp"
+                        android:button="@null"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_downloading"
+                        style="@style/common_tv"
+                        android:background="@drawable/tv_download_bg_tab_selector_right"
+                        android:text="正在下载"
+                        android:textColor="@color/tv_download_tab_selector"
+                        android:textSize="15sp"
+                        android:padding="5dp"
+                        android:button="@null"/>
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_manage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:text="管理"
+                    android:textColor="@color/colorPrimary" />
+
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:id="@+id/rl_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_select_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="已选择0项"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true">
+
+                    <TextView
+                        android:id="@+id/tv_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"
+                        android:text="删除"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="15dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/light_blue"
+                        android:text="全选"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="15dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/light_blue"
+                        android:text="完成"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="连载"/>
+
+            <TextView
+                android:id="@+id/tv_chapter_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="xx个章节"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.view.ViewPager>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/bt_dir"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_dir_selector"
+            android:textColor="@color/tv_download_common_selector"
+            android:text="目录" />
+
+        <Button
+            android:id="@+id/bt_append"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_append_selector"
+            android:textColor="@color/tv_download_common_selector"
+            android:text="追加" />
+
+        <Button
+            android:id="@+id/bt_pause"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_pause_selector"
+            android:textColor="@color/tv_download_common_selector"
+            android:text="全部暂停" />
+
+        <Button
+            android:id="@+id/bt_play"
+            style="@style/Bottom_Tab_Style"
+            android:drawableTop="@drawable/tab_play_selector"
+            android:textColor="@color/tv_download_common_selector"
+            android:text="全部开始" />
+
+    </LinearLayout>
+
+</RelativeLayout>

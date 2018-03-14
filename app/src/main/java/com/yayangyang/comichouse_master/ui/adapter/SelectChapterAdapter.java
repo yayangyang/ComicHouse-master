@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SelectChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.ChaptersBean.DataBean,BaseViewHolder> {
 
-    private String currentChapterName,comicId;
+    private String currentChapterId,comicId;
 
     public SelectChapterAdapter(int layoutResId, @Nullable List<ComicDetailHeader.ChaptersBean.DataBean> data,String comicId) {
         super(layoutResId, data);
@@ -28,7 +28,7 @@ public class SelectChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.Cha
     @Override
     protected void convert(BaseViewHolder helper, ComicDetailHeader.ChaptersBean.DataBean item) {
         helper.setText(R.id.tv_chapter,item.chapter_title);
-        if(item.chapter_title.equals(currentChapterName)){
+        if(item.chapter_id.equals(currentChapterId)){
             helper.setTextColor(R.id.tv_chapter,mContext.getResources().getColor(R.color.white));
             helper.getView(R.id.frameLayout).setSelected(true);
         }else{
@@ -40,10 +40,10 @@ public class SelectChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.Cha
     }
 
     public void getCurrentChapterName(){
-        LogUtils.e("currentChapterName:"+currentChapterName);
+        LogUtils.e("currentChapterId:"+currentChapterId);
         String readProgress = SettingManager.getInstance().getReadProgress(comicId);
         String[] split = readProgress.split("-");
-        currentChapterName=split[0];
+        currentChapterId=split[0];
     }
 
 }

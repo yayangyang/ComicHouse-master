@@ -99,6 +99,16 @@ public class ComicDetailHeader extends Base {
             public String updatetime;
             public String filesize;
             public String chapter_order;
+
+            private boolean isSelected=false;//用于判断数据是否选中(自己增加)
+
+            public boolean isSelected() {
+                return isSelected;
+            }
+
+            public void setSelected(boolean selected) {
+                isSelected = selected;
+            }
         }
     }
 

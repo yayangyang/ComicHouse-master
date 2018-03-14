@@ -1,6 +1,7 @@
 package com.yayangyang.comichouse_master.ui.adapter;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class ComicChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.ChaptersBean.DataBean,BaseViewHolder> {
 
-    private String currentChapterName,comicId;
+    private String currentChapterId,comicId;
 
     public ComicChapterAdapter(int layoutResId, @Nullable List<ComicDetailHeader.ChaptersBean.DataBean> data,String comicId) {
         super(layoutResId, data);
@@ -30,7 +31,7 @@ public class ComicChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.Chap
         LogUtils.e("getItemCount():"+getItemCount());
         LogUtils.e("mData.size():"+mData.size());
         helper.setText(R.id.tv_chapter,item.chapter_title);
-        if(item.chapter_title.equals(currentChapterName)){
+        if(!TextUtils.isEmpty(item.chapter_id)&&item.chapter_id.equals(currentChapterId)){
             helper.setTextColor(R.id.tv_chapter,mContext.getResources().getColor(R.color.white));
             helper.getView(R.id.frameLayout).setSelected(true);
         }else{
@@ -44,7 +45,7 @@ public class ComicChapterAdapter extends BaseQuickAdapter<ComicDetailHeader.Chap
     public void getCurrentChapterName(){
         String readProgress = SettingManager.getInstance().getReadProgress(comicId);
         String[] split = readProgress.split("-");
-        currentChapterName=split[0];
+        currentChapterId=split[0];
     }
 
 }

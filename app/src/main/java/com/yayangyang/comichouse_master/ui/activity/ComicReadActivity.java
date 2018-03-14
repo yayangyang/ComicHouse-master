@@ -81,7 +81,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     private boolean isEnter=true;
     private boolean canScrollToTop=false,canScrollToBottom=false,isCallScroll=false;
 
-    private String comicId,currentChapterId,appoint_chapter_name;
+    private String comicId,currentChapterId,appoint_chapter_id;
     private String chapterTitle,chapterProgress,stateInfo;
 
     private List<ComicDetailHeader.ChaptersBean.DataBean> data_beans;
@@ -152,10 +152,10 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
     });
 
     public static void startActivity(Context context, String comic_id,
-                                     String appoint_chapter_name) {
+                                     String appoint_chapter_id) {
         Intent intent = new Intent(context, ComicReadActivity.class);
         intent.putExtra(Constant.COMIC_ID,comic_id);
-        intent.putExtra(Constant.APPOINT_CHAPTER_NAME,appoint_chapter_name);
+        intent.putExtra(Constant.APPOINT_CHAPTER_ID,appoint_chapter_id);
 //        intent.putExtra(Constant.DATA_BEANS,dataBeans);
         context.startActivity(intent);
     }
@@ -413,7 +413,7 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
         mCommonToolbar.setNavigationIcon(R.drawable.img_back);
 
         comicId=getIntent().getStringExtra(Constant.COMIC_ID);
-        appoint_chapter_name=getIntent().getStringExtra(Constant.APPOINT_CHAPTER_NAME);
+        appoint_chapter_id=getIntent().getStringExtra(Constant.APPOINT_CHAPTER_ID);
 //        data_beans= (ArrayList<ComicDetailHeader.ChaptersBean.DataBean>)
 //                getIntent().getSerializableExtra(Constant.DATA_BEANS);
     }
@@ -652,16 +652,16 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
             String readProgress = SettingManager.getInstance().getReadProgress(comicId);
             int chapterIndex=0;
             LogUtils.e("readProgress:"+readProgress);
-            LogUtils.e("appoint_chapter_name:"+appoint_chapter_name);
+            LogUtils.e("appoint_chapter_id:"+appoint_chapter_id);
             //阅读记录不为空
             if(!TextUtils.isEmpty(readProgress)){
                 String[] split = readProgress.split("-");
                 //指定阅读章节与阅读记录是相同章节或没指定阅读章节,读取阅读记录
-                if(TextUtils.isEmpty(appoint_chapter_name)
-                        ||split[0].equals(appoint_chapter_name)){
+                if(TextUtils.isEmpty(appoint_chapter_id)
+                        ||split[0].equals(appoint_chapter_id)){
                     for(int i=0;i<data_beans.size();i++){
-                        LogUtils.e("chapter_title:"+data_beans.get(i).chapter_title);
-                        if(data_beans.get(i).chapter_title.equals(split[0])){
+                        LogUtils.e("chapter_id:"+data_beans.get(i).chapter_id);
+                        if(data_beans.get(i).chapter_id.equals(split[0])){
                             chapterIndex=i;
                             break;
                         }
@@ -670,16 +670,16 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
                 }else{
                     //指定阅读章节与阅读记录不是相同章节
                     for(int i=0;i<data_beans.size();i++){
-                        if(data_beans.get(i).chapter_title.equals(appoint_chapter_name)){
+                        if(data_beans.get(i).chapter_id.equals(appoint_chapter_id)){
                             chapterIndex=i;
                             break;
                         }
                     }
                 }
-            }else if(!TextUtils.isEmpty(appoint_chapter_name)){
+            }else if(!TextUtils.isEmpty(appoint_chapter_id)){
                 //无阅读记录且有指定阅读章节
                 for(int i=0;i<data_beans.size();i++){
-                    if(data_beans.get(i).chapter_title.equals(appoint_chapter_name)){
+                    if(data_beans.get(i).chapter_id.equals(appoint_chapter_id)){
                         chapterIndex=i;
                         break;
                     }
@@ -940,14 +940,14 @@ public class ComicReadActivity extends BaseLoginRvActivity<ChapterReadBean,BaseV
 
         if(!isEnter){
             //保存阅读进度
-            String substring = chapterTitle.substring(1, chapterTitle.length());
-            char[] chars = substring.toCharArray();
-            if("0".equals(chars[0]+"")&&Character.isDigit(chars[1])){
-                substring=substring.substring(1,substring.length());
-            }
-            String readProgress=substring+"-"+seekBar.getProgress();
+//            String substring = chapterTitle.substring(1, chapterTitle.length());
+//            char[] chars = substring.toCharArray();
+//            if("0".equals(chars[0]+"")&&Character.isDigit(chars[1])){
+//                substring=substring.substring(1,substring.length());
+//            }
+            String readProgress=currentChapterId+"-"+seekBar.getProgress();
 
-            LogUtils.e("chapterTitle:"+chapterTitle);
+            LogUtils.e("currentChapterId:"+currentChapterId);
             LogUtils.e("onPause-readProgress:"+readProgress);
             SettingManager.getInstance().saveReadProgress(comicId,readProgress);
         }

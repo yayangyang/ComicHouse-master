@@ -14,6 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.internal.cache.DiskLruCache;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module

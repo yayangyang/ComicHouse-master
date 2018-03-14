@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fl_touch_bg_download_selector"
+    android:id="@+id/frameLayout"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/tv_chapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="7"
+        android:gravity="center"
+        android:background="@drawable/tv_touch_bg_download_selector"
+        android:padding="10dp"/>
+
+</FrameLayout>

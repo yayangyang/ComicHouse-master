@@ -165,7 +165,7 @@ public class Constant {
     public static String COMIC_READ="comic_read";
     public static String IS_LOAD_TOP="isLoadTop";
     public static String CHAPTER_ID="chapterId";
-    public static String APPOINT_CHAPTER_NAME="appoint_chapter_name";
+    public static String APPOINT_CHAPTER_ID="appoint_chapter_id";
     public static String CHAPTERS_BEAN="chapters_bean";
     public static String MOOD_AMOUNT="mood_amount";
     public static String COMMENT_AMOUNT="comment_amount";
