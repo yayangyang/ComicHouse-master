@@ -1,5 +1,6 @@
 package com.yayangyang.comichouse_master.manager;
 
+import com.yayangyang.comichouse_master.Bean.ComicChapterDownLoadInfo;
 import com.yayangyang.comichouse_master.Bean.support.BookMark;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.base.Constant;
@@ -266,12 +267,20 @@ public class SettingManager {
         SharedPreferencesUtil.getInstance().putObject(type,list);
     }
 
-    public List<String> getComicChapterDownLoadInfo(String comicId){
+    public List<ComicChapterDownLoadInfo> getComicChapterDownLoadInfo(String comicId){
         return SharedPreferencesUtil.getInstance().getObject(comicId,ArrayList.class);
     }
 
-    public void saveComicChapterDownLoadInfo(String comicId,List<String> list){
+    public void saveComicChapterDownLoadInfo(String comicId,List<ComicChapterDownLoadInfo> list){
         SharedPreferencesUtil.getInstance().putObject(comicId,list);
+    }
+
+    public List<String> getAllComicDownLoadId(){
+        return SharedPreferencesUtil.getInstance().getObject(Constant.COMIC,ArrayList.class);
+    }
+
+    public void saveAllComicDownLoadId(List<String> list){
+        SharedPreferencesUtil.getInstance().putObject(Constant.COMIC,list);
     }
 
 }

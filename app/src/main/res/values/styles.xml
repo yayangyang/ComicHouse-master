@@ -39,6 +39,8 @@
         <!-- 用于修改item默认的分割线-->
         <item name="android:dropDownListViewStyle">@style/dropDownStyle</item>
         <item name="dropDownListViewStyle">@style/dropDownStyle</item>
+        <!--背景色-->
+        <item name="android:background">@color/common_bg</item>
     </style>
 
     <style name="ActionButton.Overflow.Menu" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">

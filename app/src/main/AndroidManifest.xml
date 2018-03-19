@@ -46,7 +46,9 @@
         <activity android:name=".ui.activity.SearchActivity"/>
         <activity android:name=".ui.activity.CommonWebActivity"/>
         <activity android:name=".ui.activity.ComicSelectDownLoadActivity"/>
-        <activity android:name=".ui.activity.ComicDownLoadActivity"/>
+        <activity android:name=".ui.activity.ComicDownLoadActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.activity.MyDownLoadActivity"/>
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"

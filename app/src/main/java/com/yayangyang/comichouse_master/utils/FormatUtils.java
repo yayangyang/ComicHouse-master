@@ -169,4 +169,14 @@ public class FormatUtils {
         }
         return str;
     }
+
+    /**
+     * 字节-M
+     * @param byteSize
+     * @return
+     */
+    public static String byteToM(float byteSize){
+        float v = byteSize / 1024 / 1024;
+        return String.format("%.2f",v)+" MB";
+    }
 }

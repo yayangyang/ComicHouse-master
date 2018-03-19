@@ -82,13 +82,13 @@ public class SearchActivity extends BaseRVActivity<SearchInfo,BaseViewHolder>
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         SearchInfo searchInfo = (SearchInfo) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(this,searchInfo.id,searchInfo.title);
+        ComicDetailActivity.startActivity(this,searchInfo.id,searchInfo.title,true);
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         SearchInfo searchInfo = (SearchInfo) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(this,searchInfo.id,searchInfo.title);
+        ComicDetailActivity.startActivity(this,searchInfo.id,searchInfo.title,true);
     }
 
     @Override

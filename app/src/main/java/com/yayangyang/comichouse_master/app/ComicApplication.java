@@ -11,6 +11,7 @@ import com.tencent.tauth.Tencent;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.Receiver.NetworkChangeReceiver;
 import com.yayangyang.comichouse_master.Receiver.TimeChangeReceiver;
+import com.yayangyang.comichouse_master.api.support.HeaderInterceptor;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.base.CrashHandler;
 import com.yayangyang.comichouse_master.component.AppComponent;
@@ -21,6 +22,16 @@ import com.yayangyang.comichouse_master.module.ComicApiModule;
 import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import zlc.season.rxdownload3.core.DownloadConfig;
+import zlc.season.rxdownload3.extension.ApkInstallExtension;
+import zlc.season.rxdownload3.extension.ApkOpenExtension;
+import zlc.season.rxdownload3.http.OkHttpClientFactory;
 
 public class ComicApplication extends Application {
 
@@ -53,6 +64,30 @@ public class ComicApplication extends Application {
         initLoginInfo();
         compatibleVersion();
         initReceiver();
+        initRxDownLoad();
+    }
+
+    private void initRxDownLoad() {
+        DownloadConfig.Builder builder = DownloadConfig.Builder.Companion.create(this)
+                .enableDb(true)
+//                .setDbActor(new CustomSqliteActor(this))
+                .enableService(true)
+                .enableNotification(true)
+                .addExtension(ApkInstallExtension.class)
+                .addExtension(ApkOpenExtension.class)
+                .setOkHttpClientFacotry(new OkHttpClientFactory() {
+                    @NotNull
+                    @Override
+                    public OkHttpClient build() {
+                        return new OkHttpClient.Builder()
+                                .connectTimeout(10, TimeUnit.SECONDS)
+                                .readTimeout(15, TimeUnit.SECONDS)
+                                .writeTimeout(15, TimeUnit.SECONDS)
+                                .addNetworkInterceptor(new HeaderInterceptor()).build();
+                    }
+                });
+
+        DownloadConfig.INSTANCE.init(builder);
     }
 
     private void initReceiver() {

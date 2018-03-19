@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.yayangyang.comichouse_master.Bean.ComicChapterDownLoadInfo;
 import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.R;
 import com.yayangyang.comichouse_master.manager.SettingManager;
@@ -32,11 +33,12 @@ public class ComicSelectDownLoadAdapter extends BaseQuickAdapter<ComicDetailHead
         helper.setText(R.id.tv_chapter,item.chapter_title);
         helper.addOnClickListener(R.id.tv_chapter);
 
-        List<String> comicChapterDownLoadInfo = SettingManager.getInstance().getComicChapterDownLoadInfo(comicId);
+        List<ComicChapterDownLoadInfo> comicChapterDownLoadInfo =
+                SettingManager.getInstance().getComicChapterDownLoadInfo(comicId);
         if(comicChapterDownLoadInfo!=null){
             boolean clickAble=true;
             for(int i=0;i<comicChapterDownLoadInfo.size();i++){
-                if(comicChapterDownLoadInfo.get(i).equals(item.chapter_id)){
+                if(comicChapterDownLoadInfo.get(i).getUrl().contains(item.chapter_id)){
                     //helper.getView(R.id.tv_chapter).setEnabled(false);//setEnabled设置值为false,View仍然会消费事件
                     clickAble=false;
                     TextView textView = helper.getView(R.id.tv_chapter);

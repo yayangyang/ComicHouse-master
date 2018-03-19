@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@color/common_bg"
                 android:gravity="center_vertical">
 
                 <RadioGroup
@@ -70,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 android:padding="10dp"
+                android:background="@color/common_bg"
                 android:visibility="gone">
 
                 <TextView
@@ -125,27 +125,6 @@
             android:layout_height="1dp"
             android:background="@color/black" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="连载"/>
-
-            <TextView
-                android:id="@+id/tv_chapter_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="xx个章节"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
@@ -159,7 +138,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_common_white_bg">
 
         <Button
             android:id="@+id/bt_dir"
@@ -176,14 +156,14 @@
             android:text="追加" />
 
         <Button
-            android:id="@+id/bt_pause"
+            android:id="@+id/bt_all_pause"
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_pause_selector"
             android:textColor="@color/tv_download_common_selector"
             android:text="全部暂停" />
 
         <Button
-            android:id="@+id/bt_play"
+            android:id="@+id/bt_all_start"
             style="@style/Bottom_Tab_Style"
             android:drawableTop="@drawable/tab_play_selector"
             android:textColor="@color/tv_download_common_selector"

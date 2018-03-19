@@ -17,6 +17,7 @@ import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.ToastUtils;
 
 import butterknife.BindView;
+import zlc.season.rxdownload3.RxDownload;
 
 public class MainActivity extends BaseActivity {
 

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/shape_common_selector">
 
     <RelativeLayout
         android:id="@+id/rl_comic_subscribe"
@@ -44,7 +45,7 @@
         android:background="@color/common_bg">
 
         <ImageView
-            android:id="@+id/iv_browse_hostory"
+            android:id="@+id/iv_comic_browse_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/img_icon_history"
@@ -54,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="浏览记录"
-            android:layout_toEndOf="@id/iv_browse_hostory"
+            android:layout_toEndOf="@id/iv_comic_browse_history"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"/>
 

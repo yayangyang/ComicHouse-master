@@ -18,6 +18,7 @@ import com.yayangyang.comichouse_master.base.BaseFragment;
 import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.component.AppComponent;
 import com.yayangyang.comichouse_master.ui.activity.LoginActivity;
+import com.yayangyang.comichouse_master.ui.activity.MyDownLoadActivity;
 import com.yayangyang.comichouse_master.utils.GlideUtil;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 import com.yayangyang.comichouse_master.utils.LoginUtil;
@@ -48,6 +49,21 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     ViewPager mViewPager;
 
     @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.rl_browse_history||v.getId()==R.id.rl_browse_history){
+
+        }else if(v.getId()==R.id.rl_comic_download||v.getId()==R.id.rl_novel_download){
+            MyDownLoadActivity.startActivity(getActivity());
+        }else{
+            if(ComicApplication.sLogin!=null){
+
+            }else{
+                LoginActivity.startActivity(getActivity());
+            }
+        }
+    }
+
+    @Override
     public int getLayoutResId() {
         LogUtils.e("MineFragment");
         return R.layout.fragment_mine;
@@ -67,13 +83,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     public void initDatas() {
         View view_comic = View.inflate(getActivity(), R.layout.view_comic, null);
         view_comic.findViewById(R.id.rl_comic_subscribe).setOnClickListener(this);
-        view_comic.findViewById(R.id.rl_browse_history).setOnClickListener(this);
+        view_comic.findViewById(R.id.iv_comic_browse_history).setOnClickListener(this);
         view_comic.findViewById(R.id.rl_comic_download).setOnClickListener(this);
         view_comic.findViewById(R.id.rl_comic_review).setOnClickListener(this);
 
         View view_novel = View.inflate(getActivity(), R.layout.view_novel, null);
         view_novel.findViewById(R.id.rl_novel_subscribe).setOnClickListener(this);
-        view_novel.findViewById(R.id.rl_browse_history).setOnClickListener(this);
+        view_novel.findViewById(R.id.rl_novel_browse_history).setOnClickListener(this);
         view_novel.findViewById(R.id.rl_novel_download).setOnClickListener(this);
         view_novel.findViewById(R.id.rl_novel_review).setOnClickListener(this);
 
@@ -97,15 +113,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
         LogUtils.e("测试");
         mTabLayout.setupWithViewPager(mViewPager);
         LogUtils.e("测试");
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(ComicApplication.sLogin!=null){
-
-        }else{
-            LoginActivity.startActivity(getActivity());
-        }
     }
 
     public class MyAdapter extends PagerAdapter{

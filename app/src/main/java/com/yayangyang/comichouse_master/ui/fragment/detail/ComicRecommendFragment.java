@@ -84,9 +84,9 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         if(!TextUtils.isEmpty(dataBean.type)){
             if(dataBean.type.equals("1")){
                 if(dataBean.obj_id==null){
-                    ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title);
+                    ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title,true);
                 }else{
-                    ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
+                    ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title,true);
                 }
             }else if(dataBean.type.equals("5")){
                 NewComicWeeklyActivity.startActivity(getActivity(),dataBean.obj_id);
@@ -97,7 +97,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
             }
         }else{
             ToastUtils.showToast("最新上架");
-            ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title);
+            ComicDetailActivity.startActivity(getActivity(),dataBean.id,dataBean.title,true);
         }
     }
 
@@ -114,7 +114,7 @@ public class ComicRecommendFragment extends BaseFragment implements SwipeRefresh
         List<BannerBean> list = banner.getImages();
         BannerBean dataBean = list.get(position);
         if(dataBean.type.equals("1")){
-            ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title);
+            ComicDetailActivity.startActivity(getActivity(),dataBean.obj_id,dataBean.title,true);
         }else if(dataBean.type.equals("5")){
             NewComicWeeklyActivity.startActivity(getActivity(),dataBean.obj_id);
         }else if(dataBean.type.equals("6")){

@@ -1,14 +1,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'//测试不加也不报错
+
+        //加上这句RxDownLoad最新版本使用不了,运行程序报错提示找不到程序包,
+        //这里使用RxDownLoad的java版本不报错,不知是否是下面这句与kotlin冲突
+        //classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'//测试不加也不报错
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

@@ -61,7 +61,10 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 
     private String comicId;
     private String title;
+    private String cover;
     private String shortDescription,description;
+
+    private boolean isVisibleDownLoad=false;
 
     private ComicDetailHeader comicDetail;
 
@@ -92,10 +95,11 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     @Inject
     ComicDetailActivityPresenter mPresenter;
 
-    public static void startActivity(Context context, String comic_id,String title) {
+    public static void startActivity(Context context, String comic_id,String title,boolean isVisibleDownLoad) {
         Intent intent = new Intent(context, ComicDetailActivity.class);
         intent.putExtra(Constant.COMIC_ID,comic_id);
         intent.putExtra(Constant.TITLE,title);
+        intent.putExtra(Constant.IS_VISIBLE_DOWNLOAD,isVisibleDownLoad);
         context.startActivity(intent);
     }
 
@@ -147,7 +151,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
     public void onClick(View v) {
         if (v.getId() == R.id.tv_download) {
             LogUtils.e("点击了下载");
-            ComicSelectDownLoadActivity.startActivity(this,comicId,list);
+            ComicSelectDownLoadActivity.startActivity(this,title,cover,comicId,list);
         }else if (v.getId() == R.id.tv_subscribe_choice) {
 
         }else if (v.getId() == R.id.tv_read_state) {
@@ -222,6 +226,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         LogUtils.e("ComicDetailActivity-initToolBar");
         comicId=getIntent().getStringExtra(Constant.COMIC_ID);
         title=getIntent().getStringExtra(Constant.TITLE);
+        isVisibleDownLoad=getIntent().getBooleanExtra(Constant.IS_VISIBLE_DOWNLOAD,false);
         LogUtils.e("initToolBar-comicId:"+comicId);
 
         tv_title.setText(title);
@@ -290,7 +295,9 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         initAdapter(ComicDetailAdapter.class,
                 R.layout.item_comic_detail,null,true,true);
         mAdapter.setOnItemChildClickListener(this);
+        if(!isVisibleDownLoad) tv_download.setVisibility(View.GONE);
         tv_download.setOnClickListener(this);
+        tv_download.setClickable(false);
         onRefresh();
     }
 
@@ -311,6 +318,9 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
 
         this.comicDetail=comicDetail;
         tv_title.setText(comicDetail.title);
+        title=comicDetail.title;
+        cover=comicDetail.cover;
+        tv_download.setClickable(true);
 
         GlideUrl cookie = new GlideUrl(comicDetail.cover, new LazyHeaders.Builder()
                 .addHeader("Referer", Constant.IMG_BASE_URL)

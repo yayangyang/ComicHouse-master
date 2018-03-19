@@ -194,6 +194,11 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/intro_navi_vline"/>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"

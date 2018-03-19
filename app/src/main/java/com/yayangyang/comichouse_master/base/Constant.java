@@ -18,9 +18,13 @@ import java.util.Map;
 
 public class Constant {
 
+    public static final String DownLoad_BASE_URL = "http://imgzip.dmzj.com";
+
     public static final String IMG_BASE_URL = "http://images.dmzj.com";
 
     public static final String API_BASE_URL = "http://v2.api.dmzj.com";
+
+    public static final String PATH_DOWNLOAD = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Download";
 
     public static String PATH_DATA = FileUtils.createRootPath(AppUtils.getAppContext()) + "/cache";
 
@@ -173,6 +177,14 @@ public class Constant {
     public static String COMIC_SPECIAL_TOPIC="comic_special_topic";
     public static String NORMAL_LIGHT="normal_light";
     public static String COMIC_READ_LIGHT="comic_read_light";
+    public static String IS_VISIBLE_DOWNLOAD="is_visible_download";
+    public static String DOWNLOAD_BEANS="download_beans";
+    public static String COVER="cover";
+    public static String COMIC="comic";
+    public static String NEW_DATA="new_data";
+    public static String CAN_SELECT="can_select";
+    public static String CLEAR_SELECT="clear_select";
+    public static String DELETE="delete";
 
 
     @IntDef({

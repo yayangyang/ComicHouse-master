@@ -2,6 +2,9 @@ package com.yayangyang.comichouse_master.api.support;
 
 import android.os.Looper;
 
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.yayangyang.comichouse_master.base.Constant;
 import com.yayangyang.comichouse_master.utils.AppUtils;
 import com.yayangyang.comichouse_master.utils.DeviceUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
@@ -28,7 +31,7 @@ public final class HeaderInterceptor implements Interceptor {
                 url.contains("post/") ||
                 url.contains("user/")) {
             LogUtils.e("请求头11111111111"+chain.request().toString());
-            Request request = original.newBuilder()
+            original = original.newBuilder()
                     .addHeader("User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]") // 不能转UTF-8
                     .addHeader("X-User-Agent", "ZhuiShuShenQi/3.40[preload=false;locale=zh_CN;clientidbase=android-nvidia]")
                     .addHeader("X-Device-Id", DeviceUtils.getIMEI(AppUtils.getAppContext()))
@@ -37,12 +40,17 @@ public final class HeaderInterceptor implements Interceptor {
                     .addHeader("If-None-Match", "W/\"2a04-4nguJ+XAaA1yAeFHyxVImg\"")
                     .addHeader("If-Modified-Since", "Tue, 02 Aug 2016 03:20:06 UTC")
                     .build();
-            return chain.proceed(request);
         }else{
             LogUtils.e("请求头22222222222222"+chain.request().toString());
             boolean isMainThread=Looper.getMainLooper() == Looper.myLooper();
             LogUtils.e("是否主线程:"+ isMainThread);
+
+            original = original.newBuilder()
+                    .addHeader("Referer",Constant.IMG_BASE_URL)
+//                    .addHeader("Accept-Encoding","gzip")//加上报错,不知原因
+                    .build();
         }
+
         return chain.proceed(original);
     }
 }

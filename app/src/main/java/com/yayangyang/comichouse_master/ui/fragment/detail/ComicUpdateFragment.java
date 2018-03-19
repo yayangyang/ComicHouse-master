@@ -55,7 +55,7 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ComicUpdate comicUpdate = (ComicUpdate) adapter.getData().get(position);
         if(view.getId()==R.id.frameLayout){
-            ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
+            ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title,true);
         }else{
             ComicReadActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.last_update_chapter_id);
         }
@@ -64,7 +64,7 @@ public class ComicUpdateFragment extends BaseRVFragment<ComicUpdatePresenter,Com
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         ComicUpdate comicUpdate = (ComicUpdate) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title);
+        ComicDetailActivity.startActivity(getActivity(),comicUpdate.id,comicUpdate.title,true);
     }
 
     @Override

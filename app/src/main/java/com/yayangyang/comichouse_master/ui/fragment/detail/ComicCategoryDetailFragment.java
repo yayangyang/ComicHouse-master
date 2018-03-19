@@ -34,7 +34,7 @@ public class ComicCategoryDetailFragment extends BaseRVFragment<ComicCategoryDet
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ComicCategoryDetail comicCategoryDetail = (ComicCategoryDetail) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(getActivity(),comicCategoryDetail.id,comicCategoryDetail.title);
+        ComicDetailActivity.startActivity(getActivity(),comicCategoryDetail.id,comicCategoryDetail.title,true);
     }
 
     @Override

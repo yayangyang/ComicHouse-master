@@ -42,7 +42,7 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ComicInfo comicInfo = (ComicInfo) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title);
+        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title,true);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ComicRankDetailFragment extends BaseRVFragment<ComicRankDetailPrese
         //RecyclerView的View即使setGone隐藏了仍占地方,它的父容器仍触发不了点击事件
 //        view.setVisibility(View.GONE);
         ComicInfo comicInfo = (ComicInfo) adapter.getData().get(position);
-        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title);
+        ComicDetailActivity.startActivity(getActivity(),comicInfo.comic_id,comicInfo.title,true);
     }
 
     @Override
