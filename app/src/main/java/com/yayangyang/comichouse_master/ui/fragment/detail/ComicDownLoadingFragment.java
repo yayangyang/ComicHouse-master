@@ -124,7 +124,7 @@ public class ComicDownLoadingFragment extends BaseFragment {
 
                         mMissions=new ArrayList<>(missionArrayList);
                         if(missionArrayList.size()==0){
-                            LogUtils.e("mMissions.size11:"+missionArrayList.size());
+//                            LogUtils.e("mMissions.size11:"+missionArrayList.size());
                             for(int i=0;i<mDownLoadInfoList.size();i++){
                                 mMissions.add(new Mission(mDownLoadInfoList.get(i).getUrl()));
                             }
@@ -132,11 +132,11 @@ public class ComicDownLoadingFragment extends BaseFragment {
                             LogUtils.e("mMissions.size22:"+missionArrayList.size());
                             try {
                                 for(int i=0;i<mDownLoadInfoList.size();i++){
-                                    LogUtils.e("i:"+i);
+//                                    LogUtils.e("i:"+i);
                                     for(int j=0;j<missionArrayList.size();j++){
-                                        LogUtils.e("j1:"+j);
-                                        LogUtils.e("j2:"+mDownLoadInfoList.get(i).getUrl());
-                                        LogUtils.e("j3:"+missionArrayList.get(j).getUrl());
+//                                        LogUtils.e("j1:"+j);
+//                                        LogUtils.e("j2:"+mDownLoadInfoList.get(i).getUrl());
+//                                        LogUtils.e("j3:"+missionArrayList.get(j).getUrl());
                                         if(mDownLoadInfoList.get(i).getUrl().equals(missionArrayList.get(j).getUrl())){
                                             break;
                                         }
@@ -155,7 +155,7 @@ public class ComicDownLoadingFragment extends BaseFragment {
                         LogUtils.e("accept2222222222"+mMissions.size());
                         ArrayList<ComicDownLoadMission> comicDownLoadMissions = new ArrayList<>();
                         for(int i=0;i<mMissions.size();i++){
-                            LogUtils.e("accept00000"+mMissions.get(i).getUrl());
+//                            LogUtils.e("accept00000"+mMissions.get(i).getUrl());
                             for(int j=0;j<mDownLoadInfoList.size();j++){
                                 if(mMissions.get(i).getUrl().equals(mDownLoadInfoList.get(j).getUrl())){
                                     ComicChapterDownLoadInfo info = mDownLoadInfoList.get(j);

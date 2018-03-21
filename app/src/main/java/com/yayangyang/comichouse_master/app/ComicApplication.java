@@ -72,7 +72,7 @@ public class ComicApplication extends Application {
                 .enableDb(true)
 //                .setDbActor(new CustomSqliteActor(this))
                 .enableService(true)
-                .enableNotification(true)
+                .enableNotification(false)
                 .addExtension(ApkInstallExtension.class)
                 .addExtension(ApkOpenExtension.class)
                 .setOkHttpClientFacotry(new OkHttpClientFactory() {
@@ -83,7 +83,7 @@ public class ComicApplication extends Application {
                                 .connectTimeout(10, TimeUnit.SECONDS)
                                 .readTimeout(15, TimeUnit.SECONDS)
                                 .writeTimeout(15, TimeUnit.SECONDS)
-                                .addNetworkInterceptor(new HeaderInterceptor()).build();
+                                .addInterceptor(new HeaderInterceptor()).build();
                     }
                 });
 

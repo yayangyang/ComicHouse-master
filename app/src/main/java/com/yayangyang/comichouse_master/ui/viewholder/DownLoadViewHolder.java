@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yayangyang.comichouse_master.Bean.ComicDownLoadMission;
 import com.yayangyang.comichouse_master.R;
+import com.yayangyang.comichouse_master.base.BaseDownLoadViewHolder;
 import com.yayangyang.comichouse_master.utils.FormatUtils;
 import com.yayangyang.comichouse_master.utils.LogUtils;
 
@@ -32,7 +33,7 @@ import zlc.season.rxdownload3.helper.UtilsKt;
  * Created by Administrator on 2018/3/14.
  */
 
-public class DownLoadViewHolder extends BaseViewHolder {
+public class DownLoadViewHolder extends BaseDownLoadViewHolder {
 
     private int position;
     private BaseQuickAdapter mAdapter;
@@ -82,6 +83,7 @@ public class DownLoadViewHolder extends BaseViewHolder {
         this.mAdapter=adapter;
     }
 
+    @Override
     public void onAttach() {
         Log.e("DownLoadViewHolder","onAttach");
         disposable = RxDownload.INSTANCE.create(mission)
@@ -144,6 +146,7 @@ public class DownLoadViewHolder extends BaseViewHolder {
         setImageResource(R.id.iv_download_state,id);
     }
 
+    @Override
     public void onDetach() {
         Log.e("DownLoadViewHolder","onDetach");
         UtilsKt.dispose(disposable);

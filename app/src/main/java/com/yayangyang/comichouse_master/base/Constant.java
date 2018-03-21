@@ -185,6 +185,9 @@ public class Constant {
     public static String CAN_SELECT="can_select";
     public static String CLEAR_SELECT="clear_select";
     public static String DELETE="delete";
+    public static String READ_PROGRESS="read_progress";
+    public static String COMIC_CHAPTER_DOWNLOAD_INFO="comic_chapter_downLoad_info";
+    public static String COMIC_CHAPTER_INFO="comic_chapter_info";
 
 
     @IntDef({

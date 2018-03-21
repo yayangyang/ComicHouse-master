@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/15.
  */
 
-public abstract class BaseDownLoadAdapter<T, K extends DownLoadViewHolder> extends BaseQuickAdapter<T,K> {
+public abstract class BaseDownLoadAdapter<T, K extends BaseDownLoadViewHolder> extends BaseQuickAdapter<T,K> {
 
     public BaseDownLoadAdapter(int layoutResId, @Nullable List<T> data) {
         super(layoutResId, data);

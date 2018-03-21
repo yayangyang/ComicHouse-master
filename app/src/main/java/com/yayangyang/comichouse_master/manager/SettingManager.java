@@ -1,6 +1,7 @@
 package com.yayangyang.comichouse_master.manager;
 
 import com.yayangyang.comichouse_master.Bean.ComicChapterDownLoadInfo;
+import com.yayangyang.comichouse_master.Bean.ComicDetailHeader;
 import com.yayangyang.comichouse_master.Bean.support.BookMark;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.base.Constant;
@@ -244,11 +245,11 @@ public class SettingManager {
     }
 
     public String getReadProgress(String comicId){
-        return SharedPreferencesUtil.getInstance().getString(comicId,"");
+        return SharedPreferencesUtil.getInstance().getString(comicId+"-"+Constant.READ_PROGRESS,"");
     }
 
     public void saveReadProgress(String comicId,String readProgress){
-        SharedPreferencesUtil.getInstance().putString(comicId,readProgress);
+        SharedPreferencesUtil.getInstance().putString(comicId+"-"+Constant.READ_PROGRESS,readProgress);
     }
 
     public boolean getIsAlreadyFabulous(String objectId){
@@ -268,11 +269,11 @@ public class SettingManager {
     }
 
     public List<ComicChapterDownLoadInfo> getComicChapterDownLoadInfo(String comicId){
-        return SharedPreferencesUtil.getInstance().getObject(comicId,ArrayList.class);
+        return SharedPreferencesUtil.getInstance().getObject(comicId+"-"+Constant.COMIC_CHAPTER_DOWNLOAD_INFO,ArrayList.class);
     }
 
     public void saveComicChapterDownLoadInfo(String comicId,List<ComicChapterDownLoadInfo> list){
-        SharedPreferencesUtil.getInstance().putObject(comicId,list);
+        SharedPreferencesUtil.getInstance().putObject(comicId+"-"+Constant.COMIC_CHAPTER_DOWNLOAD_INFO,list);
     }
 
     public List<String> getAllComicDownLoadId(){
@@ -281,6 +282,14 @@ public class SettingManager {
 
     public void saveAllComicDownLoadId(List<String> list){
         SharedPreferencesUtil.getInstance().putObject(Constant.COMIC,list);
+    }
+
+    public List<ComicDetailHeader.ChaptersBean.DataBean> getComicChapterInfo(String comicId){
+        return SharedPreferencesUtil.getInstance().getObject(comicId+"-"+Constant.COMIC_CHAPTER_INFO,ArrayList.class);
+    }
+
+    public void saveComicChapterInfo(String comicId,List<ComicDetailHeader.ChaptersBean.DataBean> list){
+        SharedPreferencesUtil.getInstance().putObject(comicId+"-"+Constant.COMIC_CHAPTER_INFO,list);
     }
 
 }

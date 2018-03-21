@@ -247,22 +247,24 @@ public class ComicDownLoadActivity extends BaseActivity implements View.OnClickL
 
     private ArrayList<ComicChapterDownLoadInfo> getDownloadInfoList() {
         ArrayList<ComicChapterDownLoadInfo> infoList = new ArrayList<>();
-        char c=title.charAt(0);
-        LogUtils.e("原字符:"+c);
-        if(Pinyin.isChinese(c)){
-            c=Pinyin.toPinyin(c).toLowerCase().charAt(0);
-        }
-        LogUtils.e("转化后字符:"+c);
-        for(int i=0;i<downLoadList.size();i++){
-            String url=Constant.DownLoad_BASE_URL+"/"+c+"/"+comicId+"/"
-                    +downLoadList.get(i).chapter_id+".zip";
-            ComicChapterDownLoadInfo info = new ComicChapterDownLoadInfo();
-            info.setUrl(url);
-            info.setCover(cover);
-            info.setTitle(title);
-            info.setChapterTitle(downLoadList.get(i).chapter_title);
-            info.setFilesize(downLoadList.get(i).filesize);
-            infoList.add(info);
+        if(downLoadList!=null&&!downLoadList.isEmpty()){
+            char c=title.charAt(0);
+            LogUtils.e("原字符:"+c);
+            if(Pinyin.isChinese(c)){
+                c=Pinyin.toPinyin(c).toLowerCase().charAt(0);
+            }
+            LogUtils.e("转化后字符:"+c);
+            for(int i=0;i<downLoadList.size();i++){
+                String url=Constant.DownLoad_BASE_URL+"/"+c+"/"+comicId+"/"
+                        +downLoadList.get(i).chapter_id+".zip";
+                ComicChapterDownLoadInfo info = new ComicChapterDownLoadInfo();
+                info.setUrl(url);
+                info.setCover(cover);
+                info.setTitle(title);
+                info.setChapterTitle(downLoadList.get(i).chapter_title);
+                info.setFilesize(downLoadList.get(i).filesize);
+                infoList.add(info);
+            }
         }
 
         return infoList;

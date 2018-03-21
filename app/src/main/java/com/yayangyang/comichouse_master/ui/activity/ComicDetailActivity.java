@@ -362,6 +362,7 @@ public class ComicDetailActivity extends BaseRVActivity<ComicDetailBody,BaseView
         chaptersBean=comicDetail.chapters.get(0);
         LogUtils.e(chaptersBean.data.size()+"ww");
         list=comicDetail.chapters.get(0).data;
+        SettingManager.getInstance().saveComicChapterInfo(comicId,list);
         LogUtils.e("data.size():"+comicDetail.chapters.get(0).data.size());
         if(comicDetail.chapters.get(0).data!=null){
             if(comicDetail.chapters.get(0).data.size()<=11){

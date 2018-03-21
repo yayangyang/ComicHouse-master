@@ -26,7 +26,7 @@ public class ComicDownLoadCompleteAdapter extends BaseQuickAdapter<ComicDownLoad
 
     @Override
     protected void convert(BaseViewHolder helper, ComicDownLoadMission item) {
-        LogUtils.e("ComicDownLoadCompleteAdapter-convert");
+//        LogUtils.e("ComicDownLoadCompleteAdapter-convert");
         helper.setText(R.id.tv_chapter,item.getChapterTitle());
         helper.addOnClickListener(R.id.tv_chapter);
 
