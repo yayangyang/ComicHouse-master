@@ -1,13 +1,20 @@
 package com.yayangyang.comichouse_master.app;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tauth.Tencent;
+import com.yayangyang.comichouse_master.Bean.base.Base;
 import com.yayangyang.comichouse_master.Bean.user.Login;
 import com.yayangyang.comichouse_master.Receiver.NetworkChangeReceiver;
 import com.yayangyang.comichouse_master.Receiver.TimeChangeReceiver;
@@ -25,6 +32,7 @@ import com.yayangyang.comichouse_master.utils.SharedPreferencesUtil;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;

@@ -1,6 +1,8 @@
 package com.yayangyang.comichouse_master.api.support;
 
+import android.os.Build;
 import android.os.Looper;
+import android.util.Log;
 
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
@@ -19,6 +21,10 @@ import okhttp3.Response;
  * Retrofit2 Header拦截器。用于保存和设置Cookies
  */
 public final class HeaderInterceptor implements Interceptor {
+
+    final String vmName = DeviceUtils.getCurrentRuntimeValue();
+    final String vmVersion = DeviceUtils.getVmVersion();
+    final String MODEL = Build.MODEL;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -45,8 +51,13 @@ public final class HeaderInterceptor implements Interceptor {
             boolean isMainThread=Looper.getMainLooper() == Looper.myLooper();
             LogUtils.e("是否主线程:"+ isMainThread);
 
+            String userAgent=vmName+"/"+vmVersion+" (Linux; U; Android "+android.os.Build.VERSION.RELEASE
+                    +"; "+MODEL+" Build/NYC)";
+            LogUtils.e(userAgent);
             original = original.newBuilder()
-                    .addHeader("Referer",Constant.IMG_BASE_URL)
+                    //"Dalvik/2.1.0 (Linux; U; Android 7.1.1; Android SDK built for x86 Build/NYC)"
+                    .addHeader("User-Agent",userAgent)//未在arm架构上测试
+//                    .addHeader("Referer",Constant.IMG_BASE_URL)//出现403错误(取消了这个头,增加了User-Agent头)
 //                    .addHeader("Accept-Encoding","gzip")//加上报错,不知原因
                     .build();
         }

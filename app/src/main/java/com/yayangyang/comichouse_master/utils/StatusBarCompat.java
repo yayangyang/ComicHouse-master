@@ -34,11 +34,11 @@ public class StatusBarCompat {
                 statusBarView.setBackgroundColor(statusColor);
                 return statusBarView;
             }
-            statusBarView = new View(activity);
-            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    getStatusBarHeight(activity));
-            statusBarView.setBackgroundColor(statusColor);
-            contentView.addView(statusBarView, lp);
+//            statusBarView = new View(activity);
+//            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                    getStatusBarHeight(activity));
+//            statusBarView.setBackgroundColor(statusColor);
+//            contentView.addView(statusBarView, lp);
             return statusBarView;
         }
         return null;

@@ -22,4 +22,7 @@
 
     <!--my-->
     <dimen name="common_radius">6dp</dimen>
+
+    <dimen name="grid_two_width">188dp</dimen>
+    <dimen name="grid_two_height">99.875dp</dimen>
 </resources>

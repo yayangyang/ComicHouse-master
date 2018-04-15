@@ -2,6 +2,7 @@ package com.yayangyang.comichouse_master.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,6 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import butterknife.BindView;
 import zlc.season.rxdownload3.RxDownload;

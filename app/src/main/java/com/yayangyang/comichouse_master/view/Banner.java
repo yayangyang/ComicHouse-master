@@ -570,6 +570,7 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
                 break;
             case 1://start Sliding
                 if (currentItem == count + 1) {
+//                    LogUtils.e("xxxxxxxxxxxxxxxx");
                     viewPager.setCurrentItem(1, false);
                 } else if (currentItem == 0) {
                     viewPager.setCurrentItem(count, false);
